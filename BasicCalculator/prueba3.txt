@@ -1,0 +1,39 @@
+program prueba      					#este es un comentario
+				       
+int::i,j,k,a,n,m,b,c,d
+begin
+
+do loop
+a = b +c
+exit
+b = b + a
+end_do
+
+
+
+
+
+#if a > b then
+   #if b > c then
+	#b = c
+ #else
+  #      b = d
+#end_if
+#end_if
+
+
+#do loop
+
+#i = i + 1
+
+#while a == m 
+#end_do
+
+
+
+end
+end program prueba
+
+
+
+

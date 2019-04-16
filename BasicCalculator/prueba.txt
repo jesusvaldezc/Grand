@@ -1,0 +1,67 @@
+program prueba      		 #Este es una prueba 				 #de comentario
+int::a,b,c,x1,x2,x3,x4
+float:: f1,f2,f3
+
+subroutine suma
+c = a + b
+x1 = 5 ç 10
+end subroutine suma
+
+subroutine resta
+c = a - b
+x2 = 5 ç 10
+end subroutine resta
+
+subroutine multiplicacion
+c = a * b
+x3 = 5 ç 10
+end subroutine multiplicacion
+
+begin
+
+c(5,5) = 0
+x4(5) = 10
+
+d = 1 + 2
+
+print(a)
+print("HOLA")
+
+if a >= b then
+a = 0
+b = 0
+else 
+a = 1
+b = 1
+end_if
+
+if a == b then
+a = 1
+end_if
+
+if a == b then
+a = c
+elsif a >= d then
+c = b
+elsif a <= b then
+c = d
+else
+c = 2
+end_if
+
+do
+a = a+1
+end_do
+
+do while a > c
+a = 1
+end_do
+
+call suma
+
+end
+end program prueba
+
+
+
+

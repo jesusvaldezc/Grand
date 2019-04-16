@@ -1,0 +1,11 @@
+program prueba      					#este es un comentario
+				       
+int::a,b,c,d,e,f,g,h,i,j,k,l,m,n,p,r,s
+begin
+
+a = a - b - c - d * ( e + f + g * h * i - j * ( k / l / m ) + ( n + p ) / ( r - s ) )
+ 
+
+
+end
+end program prueba

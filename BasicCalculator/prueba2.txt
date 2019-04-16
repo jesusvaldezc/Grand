@@ -1,0 +1,106 @@
+program prueba      					#este es un comentario
+				       
+int::i,j,sizeX1,sizeY1, sizeX2, sizeY3, local
+float::a,b,c
+int::m1[10,5] # constantes
+int::m2[10,5] #do contador
+int::m3[10,5]
+
+subroutine multiplicar
+
+i = 0
+j = 0
+
+do i,j, j = j + 1
+
+a = a +1
+
+end_do
+
+do while (i < sizeX1)
+	do while(j < sizeY1)
+
+	m3(i,j) = m1(i,j) * m2(i,j)
+
+	j = j +1
+	end_do
+
+   i = i +1
+end_do
+end subroutine multiplicar
+
+subroutine imprimir
+i = 0
+j = 0
+
+do while (i < sizeX1)
+	do while(j < sizeY1)
+
+	print(m3(i,j))
+
+	j = j +1
+	end_do
+
+   i = i +1
+end_do
+end subroutine imprimir
+
+
+begin
+
+m1(10,10) = 0
+m2(10,10) = 0
+m3(10,10) = 0
+
+print("Asigna la dimension de las matrices")
+
+do while (sizeX1 != sizeY2)
+read sizeX1
+read sizeY1
+read sizeX2
+read sizeY2
+end_do
+
+print("Llena el primer arreglo")
+
+i = 0
+j = 0
+
+do while (i < sizeX1)
+	do while(j < sizeY1)
+	read a
+
+	m1(i,j) = a
+
+	j = j +1
+	end_do
+
+   i = i +1
+end_do
+
+i = 0
+j = 0
+
+print("Llena el segundo arreglo")
+
+do while (i < sizeX2)
+	do while(j < sizeY2)
+	read a
+
+	m2(i,j) = a
+
+	j = j + 1
+	end_do
+   i = i +1
+end_do
+
+call multiplicar
+call imprimir
+
+
+end
+end program prueba
+
+
+
+
