@@ -15,7 +15,7 @@ PiladeExits = []
 # Buffers
 Cuadruplos = []
 cont = 0
-marca = 0
+marca = 200
 
 # Variables relaciondas a tabla de variables
 tablaVariables = {}
@@ -500,7 +500,6 @@ def crearCuadruploGoToF():
 		print("gotoF ")
 		Cuadruplos.append(Cuad)
 		cont += 1
-		PiladeSaltos.append(cont - 1)
 		
 	else:
 		print("OPERACION INCOMPATIBLE")
@@ -518,10 +517,23 @@ def crearCuadruploGoTo():
 	print("goto")
 	Cuadruplos.append(Cuad)
 	cont += 1
+
+def crearCuadruploGoToDoExit():
+
+	global PilaOperandos
+	global PiladeSaltos
+	global AvailTemp
+	global Cuadruplos
+	global tablaVariables
+	global cont
+
 	direccion = PiladeSaltos.pop()
-	Rellenar(direccion, cont)
-	PiladeSaltos.append(cont - 1)
-	
+
+	Cuad = ['goto',direccion,'','']
+	print("gotoDoExit")
+	Cuadruplos.append(Cuad)
+	cont += 1
+
 def crearCuadruploGoToV():
 
 	global PilaOperandos
@@ -654,33 +666,21 @@ def p_b(p):
 		| printing_variables
 		| if_expression
 		| do_loop
-		| do_contador
-		| do_while_loop
 		| call_subroutine
 		| reading_variables
-		| EXIT
+		| EXIT paso4DoExit
 		
-	'''
-
-def p_do_contador(p):
-	'''
-	do_contador : DO ID COMMA ID COMMA variable_matrix_assign d END_DO
-				| DO constante_entero COMMA constante_entero COMMA variable_matrix_assign d END_DO
 	'''
 
 def p_do_loop(p):
 	'''
-	do_loop : DO LOOP d END_DO 
+	do_loop : DO ID COMMA ID COMMA variable_matrix_assign d END_DO
+			| DO constante_entero COMMA constante_entero COMMA variable_matrix_assign d END_DO
+			| DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+			| LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
 
 	'''
 
-def p_do_while_loop(p):
-	'''
-
-	do_while_loop : DO paso1DO LOOP d WHILE expression_logic paso2DO END_DO
-
-	'''
-	
 def p_reading_variables(p):
 	'''
 	reading_variables : READ ID
@@ -693,8 +693,8 @@ def p_call_subroutine(p):
 	'''
 def p_if_expression(p):
 	'''
-	if_expression : IF expression_logic crearCuadruploGoToF THEN  if_expression_local if_expression_local2 crearCuadruploGoTo ELSE if_expression_local acabarIF END_IF
-				  | IF expression_logic crearCuadruploGoToF THEN if_expression_local acabarIF END_IF
+	if_expression : IF expression_logic paso1IF THEN  if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+				  | IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
 	
 	'''
 
@@ -828,23 +828,30 @@ def p_ge(p):
 			if p[2] == '<>':
 				crearCuadruploNE()
 
-def p_crearCuadruploGoToF(p):
+def p_paso1IF(p):
 	'''
-	crearCuadruploGoToF : empty
+	paso1IF : empty
+
 
 	'''
+
 	crearCuadruploGoToF()
+	PiladeSaltos.append(cont - 1)
 
-def p_crearCuadruploGoTo(p):
+def p_paso2IF(p):
 	'''
-	crearCuadruploGoTo : empty
+	paso2IF : empty
 
 	'''
+
 	crearCuadruploGoTo()
+	direccion = PiladeSaltos.pop()
+	Rellenar(direccion, cont)
+	PiladeSaltos.append(cont - 1)
 
-def p_acabarIF(p):
+def p_paso3IF(p):
 	'''
-	acabarIF : empty
+	paso3IF : empty
 	'''
 
 	global PiladeSaltos
@@ -896,6 +903,49 @@ def p_paso2DO(p):
 	direccion = PiladeSaltos.pop()
 
 	Rellenar(len(Cuadruplos) - 1, direccion)
+
+def p_paso1DoExit(p):
+	'''
+	paso1DoExit : empty
+
+	'''
+
+	global PiladeExits
+	global PiladeSaltos
+	PiladeExits.append(marca)
+	PiladeSaltos.append(cont)
+
+def p_paso2DoExit(p):
+	'''
+	paso2DoExit : empty
+
+	'''
+
+	crearCuadruploGoToDoExit()
+
+def p_paso3DoExit(p):
+
+	'''
+	paso3DoExit : empty
+
+	'''
+
+	topPilaExits = PiladeExits.pop()
+
+	while(topPilaExits != marca):
+		Rellenar(topPilaExits,cont)
+		topPilaExits = PiladeExits.pop()
+
+def p_paso4DoExit(p):
+	'''
+	paso4DoExit : empty
+
+	'''
+	
+	global PiladeExits
+	PiladeExits.append(cont)
+
+	crearCuadruploGoTo()
 
 def p_error(p):
 	print("Syntax error at '%s'" % p)
