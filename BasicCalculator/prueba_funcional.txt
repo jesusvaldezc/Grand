@@ -1,0 +1,134 @@
+program prueba      					#este es un comentario
+				       
+int::i, fact, number, opcion, a,b,c,d,y, expresion, local
+float::resultado
+begin
+
+fact = 1
+expresion = 1
+a = 1
+b = 2
+c = 3
+d = 4
+
+			loop
+
+			print(Elige la opcion 4 para salir del menu)
+			read opcion
+
+					if opcion == a then
+								print (Escribe el valor del X)
+								read number
+
+								for i = 1, number do
+
+									fact = fact * i
+
+								end_for
+
+								print (El valor factorial es)
+
+								print fact
+								fact  = 1
+					end_if
+
+					if opcion == b then
+							print (Escribe el valor de X)
+							read number
+
+							print (Escribe el valor de y)
+							read y
+
+							y = y - 1
+						
+							for i = 0,y do
+
+								expresion = expresion * number
+
+							end_for
+
+							print(Resultado)
+
+							print expresion
+
+							expresion = 1
+
+					end_if
+
+					if opcion == c then
+							print (Escribe el valor de X)
+							read number
+
+							fact = 1
+							expresion = 1
+							resultado = 0.0
+
+							for i = 1, 11 do
+
+							resultado = resultado + expresion / fact
+							expresion = expresion * number
+							fact = fact * i
+
+							end_for
+
+							print resultado
+							
+							resultado = 0
+							fact = 1
+							expresion = 1
+
+						
+					end_if
+
+
+			end_loop
+
+
+#----------Loop for anidado
+
+#for a = 0,3 do
+	
+	#for b = 0,3 do
+		
+	#	c = c + 1
+	
+	#end_for
+#end_for
+
+
+#--------Loop con exit
+
+#loop
+#a = a + 1
+
+#	if a > b then
+#	exit
+#	end_if
+
+#end_loop
+
+#---------IF anidados
+
+#if a > b then
+   #if b > c then
+	#b = c
+ #else
+  #      b = d
+#end_if
+#end_if
+
+
+#-----loop do while
+
+
+#do loop
+
+#i = i + 1
+
+#while a == m 
+#end_do
+
+
+end
+end program prueba
+

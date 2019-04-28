@@ -28,7 +28,9 @@ tokens = [
 'LARR',
 'RARR',
 'EQUAL',
+'QMARKS',
 'INT',
+'QUESTION',
 'FLOAT'
 ]
 
@@ -51,7 +53,10 @@ reserved = {
     'call' : 'CALL',
     'read' : 'READ',
     'loop' : 'LOOP',
+    'end_loop' : 'END_LOOP',
     'exit' : 'EXIT',
+    'for' : 'FOR',
+    'end_for' : 'END_FOR',
     'subroutine' : 'SUBROUTINE'
  }
 
@@ -85,6 +90,9 @@ t_LBRACK = '{'
 t_RBRACK = '}'
 t_LARR = r'\['
 t_RARR = r'\]'
+t_QMARKS = r'\"'
+t_QUESTION = r'\?'
+
 
 
 t_ignore = r' 	' #Ignore TAB and space

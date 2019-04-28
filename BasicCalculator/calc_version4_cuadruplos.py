@@ -2,7 +2,7 @@ from lexer import tokens
 from CuboSemantico.CuboSemantico import CuboSemantico
 import ply.yacc as yacc
 import sys
-
+import json
 
 # Cubo Semantico
 cuboSemantico = CuboSemantico()
@@ -15,15 +15,17 @@ PiladeExits = []
 # Buffers
 Cuadruplos = []
 cont = 0
-marca = 0
+marca = 200
+forID = 0
 
 # Variables relaciondas a tabla de variables
 tablaVariables = {}
-defaultValues = {'int': 9999, 'float': 9999.9999, 'bool': False}
+defaultValues = {'int': 0, 'float': 0.0, 'bool': False}
 AvailTemp = ['$t1', '$t2', '$t3', '$t4','$t5', '$t6', '$t7', '$t8', '$t9', '$t10']
 variableIdQueue = []
 currentType = ''
 currentOperator = ''
+stringOutput = ''
 
 def Rellenar(direccion1, direccion2):
 	
@@ -31,7 +33,7 @@ def Rellenar(direccion1, direccion2):
 
 	Cuad = Cuadruplos[direccion1]
 	tipoGoto = Cuad[0]
-	if (tipoGoto == 'goto'):
+	if (tipoGoto == 'goto' or tipoGoto == 'read'):
 		CuadNuevo = (Cuad[0],direccion2,'','')
 		Cuadruplos[direccion1] = CuadNuevo
 	else:
@@ -94,6 +96,43 @@ def crearCuadruploLE():
 		tablaVariables[temporal] = {'type': resultType, 'value': defaultValues[resultType]}
 		Cuadruplos.append(Cuad)
 		cont += 1
+		
+		if isinstance(OP2, str):
+			if OP2[0] == '$':
+				AvailTemp.append(OP2)
+		if isinstance(OP1, str):
+			if OP1[0] == '$':
+				AvailTemp.append(OP1)
+	else:
+		print("OPERADORES INCOMPATIBLES")
+
+def crearCuadruploLE_FOR():
+
+	global PilaOperandos
+	global AvailTemp
+	global Cuadruplos
+	global tablaVariables
+	global cont
+
+	OP2 = PilaOperandos.pop()
+	OP1 = PilaOperandos.pop()
+
+	OP2Type = tablaVariables.get(OP2)
+	OP1Type = tablaVariables.get(OP1)
+	
+	if OP2Type is not None and OP1Type is not None:
+		resultType = cuboSemantico.validarTipoPorOperacion(OP2Type['type'], OP1Type['type'], '<=')
+		temporal = AvailTemp.pop()
+		Cuad = ['<=', OP1,OP2,temporal]
+		print("cuad <= FOR")
+		PilaOperandos.append(temporal)
+		tablaVariables[temporal] = {'type': resultType, 'value': defaultValues[resultType]}
+		Cuadruplos.append(Cuad)
+
+		PiladeSaltos.append(cont)
+		cont += 1
+
+		PilaOperandos.insert(0,OP1)
 		
 		if isinstance(OP2, str):
 			if OP2[0] == '$':
@@ -191,7 +230,40 @@ def crearCuadruploAsignacion():
 		print("cuad =")
 		Cuadruplos.append(Cuad)
 		cont += 1
+
 		
+		if isinstance(OP2, str):
+			if OP2[0] == '$':
+				AvailTemp.append(OP2)
+		if isinstance(OP1, str):
+			if OP1[0] == '$':
+				AvailTemp.append(OP1)
+	else:
+		print("OPERADORES INCOMPATIBLES")
+
+def crearCuadruploAsignacionFOR():
+
+	global PilaOperandos
+	global AvailTemp
+	global Cuadruplos
+	global cont
+	global tablaVariables
+	
+	
+	OP2 = PilaOperandos.pop()
+	OP1 = PilaOperandos.pop()
+	
+	OP2Type = tablaVariables.get(OP2)
+	OP1Type = tablaVariables.get(OP1)
+	
+	if OP2Type is not None and OP1Type is not None:
+		resultType = cuboSemantico.validarTipoPorOperacion(OP2Type['type'], OP1Type['type'], '=')
+		Cuad = ['=', OP2,'',OP1]
+		print("cuad = FOR")
+		Cuadruplos.append(Cuad)
+		cont += 1
+
+		PilaOperandos.append(OP1)
 		if isinstance(OP2, str):
 			if OP2[0] == '$':
 				AvailTemp.append(OP2)
@@ -329,6 +401,38 @@ def crearCuadruploSuma():
 		print("cuad +")
 		PilaOperandos.append(temporal)
 		tablaVariables[temporal] = {'type': resultType, 'value': defaultValues[resultType]}
+		Cuadruplos.append(Cuad)
+		cont += 1
+		
+		if isinstance(OP2, str):
+			if OP2[0] == '$':
+				AvailTemp.append(OP2)
+		if isinstance(OP1, str):
+			if OP1[0] == '$':
+				AvailTemp.append(OP1)
+	else:
+		print("OPERADORES INCOMPATIBLES")
+
+def crearCuadruploSumaFOR():
+
+	global PilaOperandos
+	global AvailTemp
+	global Cuadruplos
+	global tablaVariables
+	global cont
+
+	tablaVariables[1] = {'type': 'int', 'value' : 1}
+
+	OP2 = PilaOperandos.pop(0)
+	OP1 = 1
+
+	OP2Type = tablaVariables.get(OP2)
+	OP1Type = tablaVariables.get(OP1)
+	
+	if OP2Type is not None and OP1Type is not None:
+		resultType = cuboSemantico.validarTipoPorOperacion(OP2Type['type'], OP1Type['type'], '+')
+		Cuad = ['+', OP1,OP2,OP2]
+		print("cuad + FOR")
 		Cuadruplos.append(Cuad)
 		cont += 1
 		
@@ -500,7 +604,6 @@ def crearCuadruploGoToF():
 		print("gotoF ")
 		Cuadruplos.append(Cuad)
 		cont += 1
-		PiladeSaltos.append(cont - 1)
 		
 	else:
 		print("OPERACION INCOMPATIBLE")
@@ -518,10 +621,40 @@ def crearCuadruploGoTo():
 	print("goto")
 	Cuadruplos.append(Cuad)
 	cont += 1
+
+def crearCuadruploGoToFOR():
+
+	global PilaOperandos
+	global PiladeSaltos
+	global AvailTemp
+	global Cuadruplos
+	global tablaVariables
+	global cont
+
 	direccion = PiladeSaltos.pop()
-	Rellenar(direccion, cont)
-	PiladeSaltos.append(cont - 1)
-	
+
+	Cuad = ['goto',direccion,'','']
+	print("goto FOR")
+	Cuadruplos.append(Cuad)
+	cont += 1
+	Rellenar(direccion + 1, cont)
+
+def crearCuadruploGoToDoExit():
+
+	global PilaOperandos
+	global PiladeSaltos
+	global AvailTemp
+	global Cuadruplos
+	global tablaVariables
+	global cont
+
+	direccion = PiladeSaltos.pop()
+
+	Cuad = ['goto',direccion,'','']
+	print("gotoDoExit")
+	Cuadruplos.append(Cuad)
+	cont += 1
+
 def crearCuadruploGoToV():
 
 	global PilaOperandos
@@ -561,22 +694,84 @@ def crearCuadruploGoToDoExit():
 	Cuadruplos.append(Cuad)
 	cont += 1
 
+def crearCuadruploREAD():
+		
+		global PilaOperandos
+		global PiladeSaltos
+		global AvailTemp
+		global Cuadruplos
+		global tablaVariables
+		global cont
+
+
+		Cuad = ['read','','','']
+		print("cuad READ")
+
+		Cuadruplos.append(Cuad)
+		cont += 1
+
+def crearCuadruploSTRING():
+
+	global PilaOperandos
+	global PiladeSaltos
+	global AvailTemp
+	global Cuadruplos
+	global tablaVariables
+	global cont
+	global stringOutput
+
+	Cuad = ['outputS',stringOutput,'','']
+	print("cuad OUTPUT String")
+	Cuadruplos.append(Cuad)
+	cont += 1	
+
+def crearCuadruploOutput():
+
+	global PilaOperandos
+	global PiladeSaltos
+	global AvailTemp
+	global Cuadruplos
+	global tablaVariables
+	global cont
+
+	operandoImprimir = PilaOperandos.pop()
+	Cuad = ['outputV', operandoImprimir, '', '']
+	print("cuad OUTPUT Variable")
+	Cuadruplos.append(Cuad)
+	cont += 1
+
 def p_program(p):
 
 	'''
-	program : PROGRAM ID var_assign subrutinas a END PROGRAM ID
+	program : PROGRAM ID primerCuad var_assign subrutinas rellenaCuad a END PROGRAM ID
 
 	'''
 	print("Programa creado")
 
-	
 	for x in range(len(Cuadruplos)): 
 		print(Cuadruplos[x]) 
 		
 	#print(tablaVariables)
 	print(cont)
-	
+	#print(PiladeSaltos)
+	#print(PilaOperandos)
+
 #Declaracion del tipo de variable global
+
+def p_primerCuad(p):
+	'''
+	primerCuad : empty
+	'''
+
+	crearCuadruploGoTo()
+
+def p_rellenaCuad(p):
+	'''
+	rellenaCuad : empty
+	'''
+	global cont
+
+	Rellenar(0, cont)
 
 def p_type_definition(p):
 	'''
@@ -653,38 +848,82 @@ def p_b(p):
 	b :   variable_matrix_assign
 		| printing_variables
 		| if_expression
-		| do_loop
-		| do_contador
-		| do_while_loop
+		| do_loops
 		| call_subroutine
 		| reading_variables
-		| EXIT
+		| EXIT paso4DoExit
 		
 	'''
 
-def p_do_contador(p):
+def p_do_loops(p):
 	'''
-	do_contador : DO ID COMMA ID COMMA variable_matrix_assign d END_DO
-				| DO constante_entero COMMA constante_entero COMMA variable_matrix_assign d END_DO
-	'''
-
-def p_do_loop(p):
-	'''
-	do_loop : DO LOOP d END_DO 
+	do_loops : FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+			| DO constante_entero COMMA constante_entero COMMA variable_matrix_assign d END_DO
+			| DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+			| LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
 
 	'''
 
-def p_do_while_loop(p):
+def p_paso1FOR(p):
+	'''
+	paso1FOR : ID
+
 	'''
 
-	do_while_loop : DO paso1DO LOOP d WHILE expression_logic paso2DO END_DO
+	global PilaOperandos
+	PilaOperandos.append(p[1])
+
+def p_paso2FOR(p):
+	'''
+	paso2FOR : empty
 
 	'''
-	
+
+	crearCuadruploAsignacionFOR()
+
+def p_paso3FOR(p):
+	'''
+	paso3FOR : empty
+
+	'''
+	global cont
+
+	crearCuadruploLE_FOR()
+
+	crearCuadruploGoToF()
+
+def p_paso4FOR(p):
+	'''
+	paso4FOR : empty
+
+	'''
+
+	crearCuadruploSumaFOR()
+
+	crearCuadruploGoToFOR()
+
 def p_reading_variables(p):
 	'''
-	reading_variables : READ ID
+	reading_variables : READ idrepInput
 	'''
+
+def p_idrepInput(p):
+	'''
+	idrepInput : idInput
+				| idInput COMMA idrepInput			
+
+	'''
+
+def p_idInput(p):
+	'''
+	idInput : ID
+
+	'''
+	global cont
+	crearCuadruploREAD()
+	local = p[1]
+	Rellenar(cont -1, local)
+
 
 def p_call_subroutine(p):
 	'''
@@ -693,8 +932,8 @@ def p_call_subroutine(p):
 	'''
 def p_if_expression(p):
 	'''
-	if_expression : IF expression_logic crearCuadruploGoToF THEN  if_expression_local if_expression_local2 crearCuadruploGoTo ELSE if_expression_local acabarIF END_IF
-				  | IF expression_logic crearCuadruploGoToF THEN if_expression_local acabarIF END_IF
+	if_expression : IF expression_logic paso1IF THEN  if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+				  | IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
 	
 	'''
 
@@ -709,12 +948,54 @@ def p_if_expression_local2(p):
 	if_expression_local2 : ELSIF expression_logic THEN if_expression_local if_expression_local2 
 						 | empty
 	'''
+
 def p_printing_variables(p):
 	'''
-	printing_variables : PRINT LPAREN expression_arith RPAREN
-					   | PRINT LPAREN STRING RPAREN
-	
+
+	printing_variables : PRINT Output
+					
 	'''
+
+def p_Output(p):
+	'''
+	Output : idOut
+		  | LPAREN StringOut RPAREN
+
+	'''
+	global stringOutput
+
+	if p[1] == '(':
+		crearCuadruploSTRING()
+		stringOutput = ''
+
+def p_StringOut(p):
+    '''
+	StringOut : empty
+			  | ID StringOut
+			  | constante_entero StringOut
+			  | constante_flotante StringOut   
+			  | COLONS StringOut
+			  | COMMA StringOut 
+			  | QUESTION StringOut
+				
+		'''
+    global stringOutput
+
+    if p[1] != None:
+        stringOutput = str(p[1]) + ' ' + stringOutput
+
+def p_idOut(p):
+	'''
+	idOut : ID
+
+	'''
+	global PilaOperandos
+
+	PilaOperandos.append(p[1])
+
+	crearCuadruploOutput()
+
+	
 
 def p_variable_matrix_assign(p):
 	'''
@@ -729,7 +1010,6 @@ def p_variable_matrix_assign(p):
 	if p[2] is '=':
 		crearCuadruploAsignacion()
 		
-#--------------------------------definicion expresionles aritmeticas
 def p_expression_arith(p):
 	'''
 	expression_arith :                 expression_arith PLUS c 
@@ -828,23 +1108,30 @@ def p_ge(p):
 			if p[2] == '<>':
 				crearCuadruploNE()
 
-def p_crearCuadruploGoToF(p):
+def p_paso1IF(p):
 	'''
-	crearCuadruploGoToF : empty
+	paso1IF : empty
+
 
 	'''
+
 	crearCuadruploGoToF()
+	PiladeSaltos.append(cont - 1)
 
-def p_crearCuadruploGoTo(p):
+def p_paso2IF(p):
 	'''
-	crearCuadruploGoTo : empty
+	paso2IF : empty
 
 	'''
+
 	crearCuadruploGoTo()
+	direccion = PiladeSaltos.pop()
+	Rellenar(direccion, cont)
+	PiladeSaltos.append(cont - 1)
 
-def p_acabarIF(p):
+def p_paso3IF(p):
 	'''
-	acabarIF : empty
+	paso3IF : empty
 	'''
 
 	global PiladeSaltos
@@ -897,6 +1184,49 @@ def p_paso2DO(p):
 
 	Rellenar(len(Cuadruplos) - 1, direccion)
 
+def p_paso1DoExit(p):
+	'''
+	paso1DoExit : empty
+
+	'''
+
+	global PiladeExits
+	global PiladeSaltos
+	PiladeExits.append(marca)
+	PiladeSaltos.append(cont)
+
+def p_paso2DoExit(p):
+	'''
+	paso2DoExit : empty
+
+	'''
+
+	crearCuadruploGoToDoExit()
+
+def p_paso3DoExit(p):
+
+	'''
+	paso3DoExit : empty
+
+	'''
+
+	topPilaExits = PiladeExits.pop()
+
+	while(topPilaExits != marca):
+		Rellenar(topPilaExits,cont)
+		topPilaExits = PiladeExits.pop()
+
+def p_paso4DoExit(p):
+	'''
+	paso4DoExit : empty
+
+	'''
+	
+	global PiladeExits
+	PiladeExits.append(cont)
+
+	crearCuadruploGoTo()
+
 def p_error(p):
 	print("Syntax error at '%s'" % p)
 
@@ -923,7 +1253,260 @@ while  True:
 		break
 	print(tok)
 '''
+def ejecutor():
+
+	global Cuadruplos
+	global cont
+	global tablaVariables
+
+	i = 0
+	print('\nEjecutor')
+	while i < cont:
+		cuad = Cuadruplos[i]
+		operacion = cuad[0]
+
+		if operacion == '+':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] + OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+
+		elif operacion == '=':
+			OP1 = cuad[1]
+			OP2 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value']
+				tablaVariables[OP2]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+		
+		elif operacion == '*':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] * OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+		
+		elif operacion == '/':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] / OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+		
+		elif operacion == '-':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] - OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+
+		elif operacion == 'goto':
+			salto = cuad[1]
+			i = salto - 1
+
+		elif operacion == '<':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] < OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+
+		elif operacion == 'gotoF':
+			
+			salto = cuad[2]
+			condicion = cuad[1]
+			OP1Info = tablaVariables.get(condicion)
+			
+			if OP1Info is not None:
+				if OP1Info['value'] == False:
+					i = salto - 1
+			else:
+				print('NO EXISTE LA VARIABLE')
+	
+		elif operacion == '>':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] > OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+
+		elif operacion == '<=':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] <= OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+
+		elif operacion == '>=':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] >= OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+
+		elif operacion == '<>':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] >= OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+
+		elif operacion == '==':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] == OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+
+		elif operacion == '&':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] and OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+
+		elif operacion == '|':
+			OP1 = cuad[1]
+			OP2 = cuad[2]
+			OP3 = cuad[3]
+
+			OP1Info = tablaVariables.get(OP1)
+			OP2Info = tablaVariables.get(OP2)
+
+			if OP1Info is not None and OP2Info is not None:
+				temp = OP1Info['value'] or OP2Info['value']
+				tablaVariables[OP3]['value'] = temp
+			else:
+				print('NO EXISTE LA VARIABLE')
+
+		elif operacion == 'gotoV':
+			
+			salto = cuad[2]
+			condicion = cuad[1]
+			OP1Info = tablaVariables.get(condicion)
+			
+			if OP1Info is not None:
+				if OP1Info['value'] == True:
+					i = salto - 1
+			else:
+				print('NO EXISTE LA VARIABLE')
+
+		elif operacion == 'read':
+			
+			lectura = ""
+
+			while lectura == "":
+				lectura = input("Input : ")
+			OP1 = cuad[1]
+
+			OP1Info = tablaVariables.get(OP1)
+
+			if OP1Info is not None:
+				tablaVariables[OP1]['value'] = int(lectura)
+			else:
+				print("NO EXISTE LA VARIABLE")
+		
+		elif operacion == 'outputS':
+
+			stringImp = cuad[1]
+
+			print("Output : ", stringImp)
+
+		elif operacion == 'outputV':
+
+			local = cuad[1]
+			OP1Info = tablaVariables.get(local)
+			print('Output' + ' ' + '"' + local + '"' + ': ' , OP1Info['value'])
+
+		i = i + 1
+
 print(code)
 parser.parse(code)
+ejecutor()
+#Se necesita limpiar los valores cuando el ejecutor
 
+#print(json.dumps(tablaVariables, indent = 2))
 
