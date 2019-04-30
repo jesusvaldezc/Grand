@@ -20,6 +20,8 @@ forID = 0
 
 # Variables relaciondas a tabla de variables
 tablaVariables = {}
+tablaSubrutinas = []
+tablaDirecciones = []
 defaultValues = {'int': 0, 'float': 0.0, 'bool': False}
 AvailTemp = ['$t1', '$t2', '$t3', '$t4','$t5', '$t6', '$t7', '$t8', '$t9', '$t10']
 variableIdQueue = []
@@ -33,7 +35,7 @@ def Rellenar(direccion1, direccion2):
 
 	Cuad = Cuadruplos[direccion1]
 	tipoGoto = Cuad[0]
-	if (tipoGoto == 'goto' or tipoGoto == 'read'):
+	if (tipoGoto == 'goto' or tipoGoto == 'read' or tipoGoto == 'gotoP'):
 		CuadNuevo = (Cuad[0],direccion2,'','')
 		Cuadruplos[direccion1] = CuadNuevo
 	else:
@@ -740,6 +742,34 @@ def crearCuadruploOutput():
 	Cuadruplos.append(Cuad)
 	cont += 1
 
+def crearCuadruploReturn():
+
+	global PilaOperandos
+	global PiladeSaltos
+	global AvailTemp
+	global Cuadruplos
+	global tablaVariables
+	global cont
+
+	Cuad = ['Return', '', '', '']
+	print("Cuad RETURN")
+	Cuadruplos.append(Cuad)
+	cont += 1
+
+def crearCuadruploGoToP():
+
+	global PilaOperandos
+	global PiladeSaltos
+	global AvailTemp
+	global Cuadruplos
+	global tablaVariables
+	global cont
+
+	Cuad = ['gotoP', '', '', '']
+	print("Cuad gotoP")
+	Cuadruplos.append(Cuad)
+	cont += 1
+
 def p_program(p):
 
 	'''
@@ -791,11 +821,10 @@ def p_var_assign(p):
 def p_var_dimensiones(p):
 	'''
 	var_dimensiones : LARR constante_entero RARR
-					| LARR constante_entero COMMA constante_entero  RARR
-					| empty
+									| LARR constante_entero COMMA constante_entero RARR
+									| empty
 	'''
 
-#Dimensiones de arreglo aun no esta implementado
 
 def p_create_var_table(p):
 	'''
@@ -821,14 +850,39 @@ def p_var_local(p):
 def p_subrutinas(p):
 	'''	
 	subrutinas : f_local
-				| empty
+			    	 | empty
 	'''
 
 def p_f_local(p):
 	'''
-	f_local : SUBROUTINE ID d END SUBROUTINE ID f_local
-			| SUBROUTINE ID d END SUBROUTINE ID
+	f_local : SUBROUTINE idSub d crearCuadruploReturn END_SUBROUTINE  f_local
+		    	| SUBROUTINE idSub d crearCuadruploReturn END_SUBROUTINE 
 	'''
+
+def p_idSub(p):
+	'''
+	idSub : ID
+
+	'''
+
+	global tablaSubrutinas
+	global tablaDirecciones
+	global cont
+
+	idlocal = p[1]
+
+	tablaSubrutinas.append(idlocal)
+	tablaDirecciones.append(cont)
+
+def p_crearCuadruploReturn(p):
+	
+	'''
+	crearCuadruploReturn : empty
+
+	'''
+
+	crearCuadruploReturn()
+
 
 def p_a(p):
 	'''
@@ -924,12 +978,16 @@ def p_idInput(p):
 	local = p[1]
 	Rellenar(cont -1, local)
 
-
 def p_call_subroutine(p):
 	'''
 	call_subroutine : CALL ID
 
 	'''
+	crearCuadruploGoToP()
+	indiceRutina = tablaSubrutinas.index(p[2])
+	direccionRutina = tablaDirecciones[indiceRutina]
+	Rellenar(cont-1 ,direccionRutina)
+
 def p_if_expression(p):
 	'''
 	if_expression : IF expression_logic paso1IF THEN  if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
@@ -994,8 +1052,6 @@ def p_idOut(p):
 	PilaOperandos.append(p[1])
 
 	crearCuadruploOutput()
-
-	
 
 def p_variable_matrix_assign(p):
 	'''
@@ -1243,6 +1299,7 @@ fileName = "prueba3.txt"
 
 file = open(fileName, 'r')
 code = file.read()
+
 '''
 
 lexer.input(code)
@@ -1258,6 +1315,8 @@ def ejecutor():
 	global Cuadruplos
 	global cont
 	global tablaVariables
+	global tablaDirecciones
+	global tablaSubrutinas
 
 	i = 0
 	print('\nEjecutor')
@@ -1501,11 +1560,21 @@ def ejecutor():
 			OP1Info = tablaVariables.get(local)
 			print('Output' + ' ' + '"' + local + '"' + ': ' , OP1Info['value'])
 
+		elif operacion == 'Return':
+			salto = tablaDirecciones.pop()
+			i = salto
+
+		elif operacion == 'gotoP':
+			salto = cuad[1]
+			tablaDirecciones.append(i)
+			i = salto -1
+
 		i = i + 1
 
 print(code)
 parser.parse(code)
 ejecutor()
+
 #Se necesita limpiar los valores cuando el ejecutor
 
 #print(json.dumps(tablaVariables, indent = 2))

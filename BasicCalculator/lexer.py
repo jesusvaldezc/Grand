@@ -57,6 +57,7 @@ reserved = {
     'exit' : 'EXIT',
     'for' : 'FOR',
     'end_for' : 'END_FOR',
+    'end_subroutine' : 'END_SUBROUTINE',
     'subroutine' : 'SUBROUTINE'
  }
 

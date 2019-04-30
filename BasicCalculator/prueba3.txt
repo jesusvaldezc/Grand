@@ -2,6 +2,7 @@ program prueba      					#este es un comentario
 				       
 int::i, fact, number, opcion, a,b,c,d,y, expresion, local,k, local2
 float::resultado
+
 begin
 
 fact = 1
@@ -81,7 +82,7 @@ local2 = 0
 									
 								end_if
 				
-				print(Quieres hacer otra operacion? 1: Si)
+				print(Quieres hacer otra operacion? 1: Si, 0 u otro : No)
 
 				read opcion
 
