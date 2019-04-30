@@ -1,0 +1,15 @@
+program prueba      					#este es un comentario
+      
+int::d[6]
+
+begin
+
+print (Hola)
+
+
+end
+end program prueba
+
+
+
+

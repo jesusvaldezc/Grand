@@ -18,7 +18,8 @@ cont = 0
 marca = 200
 forID = 0
 
-# Variables relaciondas a tabla de variables
+# Variables relaciondas a la tabla de variables
+
 tablaVariables = {}
 tablaSubrutinas = []
 tablaDirecciones = []
@@ -28,6 +29,8 @@ variableIdQueue = []
 currentType = ''
 currentOperator = ''
 stringOutput = ''
+tam1 = 0
+tam2 = 0
 
 def Rellenar(direccion1, direccion2):
 	
@@ -781,7 +784,7 @@ def p_program(p):
 	for x in range(len(Cuadruplos)): 
 		print(Cuadruplos[x]) 
 		
-	#print(tablaVariables)
+	print(tablaVariables)
 	print(cont)
 	#print(PiladeSaltos)
 	#print(PilaOperandos)
@@ -820,25 +823,45 @@ def p_var_assign(p):
 
 def p_var_dimensiones(p):
 	'''
-	var_dimensiones : LARR constante_entero RARR
-									| LARR constante_entero COMMA constante_entero RARR
+	var_dimensiones : LARR Decnumsize RARR
 									| empty
 	'''
 
+def p_Decnumsize(p):
+	'''
+
+	Decnumsize : INT empty
+						 | INT COMMA INT
+
+	'''
+	global tam1
+	global tam2
+
+	if p[2] == ',':
+		tam1 = p[1]
+		tam2 = p[3]
+	else:
+		tam1 = p[1]
 
 def p_create_var_table(p):
 	'''
 	create_var_table : empty
 
 	'''
+
+	global variableIdQueue
 	global tablaVariables
 	global currentType
 	global defaultValues
+	global tam1
+	global tam2
 
 	while len(variableIdQueue) > 0:
 	 currentVar = variableIdQueue.pop()
-	 tablaVariables[currentVar] = {'type': currentType, 'value' : defaultValues[currentType]}
-
+	 tablaVariables[currentVar] = {'type': currentType, 'd1' : tam1, 'd2' : tam2, 'value' : defaultValues[currentType]}
+	 tam1 = 0
+	 tam2 = 0
+	
 def p_var_local(p):
 	'''
 	var_local : ID COMMA var_local
@@ -884,11 +907,15 @@ def p_crearCuadruploReturn(p):
 	crearCuadruploReturn()
 
 
+#Inicia el "main" del lenguaje
+
 def p_a(p):
 	'''
 	a : BEGIN d END
 
 	'''
+
+#Permite que exista mas de un estatuto
 
 def p_d(p):
 	'''
@@ -897,11 +924,13 @@ def p_d(p):
 
 	'''
 
+#Estatutos
+
 def p_b(p):
 	'''
-	b :   variable_matrix_assign
+	b : variable_matrix_assign
 		| printing_variables
-		| if_expression
+		| if_expression 
 		| do_loops
 		| call_subroutine
 		| reading_variables
@@ -912,9 +941,8 @@ def p_b(p):
 def p_do_loops(p):
 	'''
 	do_loops : FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
-			| DO constante_entero COMMA constante_entero COMMA variable_matrix_assign d END_DO
-			| DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
-			| LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
+			     | DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+			     | LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
 
 	'''
 
@@ -1204,7 +1232,8 @@ def p_constante_entero(p):
 	'''
 	global tablaVariables
 
-	tablaVariables[p[1]] = {'type': 'int', 'value': p[1]}
+
+	tablaVariables[p[1]] = {'type': 'int', 'd1' : 0, 'd2' : 0, 'value': p[1]}
 	p[0] = p[1]
 
 def p_constante_flotante(p):
@@ -1214,7 +1243,7 @@ def p_constante_flotante(p):
 	'''
 	global tablaVariables
 
-	tablaVariables[p[1]] = {'type': 'float', 'value': p[1]}
+	tablaVariables[p[1]] = {'type': 'float', 'd1' : 0, 'd2' : 0, 'value': p[1]}
 	p[0] = p[1]
 
 def p_paso1DO(p):
@@ -1294,8 +1323,8 @@ def p_empty(p):
 
 parser = yacc.yacc()
 
-print("Leyendo de prueba3: ")
-fileName = "prueba3.txt"
+print("Leyendo archivo..... " )
+fileName = "prueba_arreglo.txt"
 
 file = open(fileName, 'r')
 code = file.read()
@@ -1574,8 +1603,6 @@ def ejecutor():
 print(code)
 parser.parse(code)
 ejecutor()
-
-#Se necesita limpiar los valores cuando el ejecutor
 
 #print(json.dumps(tablaVariables, indent = 2))
 
