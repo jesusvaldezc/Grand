@@ -1,0 +1,84 @@
+program prueba      					#este es un comentario
+
+int::local1,local2,local,local3, local4,n, columna1,filas1,columna2,filas2,i,j,temp1,temp2,temp3,temp4,temp5
+int::a[2,2]
+int::b[2,2]
+int::c[2,2]
+
+
+
+
+begin
+
+print(Dame la columna)
+    read columna1
+print(Dame las filas)
+    read filas1
+print(Dame la columna 2)
+    read columna2
+print(Dame las filas 2)
+    read filas2
+
+    for i = 0,filas1 do
+        for j = 0,columna1 do
+
+            
+            a[i,j] = 1
+
+
+         end_for
+
+    end_for
+
+    for i = 0,filas2 do
+        for j = 0,columna2 do
+
+            
+            b[i,j] = 1
+
+    
+         end_for
+
+    end_for
+
+    for i = 0,filas1 do
+        for j = 0, columna2 do
+
+        c[i,j] = 0
+        local1 = 0
+        
+        do loop
+
+            temp1 = a[i,local1]
+            print temp1
+            temp2 = b[local1,j]
+            print temp2
+            temp3 = temp1 * temp2
+            print temp3
+            temp5 = c[i,j]
+            print temp5
+            local4 = temp5 + temp3
+            print local4
+            c[i,j] = local4
+
+
+        local1 = local1 + 1
+        while local1 < filas2
+        end_do
+
+
+        end_for
+
+    end_for
+    
+    print a
+    print b
+    print c
+    
+   
+end
+end program prueba
+
+
+
+

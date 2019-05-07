@@ -1,0 +1,31 @@
+program prueba      					#este es un comentario
+
+int::new, actual, currentIter, iterations, temp
+
+subroutine fibo
+    if (currentIter < iterations) then
+
+        temp = new + actual
+        actual = new
+        new = temp
+        print new
+        currentIter = currentIter + 1
+        call fibo
+    end_if
+
+end_subroutine
+
+begin
+     currentIter = 0
+     new = 1
+     actual = 0
+        print(Ingresa un entero positivo)
+            read iterations
+        print(El factorial del entero es )
+    call fibo
+end
+end program prueba
+
+
+
+

@@ -1,0 +1,84 @@
+program prueba      					#este es un comentario
+
+int::b,c,x,local,local2,local3,d,k, dimension1, valorMax, s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,i,j
+int::a[10]
+int::r[10]
+
+subroutine teclearVector
+    print(Llena el vector)
+    for b = 0, dimension1 do
+        read x
+        a[b] = x
+
+    end_for
+
+end_subroutine
+
+subroutine sort
+
+    for i = j + 1, dimension1 do
+        for j = 0, dimension1 do
+
+            local = a[j]
+            local2 = a[i]
+
+            if (local > local2) then
+                a[j] = local2
+                a[i] = local
+            end_if
+
+      end_for
+    end_for
+
+    end_subroutine
+
+subroutine clearValues
+
+ local = 0
+ local2 = 0
+ i = 0
+ j = 0
+
+    for b = 0, dimension1 do
+        a[b] = 0
+
+    end_for
+
+end_subroutine
+
+
+begin
+
+valorMax = 10
+d = 1
+ 
+    do loop
+    
+        print(Asigna la dimension del vector)
+            read dimension1
+
+            if (dimension1 < valorMax) then
+                dimension1 = dimension1 - 1
+                call teclearVector
+                call sort
+                print a
+
+                print(Deseas ordenar otro vector? 1: Si, Otros: No)
+                read k
+                call clearValues
+            else
+                print(La dimension es mayor a 10)
+                print(Cerrando programa)
+                k = 10
+            end_if
+    
+    while (k == d)
+    end_do
+   
+    
+end
+end program prueba
+
+
+
+

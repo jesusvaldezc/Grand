@@ -1,0 +1,51 @@
+
+
+
+program prueba      					#este es un comentario
+
+int::a[2,2]
+int::b[2,2]
+int::c[2,2]
+
+
+
+
+begin
+
+    a[0,0] = 1
+    b[0,0] = 1
+
+
+            temp1 = a[0,0]
+            print temp1
+            temp2 = b[0,0]
+            print temp2
+            temp3 = temp1 * temp2
+            print temp3
+            temp5 = c[0,0]
+            print temp5
+            local4 = temp5 + temp3
+            print local4
+            c[0,0] = local4
+
+            temp1 = a[0,0]
+            print temp1
+            temp2 = b[0,0]
+            print temp2
+            temp3 = temp1 * temp2
+            print temp3
+            temp5 = c[0,0]
+            print temp5
+            local4 = temp5 + temp3
+            print local4
+            c[0,0] = local4
+
+            print c
+
+   
+end
+end program prueba
+
+
+
+

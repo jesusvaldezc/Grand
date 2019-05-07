@@ -1,0 +1,44 @@
+program prueba      					#este es un comentario
+
+int::i,j,n,temp1,temp2,temp3,temp4,temp5,x
+int::a[2,2]
+int::b[2,2]
+int::c[2,2]
+
+begin
+
+    for i = 0,1 do
+
+            for j = 0,1 do
+
+                do loop
+                    temp1 = a[j,i]
+                    temp2 = b[j,i]
+                    temp3 = temp1 * temp2
+                    temp5 = c[j,i]
+                    temp4 = temp5 + temp3
+                    c[j,i] = temp4
+
+                while 
+                end_do
+                    
+                
+             end_for
+
+    end_for
+
+    
+
+
+        print a
+        print b
+        print c
+
+    
+   
+end
+end program prueba
+
+
+
+

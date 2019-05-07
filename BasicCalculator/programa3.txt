@@ -1,0 +1,77 @@
+program prueba      					#este es un comentario
+
+int::x,a,b,c,d,e,f,g,h,inferior,superior
+
+begin
+
+inferior = 0
+superior = 8
+a = 0
+b = 1
+c = 2
+d = 3
+e = 4
+f = 5 
+g = 6
+h = 7
+
+     loop
+
+        print (Elige un numero entre 0 y 7)
+        read x
+
+        if (x >= inferior) & (x < superior) then
+
+            if(x == a) then
+                print(Cero)
+                exit
+            end_if
+
+            if(x == b) then
+                print(Uno)
+                exit
+            end_if
+
+            if(x == c) then
+                print(Dos)
+                exit
+            end_if
+
+            if(x == d) then
+                print(Tres)
+                exit
+            end_if
+
+            if(x == e) then
+                print(Cuatro)
+                exit
+            end_if
+
+            if(x == f) then
+                print(Cinco)
+                exit
+            end_if
+
+            if(x == g) then
+                print(Seis)
+                exit
+            end_if
+
+            if(x == h) then
+                print(Siete)
+                exit
+            end_if
+               
+        else
+            print(No se eligio un numero entre 0 y 7, vuelve a intentarlo)
+        end_if
+
+    end_loop
+    
+   
+end
+end program prueba
+
+
+
+

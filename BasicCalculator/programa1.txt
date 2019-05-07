@@ -1,0 +1,141 @@
+program prueba      					#este es un comentario
+
+int::b,c,x,local,local2,local3,d,k,opcion1, opcion2,y, dimension1, dimension2, valorMax
+int::temp1,temp2,temp3,temp4,temp5
+int::a[5,5]
+int::f[5,5]
+int::r[5,5]
+
+subroutine teclearMatrices
+
+    print(Llena la primera matriz)
+        for b = 0,dimension1 do  
+                    for c = 0,dimension2 do
+                    
+                        read x
+                        a[c,b] = x
+
+                    end_for
+
+            end_for
+  
+    print(Llena la segunda matriz)
+                for b = 0,dimension1 do  
+                    for c = 0,dimension2 do
+
+                        read x
+                        f[c,b] = x
+
+                end_for
+
+            end_for
+
+end_subroutine
+
+subroutine mulMatrices
+
+    for b = 0,dimension1 do  
+
+            for c = 0,dimension2 do
+
+              local = a[c,b]
+              local2 = f[c,b]
+              local3 = local * local2
+              r[c,b] = local3
+
+         end_for
+
+        end_for
+
+end_subroutine
+
+subroutine sumaMatrices
+
+    for b = 0,dimension1 do  
+
+            for c = 0,dimension2 do
+
+              local = a[c,b]
+              local2 = f[c,b]
+              local3 = local + local2
+              r[c,b] = local3
+
+         end_for
+
+        end_for
+
+end_subroutine
+
+
+begin
+ 
+    k = 0
+    d = 0
+    valorMax = 5
+    opcion1 = 1
+    opcion2 = 2
+
+    loop
+
+        print(Selecciona la opcion: 1 Multiplicacion de matrices, 2: Suma de matrices)
+
+        read y
+
+        if y == opcion1 then
+
+            print(Asigna la dimension1)
+                read dimension1
+            print(Asigna la dimension2)
+                read dimension2
+
+            if (dimension1 == dimension2) & (dimension1 < valorMax)then
+
+                dimension1 = dimension1 - 1
+                dimension2 = dimension2 - 1
+                call teclearMatrices
+                call mulMatrices
+                print(El resultado es: )
+                print r
+
+            else
+                print(Las dimensiones no son las correctas u la dimension es mayor a 5)
+                print(Cerrando programa)
+                exit
+
+            end_if
+        end_if
+
+        if y == opcion2 then
+
+
+            print(Asigna la dimension1)
+                read dimension1
+            print(Asigna la dimension2)
+                read dimension2
+
+            if (dimension1 == dimension2) & (dimension1 < valorMax)then
+
+                dimension1 = dimension1 - 1
+                dimension2 = dimension2 - 1
+                call teclearMatrices
+                call sumaMatrices
+                print(El resultado es: )
+                print r
+
+            else
+                print(Las dimensiones no son las correctas u la dimension es mayor a 5)
+                print(Cerrando programa)
+                exit
+
+            end_if
+
+        end_if
+            
+    end_loop
+    
+end
+end program prueba
+
+
+
+

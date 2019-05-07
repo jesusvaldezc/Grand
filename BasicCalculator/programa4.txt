@@ -1,0 +1,35 @@
+program prueba      					#este es un comentario
+
+int::x, a, respuesta
+
+subroutine factorial
+
+    if x <= a then
+
+    respuesta = respuesta * 1
+
+    else
+    
+    respuesta = respuesta * x
+    x = x - 1
+    call factorial
+    end_if
+
+end_subroutine
+
+begin
+
+     respuesta = 1
+     a = 1
+        print(Ingresa un entero positivo)
+            read x
+        print(El factorial del entero es )
+    call factorial
+        print respuesta
+
+end
+end program prueba
+
+
+
+

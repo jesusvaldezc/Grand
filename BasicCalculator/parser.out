@@ -17,7 +17,7 @@ Rule 2     primerCuad -> empty
 Rule 3     rellenaCuad -> empty
 Rule 4     type_definition -> INT_TYPE
 Rule 5     type_definition -> FLOAT_TYPE
-Rule 6     var_assign -> type_definition COLONS COLONS var_local var_dimensiones create_var_table obtenerMatriz var_assign
+Rule 6     var_assign -> type_definition COLONS COLONS var_local var_dimensiones create_var_table var_assign
 Rule 7     var_assign -> empty
 Rule 8     var_dimensiones -> LARR Decnumsize RARR
 Rule 9     var_dimensiones -> empty
@@ -71,55 +71,57 @@ Rule 56    StringOut -> COLONS StringOut
 Rule 57    StringOut -> COMMA StringOut
 Rule 58    StringOut -> QUESTION StringOut
 Rule 59    idOut -> ID
-Rule 60    variable_matrix_assign -> ID ASSIGN expression_arith
-Rule 61    variable_matrix_assign -> ID LPAREN expression_arith RPAREN ASSIGN expression_arith
-Rule 62    variable_matrix_assign -> ID LPAREN expression_arith COMMA expression_arith RPAREN ASSIGN expression_arith
-Rule 63    expression_arith -> expression_arith PLUS c
-Rule 64    expression_arith -> expression_arith MINUS c
-Rule 65    expression_arith -> c
-Rule 66    c -> c MULTIPLY te
-Rule 67    c -> c DIVIDE te
-Rule 68    c -> te
-Rule 69    te -> ID
-Rule 70    te -> constante_entero
-Rule 71    te -> constante_flotante
-Rule 72    te -> ID LPAREN expression_arith RPAREN
-Rule 73    te -> ID LPAREN expression_arith COMMA expression_arith RPAREN
-Rule 74    te -> LPAREN expression_arith RPAREN
-Rule 75    expression_logic -> expression_logic OR g
-Rule 76    expression_logic -> g
-Rule 77    g -> g AND ge
-Rule 78    g -> ge
-Rule 79    ge -> ID GT ID
-Rule 80    ge -> ID LT ID
-Rule 81    ge -> ID GE ID
-Rule 82    ge -> ID LE ID
-Rule 83    ge -> ID NE ID
-Rule 84    ge -> ID EQUAL ID
-Rule 85    ge -> LPAREN expression_logic RPAREN
-Rule 86    paso1IF -> empty
-Rule 87    paso2IF -> empty
-Rule 88    paso3IF -> empty
-Rule 89    constante_entero -> INT
-Rule 90    constante_flotante -> FLOAT
-Rule 91    paso1DO -> empty
-Rule 92    paso2DO -> empty
-Rule 93    paso1DoExit -> empty
-Rule 94    paso2DoExit -> empty
-Rule 95    paso3DoExit -> empty
-Rule 96    paso4DoExit -> empty
-Rule 97    empty -> <empty>
+Rule 60    variable_matrix_assign -> otro1
+Rule 61    variable_matrix_assign -> otro
+Rule 62    otro -> ID LARR expression_arith RARR ASSIGN expression_arith
+Rule 63    otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+Rule 64    otro1 -> ID ASSIGN expression_arith
+Rule 65    expression_arith -> expression_arith PLUS c
+Rule 66    expression_arith -> expression_arith MINUS c
+Rule 67    expression_arith -> c
+Rule 68    c -> c MULTIPLY te
+Rule 69    c -> c DIVIDE te
+Rule 70    c -> te
+Rule 71    te -> ID
+Rule 72    te -> constante_entero
+Rule 73    te -> constante_flotante
+Rule 74    te -> ID LARR expression_arith RARR
+Rule 75    te -> ID LARR expression_arith COMMA expression_arith RARR
+Rule 76    te -> LPAREN expression_arith RPAREN
+Rule 77    expression_logic -> expression_logic OR g
+Rule 78    expression_logic -> g
+Rule 79    g -> g AND ge
+Rule 80    g -> ge
+Rule 81    ge -> ID GT ID
+Rule 82    ge -> ID LT ID
+Rule 83    ge -> ID GE ID
+Rule 84    ge -> ID LE ID
+Rule 85    ge -> ID NE ID
+Rule 86    ge -> ID EQUAL ID
+Rule 87    ge -> LPAREN expression_logic RPAREN
+Rule 88    paso1IF -> empty
+Rule 89    paso2IF -> empty
+Rule 90    paso3IF -> empty
+Rule 91    constante_entero -> INT
+Rule 92    constante_flotante -> FLOAT
+Rule 93    paso1DO -> empty
+Rule 94    paso2DO -> empty
+Rule 95    paso1DoExit -> empty
+Rule 96    paso2DoExit -> empty
+Rule 97    paso3DoExit -> empty
+Rule 98    paso4DoExit -> empty
+Rule 99    empty -> <empty>
 
 Terminals, with rules where they appear
 
-AND                  : 77
-ASSIGN               : 31 60 61 62
+AND                  : 79
+ASSIGN               : 31 62 63 64
 BEGIN                : 21
 CALL                 : 42
 COLONS               : 6 6 56
-COMMA                : 11 13 31 40 57 62 73
+COMMA                : 11 13 31 40 57 63 75
 COMMENT              : 
-DIVIDE               : 67
+DIVIDE               : 69
 DO                   : 31 32
 ELSE                 : 43
 ELSIF                : 47
@@ -129,36 +131,36 @@ END_FOR              : 31
 END_IF               : 43 44
 END_LOOP             : 33
 END_SUBROUTINE       : 17 18
-EQUAL                : 84
+EQUAL                : 86
 EXIT                 : 30
-FLOAT                : 90
+FLOAT                : 92
 FLOAT_TYPE           : 5
 FOR                  : 31
-GE                   : 81
-GT                   : 79
-ID                   : 1 1 13 14 19 34 41 42 53 59 60 61 62 69 72 73 79 79 80 80 81 81 82 82 83 83 84 84
+GE                   : 83
+GT                   : 81
+ID                   : 1 1 13 14 19 34 41 42 53 59 62 63 64 71 74 75 81 81 82 82 83 83 84 84 85 85 86 86
 IF                   : 43 44
-INT                  : 10 11 11 89
+INT                  : 10 11 11 91
 INT_TYPE             : 4
-LARR                 : 8
+LARR                 : 8 62 63 74 75
 LBRACK               : 
-LE                   : 82
+LE                   : 84
 LOOP                 : 32 33
-LPAREN               : 51 61 62 72 73 74 85
-LT                   : 80
-MINUS                : 64
-MULTIPLY             : 66
-NE                   : 83
-OR                   : 75
-PLUS                 : 63
+LPAREN               : 51 76 87
+LT                   : 82
+MINUS                : 66
+MULTIPLY             : 68
+NE                   : 85
+OR                   : 77
+PLUS                 : 65
 PRINT                : 49
 PROGRAM              : 1 1
 QMARKS               : 
 QUESTION             : 58
-RARR                 : 8
+RARR                 : 8 62 63 74 75
 RBRACK               : 
 READ                 : 38
-RPAREN               : 51 61 62 72 73 74 85
+RPAREN               : 51 76 87
 STRING               : 
 SUBROUTINE           : 17 18
 THEN                 : 43 44 47
@@ -173,20 +175,20 @@ Output               : 49
 StringOut            : 51 53 54 55 56 57 58
 a                    : 1
 b                    : 22 23
-c                    : 63 64 65 66 67
+c                    : 65 66 67 68 69
 call_subroutine      : 28
-constante_entero     : 54 70
-constante_flotante   : 55 71
+constante_entero     : 54 72
+constante_flotante   : 55 73
 crearCuadruploReturn : 17 18
 create_var_table     : 6
 d                    : 17 18 21 23 31 32 33 45
 do_loops             : 27
-empty                : 2 3 7 9 10 12 16 20 35 36 37 46 48 52 86 87 88 91 92 93 94 95 96
-expression_arith     : 31 31 60 61 61 62 62 62 63 64 72 73 73 74
-expression_logic     : 32 43 44 47 75 85
+empty                : 2 3 7 9 10 12 16 20 35 36 37 46 48 52 88 89 90 93 94 95 96 97 98
+expression_arith     : 31 31 62 62 63 63 63 64 65 66 74 75 75 76
+expression_logic     : 32 43 44 47 77 87
 f_local              : 15 17
-g                    : 75 76 77
-ge                   : 77 78
+g                    : 77 78 79
+ge                   : 79 80
 idInput              : 39 40
 idOut                : 50
 idSub                : 17 18
@@ -194,7 +196,8 @@ idrepInput           : 38 40
 if_expression        : 26
 if_expression_local  : 43 43 44 47
 if_expression_local2 : 43 47
-obtenerMatriz        : 6
+otro                 : 61
+otro1                : 60
 paso1DO              : 32
 paso1DoExit          : 33
 paso1FOR             : 31
@@ -214,10 +217,3604 @@ program              : 0
 reading_variables    : 29
 rellenaCuad          : 1
 subrutinas           : 1
-te                   : 66 67 68
+te                   : 68 69 70
 type_definition      : 6
 var_assign           : 1 6
 var_dimensiones      : 6
 var_local            : 6 13
 variable_matrix_assign : 24
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PROGRAM ID primerCuad var_assign subrutinas rellenaCuad a END PROGRAM ID
+
+    PROGRAM         shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PROGRAM . ID primerCuad var_assign subrutinas rellenaCuad a END PROGRAM ID
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) program -> PROGRAM ID . primerCuad var_assign subrutinas rellenaCuad a END PROGRAM ID
+    (2) primerCuad -> . empty
+    (99) empty -> .
+
+    INT_TYPE        reduce using rule 99 (empty -> .)
+    FLOAT_TYPE      reduce using rule 99 (empty -> .)
+    SUBROUTINE      reduce using rule 99 (empty -> .)
+    BEGIN           reduce using rule 99 (empty -> .)
+
+    primerCuad                     shift and go to state 4
+    empty                          shift and go to state 5
+
+state 4
+
+    (1) program -> PROGRAM ID primerCuad . var_assign subrutinas rellenaCuad a END PROGRAM ID
+    (6) var_assign -> . type_definition COLONS COLONS var_local var_dimensiones create_var_table var_assign
+    (7) var_assign -> . empty
+    (4) type_definition -> . INT_TYPE
+    (5) type_definition -> . FLOAT_TYPE
+    (99) empty -> .
+
+    INT_TYPE        shift and go to state 9
+    FLOAT_TYPE      shift and go to state 10
+    SUBROUTINE      reduce using rule 99 (empty -> .)
+    BEGIN           reduce using rule 99 (empty -> .)
+
+    var_assign                     shift and go to state 6
+    type_definition                shift and go to state 7
+    empty                          shift and go to state 8
+
+state 5
+
+    (2) primerCuad -> empty .
+
+    INT_TYPE        reduce using rule 2 (primerCuad -> empty .)
+    FLOAT_TYPE      reduce using rule 2 (primerCuad -> empty .)
+    SUBROUTINE      reduce using rule 2 (primerCuad -> empty .)
+    BEGIN           reduce using rule 2 (primerCuad -> empty .)
+
+
+state 6
+
+    (1) program -> PROGRAM ID primerCuad var_assign . subrutinas rellenaCuad a END PROGRAM ID
+    (15) subrutinas -> . f_local
+    (16) subrutinas -> . empty
+    (17) f_local -> . SUBROUTINE idSub d crearCuadruploReturn END_SUBROUTINE f_local
+    (18) f_local -> . SUBROUTINE idSub d crearCuadruploReturn END_SUBROUTINE
+    (99) empty -> .
+
+    SUBROUTINE      shift and go to state 14
+    BEGIN           reduce using rule 99 (empty -> .)
+
+    subrutinas                     shift and go to state 11
+    f_local                        shift and go to state 12
+    empty                          shift and go to state 13
+
+state 7
+
+    (6) var_assign -> type_definition . COLONS COLONS var_local var_dimensiones create_var_table var_assign
+
+    COLONS          shift and go to state 15
+
+
+state 8
+
+    (7) var_assign -> empty .
+
+    SUBROUTINE      reduce using rule 7 (var_assign -> empty .)
+    BEGIN           reduce using rule 7 (var_assign -> empty .)
+
+
+state 9
+
+    (4) type_definition -> INT_TYPE .
+
+    COLONS          reduce using rule 4 (type_definition -> INT_TYPE .)
+
+
+state 10
+
+    (5) type_definition -> FLOAT_TYPE .
+
+    COLONS          reduce using rule 5 (type_definition -> FLOAT_TYPE .)
+
+
+state 11
+
+    (1) program -> PROGRAM ID primerCuad var_assign subrutinas . rellenaCuad a END PROGRAM ID
+    (3) rellenaCuad -> . empty
+    (99) empty -> .
+
+    BEGIN           reduce using rule 99 (empty -> .)
+
+    rellenaCuad                    shift and go to state 16
+    empty                          shift and go to state 17
+
+state 12
+
+    (15) subrutinas -> f_local .
+
+    BEGIN           reduce using rule 15 (subrutinas -> f_local .)
+
+
+state 13
+
+    (16) subrutinas -> empty .
+
+    BEGIN           reduce using rule 16 (subrutinas -> empty .)
+
+
+state 14
+
+    (17) f_local -> SUBROUTINE . idSub d crearCuadruploReturn END_SUBROUTINE f_local
+    (18) f_local -> SUBROUTINE . idSub d crearCuadruploReturn END_SUBROUTINE
+    (19) idSub -> . ID
+
+    ID              shift and go to state 19
+
+    idSub                          shift and go to state 18
+
+state 15
+
+    (6) var_assign -> type_definition COLONS . COLONS var_local var_dimensiones create_var_table var_assign
+
+    COLONS          shift and go to state 20
+
+
+state 16
+
+    (1) program -> PROGRAM ID primerCuad var_assign subrutinas rellenaCuad . a END PROGRAM ID
+    (21) a -> . BEGIN d END
+
+    BEGIN           shift and go to state 22
+
+    a                              shift and go to state 21
+
+state 17
+
+    (3) rellenaCuad -> empty .
+
+    BEGIN           reduce using rule 3 (rellenaCuad -> empty .)
+
+
+state 18
+
+    (17) f_local -> SUBROUTINE idSub . d crearCuadruploReturn END_SUBROUTINE f_local
+    (18) f_local -> SUBROUTINE idSub . d crearCuadruploReturn END_SUBROUTINE
+    (22) d -> . b
+    (23) d -> . b d
+    (24) b -> . variable_matrix_assign
+    (25) b -> . printing_variables
+    (26) b -> . if_expression
+    (27) b -> . do_loops
+    (28) b -> . call_subroutine
+    (29) b -> . reading_variables
+    (30) b -> . EXIT paso4DoExit
+    (60) variable_matrix_assign -> . otro1
+    (61) variable_matrix_assign -> . otro
+    (49) printing_variables -> . PRINT Output
+    (43) if_expression -> . IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> . IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
+    (31) do_loops -> . FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (32) do_loops -> . DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+    (33) do_loops -> . LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
+    (42) call_subroutine -> . CALL ID
+    (38) reading_variables -> . READ idrepInput
+    (64) otro1 -> . ID ASSIGN expression_arith
+    (62) otro -> . ID LARR expression_arith RARR ASSIGN expression_arith
+    (63) otro -> . ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+
+    EXIT            shift and go to state 31
+    PRINT           shift and go to state 34
+    IF              shift and go to state 35
+    FOR             shift and go to state 36
+    DO              shift and go to state 37
+    LOOP            shift and go to state 38
+    CALL            shift and go to state 39
+    READ            shift and go to state 41
+    ID              shift and go to state 40
+
+    d                              shift and go to state 23
+    b                              shift and go to state 24
+    variable_matrix_assign         shift and go to state 25
+    printing_variables             shift and go to state 26
+    if_expression                  shift and go to state 27
+    do_loops                       shift and go to state 28
+    call_subroutine                shift and go to state 29
+    reading_variables              shift and go to state 30
+    otro1                          shift and go to state 32
+    otro                           shift and go to state 33
+
+state 19
+
+    (19) idSub -> ID .
+
+    EXIT            reduce using rule 19 (idSub -> ID .)
+    PRINT           reduce using rule 19 (idSub -> ID .)
+    IF              reduce using rule 19 (idSub -> ID .)
+    FOR             reduce using rule 19 (idSub -> ID .)
+    DO              reduce using rule 19 (idSub -> ID .)
+    LOOP            reduce using rule 19 (idSub -> ID .)
+    CALL            reduce using rule 19 (idSub -> ID .)
+    READ            reduce using rule 19 (idSub -> ID .)
+    ID              reduce using rule 19 (idSub -> ID .)
+
+
+state 20
+
+    (6) var_assign -> type_definition COLONS COLONS . var_local var_dimensiones create_var_table var_assign
+    (13) var_local -> . ID COMMA var_local
+    (14) var_local -> . ID
+
+    ID              shift and go to state 43
+
+    var_local                      shift and go to state 42
+
+state 21
+
+    (1) program -> PROGRAM ID primerCuad var_assign subrutinas rellenaCuad a . END PROGRAM ID
+
+    END             shift and go to state 44
+
+
+state 22
+
+    (21) a -> BEGIN . d END
+    (22) d -> . b
+    (23) d -> . b d
+    (24) b -> . variable_matrix_assign
+    (25) b -> . printing_variables
+    (26) b -> . if_expression
+    (27) b -> . do_loops
+    (28) b -> . call_subroutine
+    (29) b -> . reading_variables
+    (30) b -> . EXIT paso4DoExit
+    (60) variable_matrix_assign -> . otro1
+    (61) variable_matrix_assign -> . otro
+    (49) printing_variables -> . PRINT Output
+    (43) if_expression -> . IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> . IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
+    (31) do_loops -> . FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (32) do_loops -> . DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+    (33) do_loops -> . LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
+    (42) call_subroutine -> . CALL ID
+    (38) reading_variables -> . READ idrepInput
+    (64) otro1 -> . ID ASSIGN expression_arith
+    (62) otro -> . ID LARR expression_arith RARR ASSIGN expression_arith
+    (63) otro -> . ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+
+    EXIT            shift and go to state 31
+    PRINT           shift and go to state 34
+    IF              shift and go to state 35
+    FOR             shift and go to state 36
+    DO              shift and go to state 37
+    LOOP            shift and go to state 38
+    CALL            shift and go to state 39
+    READ            shift and go to state 41
+    ID              shift and go to state 40
+
+    d                              shift and go to state 45
+    b                              shift and go to state 24
+    variable_matrix_assign         shift and go to state 25
+    printing_variables             shift and go to state 26
+    if_expression                  shift and go to state 27
+    do_loops                       shift and go to state 28
+    call_subroutine                shift and go to state 29
+    reading_variables              shift and go to state 30
+    otro1                          shift and go to state 32
+    otro                           shift and go to state 33
+
+state 23
+
+    (17) f_local -> SUBROUTINE idSub d . crearCuadruploReturn END_SUBROUTINE f_local
+    (18) f_local -> SUBROUTINE idSub d . crearCuadruploReturn END_SUBROUTINE
+    (20) crearCuadruploReturn -> . empty
+    (99) empty -> .
+
+    END_SUBROUTINE  reduce using rule 99 (empty -> .)
+
+    crearCuadruploReturn           shift and go to state 46
+    empty                          shift and go to state 47
+
+state 24
+
+    (22) d -> b .
+    (23) d -> b . d
+    (22) d -> . b
+    (23) d -> . b d
+    (24) b -> . variable_matrix_assign
+    (25) b -> . printing_variables
+    (26) b -> . if_expression
+    (27) b -> . do_loops
+    (28) b -> . call_subroutine
+    (29) b -> . reading_variables
+    (30) b -> . EXIT paso4DoExit
+    (60) variable_matrix_assign -> . otro1
+    (61) variable_matrix_assign -> . otro
+    (49) printing_variables -> . PRINT Output
+    (43) if_expression -> . IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> . IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
+    (31) do_loops -> . FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (32) do_loops -> . DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+    (33) do_loops -> . LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
+    (42) call_subroutine -> . CALL ID
+    (38) reading_variables -> . READ idrepInput
+    (64) otro1 -> . ID ASSIGN expression_arith
+    (62) otro -> . ID LARR expression_arith RARR ASSIGN expression_arith
+    (63) otro -> . ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+
+    END_SUBROUTINE  reduce using rule 22 (d -> b .)
+    END             reduce using rule 22 (d -> b .)
+    END_LOOP        reduce using rule 22 (d -> b .)
+    WHILE           reduce using rule 22 (d -> b .)
+    ELSIF           reduce using rule 22 (d -> b .)
+    ELSE            reduce using rule 22 (d -> b .)
+    END_IF          reduce using rule 22 (d -> b .)
+    END_FOR         reduce using rule 22 (d -> b .)
+    EXIT            shift and go to state 31
+    PRINT           shift and go to state 34
+    IF              shift and go to state 35
+    FOR             shift and go to state 36
+    DO              shift and go to state 37
+    LOOP            shift and go to state 38
+    CALL            shift and go to state 39
+    READ            shift and go to state 41
+    ID              shift and go to state 40
+
+    b                              shift and go to state 24
+    d                              shift and go to state 48
+    variable_matrix_assign         shift and go to state 25
+    printing_variables             shift and go to state 26
+    if_expression                  shift and go to state 27
+    do_loops                       shift and go to state 28
+    call_subroutine                shift and go to state 29
+    reading_variables              shift and go to state 30
+    otro1                          shift and go to state 32
+    otro                           shift and go to state 33
+
+state 25
+
+    (24) b -> variable_matrix_assign .
+
+    EXIT            reduce using rule 24 (b -> variable_matrix_assign .)
+    PRINT           reduce using rule 24 (b -> variable_matrix_assign .)
+    IF              reduce using rule 24 (b -> variable_matrix_assign .)
+    FOR             reduce using rule 24 (b -> variable_matrix_assign .)
+    DO              reduce using rule 24 (b -> variable_matrix_assign .)
+    LOOP            reduce using rule 24 (b -> variable_matrix_assign .)
+    CALL            reduce using rule 24 (b -> variable_matrix_assign .)
+    READ            reduce using rule 24 (b -> variable_matrix_assign .)
+    ID              reduce using rule 24 (b -> variable_matrix_assign .)
+    END_SUBROUTINE  reduce using rule 24 (b -> variable_matrix_assign .)
+    END             reduce using rule 24 (b -> variable_matrix_assign .)
+    END_LOOP        reduce using rule 24 (b -> variable_matrix_assign .)
+    WHILE           reduce using rule 24 (b -> variable_matrix_assign .)
+    ELSIF           reduce using rule 24 (b -> variable_matrix_assign .)
+    ELSE            reduce using rule 24 (b -> variable_matrix_assign .)
+    END_IF          reduce using rule 24 (b -> variable_matrix_assign .)
+    END_FOR         reduce using rule 24 (b -> variable_matrix_assign .)
+
+
+state 26
+
+    (25) b -> printing_variables .
+
+    EXIT            reduce using rule 25 (b -> printing_variables .)
+    PRINT           reduce using rule 25 (b -> printing_variables .)
+    IF              reduce using rule 25 (b -> printing_variables .)
+    FOR             reduce using rule 25 (b -> printing_variables .)
+    DO              reduce using rule 25 (b -> printing_variables .)
+    LOOP            reduce using rule 25 (b -> printing_variables .)
+    CALL            reduce using rule 25 (b -> printing_variables .)
+    READ            reduce using rule 25 (b -> printing_variables .)
+    ID              reduce using rule 25 (b -> printing_variables .)
+    END_SUBROUTINE  reduce using rule 25 (b -> printing_variables .)
+    END             reduce using rule 25 (b -> printing_variables .)
+    END_LOOP        reduce using rule 25 (b -> printing_variables .)
+    WHILE           reduce using rule 25 (b -> printing_variables .)
+    ELSIF           reduce using rule 25 (b -> printing_variables .)
+    ELSE            reduce using rule 25 (b -> printing_variables .)
+    END_IF          reduce using rule 25 (b -> printing_variables .)
+    END_FOR         reduce using rule 25 (b -> printing_variables .)
+
+
+state 27
+
+    (26) b -> if_expression .
+
+    EXIT            reduce using rule 26 (b -> if_expression .)
+    PRINT           reduce using rule 26 (b -> if_expression .)
+    IF              reduce using rule 26 (b -> if_expression .)
+    FOR             reduce using rule 26 (b -> if_expression .)
+    DO              reduce using rule 26 (b -> if_expression .)
+    LOOP            reduce using rule 26 (b -> if_expression .)
+    CALL            reduce using rule 26 (b -> if_expression .)
+    READ            reduce using rule 26 (b -> if_expression .)
+    ID              reduce using rule 26 (b -> if_expression .)
+    END_SUBROUTINE  reduce using rule 26 (b -> if_expression .)
+    END             reduce using rule 26 (b -> if_expression .)
+    END_LOOP        reduce using rule 26 (b -> if_expression .)
+    WHILE           reduce using rule 26 (b -> if_expression .)
+    ELSIF           reduce using rule 26 (b -> if_expression .)
+    ELSE            reduce using rule 26 (b -> if_expression .)
+    END_IF          reduce using rule 26 (b -> if_expression .)
+    END_FOR         reduce using rule 26 (b -> if_expression .)
+
+
+state 28
+
+    (27) b -> do_loops .
+
+    EXIT            reduce using rule 27 (b -> do_loops .)
+    PRINT           reduce using rule 27 (b -> do_loops .)
+    IF              reduce using rule 27 (b -> do_loops .)
+    FOR             reduce using rule 27 (b -> do_loops .)
+    DO              reduce using rule 27 (b -> do_loops .)
+    LOOP            reduce using rule 27 (b -> do_loops .)
+    CALL            reduce using rule 27 (b -> do_loops .)
+    READ            reduce using rule 27 (b -> do_loops .)
+    ID              reduce using rule 27 (b -> do_loops .)
+    END_SUBROUTINE  reduce using rule 27 (b -> do_loops .)
+    END             reduce using rule 27 (b -> do_loops .)
+    END_LOOP        reduce using rule 27 (b -> do_loops .)
+    WHILE           reduce using rule 27 (b -> do_loops .)
+    ELSIF           reduce using rule 27 (b -> do_loops .)
+    ELSE            reduce using rule 27 (b -> do_loops .)
+    END_IF          reduce using rule 27 (b -> do_loops .)
+    END_FOR         reduce using rule 27 (b -> do_loops .)
+
+
+state 29
+
+    (28) b -> call_subroutine .
+
+    EXIT            reduce using rule 28 (b -> call_subroutine .)
+    PRINT           reduce using rule 28 (b -> call_subroutine .)
+    IF              reduce using rule 28 (b -> call_subroutine .)
+    FOR             reduce using rule 28 (b -> call_subroutine .)
+    DO              reduce using rule 28 (b -> call_subroutine .)
+    LOOP            reduce using rule 28 (b -> call_subroutine .)
+    CALL            reduce using rule 28 (b -> call_subroutine .)
+    READ            reduce using rule 28 (b -> call_subroutine .)
+    ID              reduce using rule 28 (b -> call_subroutine .)
+    END_SUBROUTINE  reduce using rule 28 (b -> call_subroutine .)
+    END             reduce using rule 28 (b -> call_subroutine .)
+    END_LOOP        reduce using rule 28 (b -> call_subroutine .)
+    WHILE           reduce using rule 28 (b -> call_subroutine .)
+    ELSIF           reduce using rule 28 (b -> call_subroutine .)
+    ELSE            reduce using rule 28 (b -> call_subroutine .)
+    END_IF          reduce using rule 28 (b -> call_subroutine .)
+    END_FOR         reduce using rule 28 (b -> call_subroutine .)
+
+
+state 30
+
+    (29) b -> reading_variables .
+
+    EXIT            reduce using rule 29 (b -> reading_variables .)
+    PRINT           reduce using rule 29 (b -> reading_variables .)
+    IF              reduce using rule 29 (b -> reading_variables .)
+    FOR             reduce using rule 29 (b -> reading_variables .)
+    DO              reduce using rule 29 (b -> reading_variables .)
+    LOOP            reduce using rule 29 (b -> reading_variables .)
+    CALL            reduce using rule 29 (b -> reading_variables .)
+    READ            reduce using rule 29 (b -> reading_variables .)
+    ID              reduce using rule 29 (b -> reading_variables .)
+    END_SUBROUTINE  reduce using rule 29 (b -> reading_variables .)
+    END             reduce using rule 29 (b -> reading_variables .)
+    END_LOOP        reduce using rule 29 (b -> reading_variables .)
+    WHILE           reduce using rule 29 (b -> reading_variables .)
+    ELSIF           reduce using rule 29 (b -> reading_variables .)
+    ELSE            reduce using rule 29 (b -> reading_variables .)
+    END_IF          reduce using rule 29 (b -> reading_variables .)
+    END_FOR         reduce using rule 29 (b -> reading_variables .)
+
+
+state 31
+
+    (30) b -> EXIT . paso4DoExit
+    (98) paso4DoExit -> . empty
+    (99) empty -> .
+
+    EXIT            reduce using rule 99 (empty -> .)
+    PRINT           reduce using rule 99 (empty -> .)
+    IF              reduce using rule 99 (empty -> .)
+    FOR             reduce using rule 99 (empty -> .)
+    DO              reduce using rule 99 (empty -> .)
+    LOOP            reduce using rule 99 (empty -> .)
+    CALL            reduce using rule 99 (empty -> .)
+    READ            reduce using rule 99 (empty -> .)
+    ID              reduce using rule 99 (empty -> .)
+    END_SUBROUTINE  reduce using rule 99 (empty -> .)
+    END             reduce using rule 99 (empty -> .)
+    END_LOOP        reduce using rule 99 (empty -> .)
+    WHILE           reduce using rule 99 (empty -> .)
+    ELSIF           reduce using rule 99 (empty -> .)
+    ELSE            reduce using rule 99 (empty -> .)
+    END_IF          reduce using rule 99 (empty -> .)
+    END_FOR         reduce using rule 99 (empty -> .)
+
+    paso4DoExit                    shift and go to state 49
+    empty                          shift and go to state 50
+
+state 32
+
+    (60) variable_matrix_assign -> otro1 .
+
+    EXIT            reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    PRINT           reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    IF              reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    FOR             reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    DO              reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    LOOP            reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    CALL            reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    READ            reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    ID              reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    END_SUBROUTINE  reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    END             reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    END_LOOP        reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    WHILE           reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    ELSIF           reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    ELSE            reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    END_IF          reduce using rule 60 (variable_matrix_assign -> otro1 .)
+    END_FOR         reduce using rule 60 (variable_matrix_assign -> otro1 .)
+
+
+state 33
+
+    (61) variable_matrix_assign -> otro .
+
+    EXIT            reduce using rule 61 (variable_matrix_assign -> otro .)
+    PRINT           reduce using rule 61 (variable_matrix_assign -> otro .)
+    IF              reduce using rule 61 (variable_matrix_assign -> otro .)
+    FOR             reduce using rule 61 (variable_matrix_assign -> otro .)
+    DO              reduce using rule 61 (variable_matrix_assign -> otro .)
+    LOOP            reduce using rule 61 (variable_matrix_assign -> otro .)
+    CALL            reduce using rule 61 (variable_matrix_assign -> otro .)
+    READ            reduce using rule 61 (variable_matrix_assign -> otro .)
+    ID              reduce using rule 61 (variable_matrix_assign -> otro .)
+    END_SUBROUTINE  reduce using rule 61 (variable_matrix_assign -> otro .)
+    END             reduce using rule 61 (variable_matrix_assign -> otro .)
+    END_LOOP        reduce using rule 61 (variable_matrix_assign -> otro .)
+    WHILE           reduce using rule 61 (variable_matrix_assign -> otro .)
+    ELSIF           reduce using rule 61 (variable_matrix_assign -> otro .)
+    ELSE            reduce using rule 61 (variable_matrix_assign -> otro .)
+    END_IF          reduce using rule 61 (variable_matrix_assign -> otro .)
+    END_FOR         reduce using rule 61 (variable_matrix_assign -> otro .)
+
+
+state 34
+
+    (49) printing_variables -> PRINT . Output
+    (50) Output -> . idOut
+    (51) Output -> . LPAREN StringOut RPAREN
+    (59) idOut -> . ID
+
+    LPAREN          shift and go to state 53
+    ID              shift and go to state 54
+
+    Output                         shift and go to state 51
+    idOut                          shift and go to state 52
+
+state 35
+
+    (43) if_expression -> IF . expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> IF . expression_logic paso1IF THEN if_expression_local paso3IF END_IF
+    (77) expression_logic -> . expression_logic OR g
+    (78) expression_logic -> . g
+    (79) g -> . g AND ge
+    (80) g -> . ge
+    (81) ge -> . ID GT ID
+    (82) ge -> . ID LT ID
+    (83) ge -> . ID GE ID
+    (84) ge -> . ID LE ID
+    (85) ge -> . ID NE ID
+    (86) ge -> . ID EQUAL ID
+    (87) ge -> . LPAREN expression_logic RPAREN
+
+    ID              shift and go to state 58
+    LPAREN          shift and go to state 59
+
+    expression_logic               shift and go to state 55
+    g                              shift and go to state 56
+    ge                             shift and go to state 57
+
+state 36
+
+    (31) do_loops -> FOR . paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (34) paso1FOR -> . ID
+
+    ID              shift and go to state 61
+
+    paso1FOR                       shift and go to state 60
+
+state 37
+
+    (32) do_loops -> DO . paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+    (93) paso1DO -> . empty
+    (99) empty -> .
+
+    LOOP            reduce using rule 99 (empty -> .)
+
+    paso1DO                        shift and go to state 62
+    empty                          shift and go to state 63
+
+state 38
+
+    (33) do_loops -> LOOP . paso1DoExit d END_LOOP paso2DoExit paso3DoExit
+    (95) paso1DoExit -> . empty
+    (99) empty -> .
+
+    EXIT            reduce using rule 99 (empty -> .)
+    PRINT           reduce using rule 99 (empty -> .)
+    IF              reduce using rule 99 (empty -> .)
+    FOR             reduce using rule 99 (empty -> .)
+    DO              reduce using rule 99 (empty -> .)
+    LOOP            reduce using rule 99 (empty -> .)
+    CALL            reduce using rule 99 (empty -> .)
+    READ            reduce using rule 99 (empty -> .)
+    ID              reduce using rule 99 (empty -> .)
+
+    paso1DoExit                    shift and go to state 64
+    empty                          shift and go to state 65
+
+state 39
+
+    (42) call_subroutine -> CALL . ID
+
+    ID              shift and go to state 66
+
+
+state 40
+
+    (64) otro1 -> ID . ASSIGN expression_arith
+    (62) otro -> ID . LARR expression_arith RARR ASSIGN expression_arith
+    (63) otro -> ID . LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+
+    ASSIGN          shift and go to state 67
+    LARR            shift and go to state 68
+
+
+state 41
+
+    (38) reading_variables -> READ . idrepInput
+    (39) idrepInput -> . idInput
+    (40) idrepInput -> . idInput COMMA idrepInput
+    (41) idInput -> . ID
+
+    ID              shift and go to state 71
+
+    idrepInput                     shift and go to state 69
+    idInput                        shift and go to state 70
+
+state 42
+
+    (6) var_assign -> type_definition COLONS COLONS var_local . var_dimensiones create_var_table var_assign
+    (8) var_dimensiones -> . LARR Decnumsize RARR
+    (9) var_dimensiones -> . empty
+    (99) empty -> .
+
+    LARR            shift and go to state 73
+    INT_TYPE        reduce using rule 99 (empty -> .)
+    FLOAT_TYPE      reduce using rule 99 (empty -> .)
+    SUBROUTINE      reduce using rule 99 (empty -> .)
+    BEGIN           reduce using rule 99 (empty -> .)
+
+    var_dimensiones                shift and go to state 72
+    empty                          shift and go to state 74
+
+state 43
+
+    (13) var_local -> ID . COMMA var_local
+    (14) var_local -> ID .
+
+    COMMA           shift and go to state 75
+    LARR            reduce using rule 14 (var_local -> ID .)
+    INT_TYPE        reduce using rule 14 (var_local -> ID .)
+    FLOAT_TYPE      reduce using rule 14 (var_local -> ID .)
+    SUBROUTINE      reduce using rule 14 (var_local -> ID .)
+    BEGIN           reduce using rule 14 (var_local -> ID .)
+
+
+state 44
+
+    (1) program -> PROGRAM ID primerCuad var_assign subrutinas rellenaCuad a END . PROGRAM ID
+
+    PROGRAM         shift and go to state 76
+
+
+state 45
+
+    (21) a -> BEGIN d . END
+
+    END             shift and go to state 77
+
+
+state 46
+
+    (17) f_local -> SUBROUTINE idSub d crearCuadruploReturn . END_SUBROUTINE f_local
+    (18) f_local -> SUBROUTINE idSub d crearCuadruploReturn . END_SUBROUTINE
+
+    END_SUBROUTINE  shift and go to state 78
+
+
+state 47
+
+    (20) crearCuadruploReturn -> empty .
+
+    END_SUBROUTINE  reduce using rule 20 (crearCuadruploReturn -> empty .)
+
+
+state 48
+
+    (23) d -> b d .
+
+    END_SUBROUTINE  reduce using rule 23 (d -> b d .)
+    END             reduce using rule 23 (d -> b d .)
+    END_LOOP        reduce using rule 23 (d -> b d .)
+    WHILE           reduce using rule 23 (d -> b d .)
+    ELSIF           reduce using rule 23 (d -> b d .)
+    ELSE            reduce using rule 23 (d -> b d .)
+    END_IF          reduce using rule 23 (d -> b d .)
+    END_FOR         reduce using rule 23 (d -> b d .)
+
+
+state 49
+
+    (30) b -> EXIT paso4DoExit .
+
+    EXIT            reduce using rule 30 (b -> EXIT paso4DoExit .)
+    PRINT           reduce using rule 30 (b -> EXIT paso4DoExit .)
+    IF              reduce using rule 30 (b -> EXIT paso4DoExit .)
+    FOR             reduce using rule 30 (b -> EXIT paso4DoExit .)
+    DO              reduce using rule 30 (b -> EXIT paso4DoExit .)
+    LOOP            reduce using rule 30 (b -> EXIT paso4DoExit .)
+    CALL            reduce using rule 30 (b -> EXIT paso4DoExit .)
+    READ            reduce using rule 30 (b -> EXIT paso4DoExit .)
+    ID              reduce using rule 30 (b -> EXIT paso4DoExit .)
+    END_SUBROUTINE  reduce using rule 30 (b -> EXIT paso4DoExit .)
+    END             reduce using rule 30 (b -> EXIT paso4DoExit .)
+    END_LOOP        reduce using rule 30 (b -> EXIT paso4DoExit .)
+    WHILE           reduce using rule 30 (b -> EXIT paso4DoExit .)
+    ELSIF           reduce using rule 30 (b -> EXIT paso4DoExit .)
+    ELSE            reduce using rule 30 (b -> EXIT paso4DoExit .)
+    END_IF          reduce using rule 30 (b -> EXIT paso4DoExit .)
+    END_FOR         reduce using rule 30 (b -> EXIT paso4DoExit .)
+
+
+state 50
+
+    (98) paso4DoExit -> empty .
+
+    EXIT            reduce using rule 98 (paso4DoExit -> empty .)
+    PRINT           reduce using rule 98 (paso4DoExit -> empty .)
+    IF              reduce using rule 98 (paso4DoExit -> empty .)
+    FOR             reduce using rule 98 (paso4DoExit -> empty .)
+    DO              reduce using rule 98 (paso4DoExit -> empty .)
+    LOOP            reduce using rule 98 (paso4DoExit -> empty .)
+    CALL            reduce using rule 98 (paso4DoExit -> empty .)
+    READ            reduce using rule 98 (paso4DoExit -> empty .)
+    ID              reduce using rule 98 (paso4DoExit -> empty .)
+    END_SUBROUTINE  reduce using rule 98 (paso4DoExit -> empty .)
+    END             reduce using rule 98 (paso4DoExit -> empty .)
+    END_LOOP        reduce using rule 98 (paso4DoExit -> empty .)
+    WHILE           reduce using rule 98 (paso4DoExit -> empty .)
+    ELSIF           reduce using rule 98 (paso4DoExit -> empty .)
+    ELSE            reduce using rule 98 (paso4DoExit -> empty .)
+    END_IF          reduce using rule 98 (paso4DoExit -> empty .)
+    END_FOR         reduce using rule 98 (paso4DoExit -> empty .)
+
+
+state 51
+
+    (49) printing_variables -> PRINT Output .
+
+    EXIT            reduce using rule 49 (printing_variables -> PRINT Output .)
+    PRINT           reduce using rule 49 (printing_variables -> PRINT Output .)
+    IF              reduce using rule 49 (printing_variables -> PRINT Output .)
+    FOR             reduce using rule 49 (printing_variables -> PRINT Output .)
+    DO              reduce using rule 49 (printing_variables -> PRINT Output .)
+    LOOP            reduce using rule 49 (printing_variables -> PRINT Output .)
+    CALL            reduce using rule 49 (printing_variables -> PRINT Output .)
+    READ            reduce using rule 49 (printing_variables -> PRINT Output .)
+    ID              reduce using rule 49 (printing_variables -> PRINT Output .)
+    END_SUBROUTINE  reduce using rule 49 (printing_variables -> PRINT Output .)
+    END             reduce using rule 49 (printing_variables -> PRINT Output .)
+    END_LOOP        reduce using rule 49 (printing_variables -> PRINT Output .)
+    WHILE           reduce using rule 49 (printing_variables -> PRINT Output .)
+    ELSIF           reduce using rule 49 (printing_variables -> PRINT Output .)
+    ELSE            reduce using rule 49 (printing_variables -> PRINT Output .)
+    END_IF          reduce using rule 49 (printing_variables -> PRINT Output .)
+    END_FOR         reduce using rule 49 (printing_variables -> PRINT Output .)
+
+
+state 52
+
+    (50) Output -> idOut .
+
+    EXIT            reduce using rule 50 (Output -> idOut .)
+    PRINT           reduce using rule 50 (Output -> idOut .)
+    IF              reduce using rule 50 (Output -> idOut .)
+    FOR             reduce using rule 50 (Output -> idOut .)
+    DO              reduce using rule 50 (Output -> idOut .)
+    LOOP            reduce using rule 50 (Output -> idOut .)
+    CALL            reduce using rule 50 (Output -> idOut .)
+    READ            reduce using rule 50 (Output -> idOut .)
+    ID              reduce using rule 50 (Output -> idOut .)
+    END_SUBROUTINE  reduce using rule 50 (Output -> idOut .)
+    END             reduce using rule 50 (Output -> idOut .)
+    END_LOOP        reduce using rule 50 (Output -> idOut .)
+    WHILE           reduce using rule 50 (Output -> idOut .)
+    ELSIF           reduce using rule 50 (Output -> idOut .)
+    ELSE            reduce using rule 50 (Output -> idOut .)
+    END_IF          reduce using rule 50 (Output -> idOut .)
+    END_FOR         reduce using rule 50 (Output -> idOut .)
+
+
+state 53
+
+    (51) Output -> LPAREN . StringOut RPAREN
+    (52) StringOut -> . empty
+    (53) StringOut -> . ID StringOut
+    (54) StringOut -> . constante_entero StringOut
+    (55) StringOut -> . constante_flotante StringOut
+    (56) StringOut -> . COLONS StringOut
+    (57) StringOut -> . COMMA StringOut
+    (58) StringOut -> . QUESTION StringOut
+    (99) empty -> .
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 81
+    COLONS          shift and go to state 84
+    COMMA           shift and go to state 85
+    QUESTION        shift and go to state 86
+    RPAREN          reduce using rule 99 (empty -> .)
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    StringOut                      shift and go to state 79
+    empty                          shift and go to state 80
+    constante_entero               shift and go to state 82
+    constante_flotante             shift and go to state 83
+
+state 54
+
+    (59) idOut -> ID .
+
+    EXIT            reduce using rule 59 (idOut -> ID .)
+    PRINT           reduce using rule 59 (idOut -> ID .)
+    IF              reduce using rule 59 (idOut -> ID .)
+    FOR             reduce using rule 59 (idOut -> ID .)
+    DO              reduce using rule 59 (idOut -> ID .)
+    LOOP            reduce using rule 59 (idOut -> ID .)
+    CALL            reduce using rule 59 (idOut -> ID .)
+    READ            reduce using rule 59 (idOut -> ID .)
+    ID              reduce using rule 59 (idOut -> ID .)
+    END_SUBROUTINE  reduce using rule 59 (idOut -> ID .)
+    END             reduce using rule 59 (idOut -> ID .)
+    END_LOOP        reduce using rule 59 (idOut -> ID .)
+    WHILE           reduce using rule 59 (idOut -> ID .)
+    ELSIF           reduce using rule 59 (idOut -> ID .)
+    ELSE            reduce using rule 59 (idOut -> ID .)
+    END_IF          reduce using rule 59 (idOut -> ID .)
+    END_FOR         reduce using rule 59 (idOut -> ID .)
+
+
+state 55
+
+    (43) if_expression -> IF expression_logic . paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> IF expression_logic . paso1IF THEN if_expression_local paso3IF END_IF
+    (77) expression_logic -> expression_logic . OR g
+    (88) paso1IF -> . empty
+    (99) empty -> .
+
+    OR              shift and go to state 90
+    THEN            reduce using rule 99 (empty -> .)
+
+    paso1IF                        shift and go to state 89
+    empty                          shift and go to state 91
+
+state 56
+
+    (78) expression_logic -> g .
+    (79) g -> g . AND ge
+
+    OR              reduce using rule 78 (expression_logic -> g .)
+    THEN            reduce using rule 78 (expression_logic -> g .)
+    RPAREN          reduce using rule 78 (expression_logic -> g .)
+    END_DO          reduce using rule 78 (expression_logic -> g .)
+    AND             shift and go to state 92
+
+
+state 57
+
+    (80) g -> ge .
+
+    AND             reduce using rule 80 (g -> ge .)
+    OR              reduce using rule 80 (g -> ge .)
+    THEN            reduce using rule 80 (g -> ge .)
+    RPAREN          reduce using rule 80 (g -> ge .)
+    END_DO          reduce using rule 80 (g -> ge .)
+
+
+state 58
+
+    (81) ge -> ID . GT ID
+    (82) ge -> ID . LT ID
+    (83) ge -> ID . GE ID
+    (84) ge -> ID . LE ID
+    (85) ge -> ID . NE ID
+    (86) ge -> ID . EQUAL ID
+
+    GT              shift and go to state 93
+    LT              shift and go to state 94
+    GE              shift and go to state 95
+    LE              shift and go to state 96
+    NE              shift and go to state 97
+    EQUAL           shift and go to state 98
+
+
+state 59
+
+    (87) ge -> LPAREN . expression_logic RPAREN
+    (77) expression_logic -> . expression_logic OR g
+    (78) expression_logic -> . g
+    (79) g -> . g AND ge
+    (80) g -> . ge
+    (81) ge -> . ID GT ID
+    (82) ge -> . ID LT ID
+    (83) ge -> . ID GE ID
+    (84) ge -> . ID LE ID
+    (85) ge -> . ID NE ID
+    (86) ge -> . ID EQUAL ID
+    (87) ge -> . LPAREN expression_logic RPAREN
+
+    ID              shift and go to state 58
+    LPAREN          shift and go to state 59
+
+    expression_logic               shift and go to state 99
+    g                              shift and go to state 56
+    ge                             shift and go to state 57
+
+state 60
+
+    (31) do_loops -> FOR paso1FOR . ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+
+    ASSIGN          shift and go to state 100
+
+
+state 61
+
+    (34) paso1FOR -> ID .
+
+    ASSIGN          reduce using rule 34 (paso1FOR -> ID .)
+
+
+state 62
+
+    (32) do_loops -> DO paso1DO . LOOP d WHILE expression_logic END_DO paso2DO
+
+    LOOP            shift and go to state 101
+
+
+state 63
+
+    (93) paso1DO -> empty .
+
+    LOOP            reduce using rule 93 (paso1DO -> empty .)
+
+
+state 64
+
+    (33) do_loops -> LOOP paso1DoExit . d END_LOOP paso2DoExit paso3DoExit
+    (22) d -> . b
+    (23) d -> . b d
+    (24) b -> . variable_matrix_assign
+    (25) b -> . printing_variables
+    (26) b -> . if_expression
+    (27) b -> . do_loops
+    (28) b -> . call_subroutine
+    (29) b -> . reading_variables
+    (30) b -> . EXIT paso4DoExit
+    (60) variable_matrix_assign -> . otro1
+    (61) variable_matrix_assign -> . otro
+    (49) printing_variables -> . PRINT Output
+    (43) if_expression -> . IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> . IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
+    (31) do_loops -> . FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (32) do_loops -> . DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+    (33) do_loops -> . LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
+    (42) call_subroutine -> . CALL ID
+    (38) reading_variables -> . READ idrepInput
+    (64) otro1 -> . ID ASSIGN expression_arith
+    (62) otro -> . ID LARR expression_arith RARR ASSIGN expression_arith
+    (63) otro -> . ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+
+    EXIT            shift and go to state 31
+    PRINT           shift and go to state 34
+    IF              shift and go to state 35
+    FOR             shift and go to state 36
+    DO              shift and go to state 37
+    LOOP            shift and go to state 38
+    CALL            shift and go to state 39
+    READ            shift and go to state 41
+    ID              shift and go to state 40
+
+    d                              shift and go to state 102
+    b                              shift and go to state 24
+    variable_matrix_assign         shift and go to state 25
+    printing_variables             shift and go to state 26
+    if_expression                  shift and go to state 27
+    do_loops                       shift and go to state 28
+    call_subroutine                shift and go to state 29
+    reading_variables              shift and go to state 30
+    otro1                          shift and go to state 32
+    otro                           shift and go to state 33
+
+state 65
+
+    (95) paso1DoExit -> empty .
+
+    EXIT            reduce using rule 95 (paso1DoExit -> empty .)
+    PRINT           reduce using rule 95 (paso1DoExit -> empty .)
+    IF              reduce using rule 95 (paso1DoExit -> empty .)
+    FOR             reduce using rule 95 (paso1DoExit -> empty .)
+    DO              reduce using rule 95 (paso1DoExit -> empty .)
+    LOOP            reduce using rule 95 (paso1DoExit -> empty .)
+    CALL            reduce using rule 95 (paso1DoExit -> empty .)
+    READ            reduce using rule 95 (paso1DoExit -> empty .)
+    ID              reduce using rule 95 (paso1DoExit -> empty .)
+
+
+state 66
+
+    (42) call_subroutine -> CALL ID .
+
+    EXIT            reduce using rule 42 (call_subroutine -> CALL ID .)
+    PRINT           reduce using rule 42 (call_subroutine -> CALL ID .)
+    IF              reduce using rule 42 (call_subroutine -> CALL ID .)
+    FOR             reduce using rule 42 (call_subroutine -> CALL ID .)
+    DO              reduce using rule 42 (call_subroutine -> CALL ID .)
+    LOOP            reduce using rule 42 (call_subroutine -> CALL ID .)
+    CALL            reduce using rule 42 (call_subroutine -> CALL ID .)
+    READ            reduce using rule 42 (call_subroutine -> CALL ID .)
+    ID              reduce using rule 42 (call_subroutine -> CALL ID .)
+    END_SUBROUTINE  reduce using rule 42 (call_subroutine -> CALL ID .)
+    END             reduce using rule 42 (call_subroutine -> CALL ID .)
+    END_LOOP        reduce using rule 42 (call_subroutine -> CALL ID .)
+    WHILE           reduce using rule 42 (call_subroutine -> CALL ID .)
+    ELSIF           reduce using rule 42 (call_subroutine -> CALL ID .)
+    ELSE            reduce using rule 42 (call_subroutine -> CALL ID .)
+    END_IF          reduce using rule 42 (call_subroutine -> CALL ID .)
+    END_FOR         reduce using rule 42 (call_subroutine -> CALL ID .)
+
+
+state 67
+
+    (64) otro1 -> ID ASSIGN . expression_arith
+    (65) expression_arith -> . expression_arith PLUS c
+    (66) expression_arith -> . expression_arith MINUS c
+    (67) expression_arith -> . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    expression_arith               shift and go to state 104
+    c                              shift and go to state 105
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 68
+
+    (62) otro -> ID LARR . expression_arith RARR ASSIGN expression_arith
+    (63) otro -> ID LARR . expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+    (65) expression_arith -> . expression_arith PLUS c
+    (66) expression_arith -> . expression_arith MINUS c
+    (67) expression_arith -> . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    expression_arith               shift and go to state 110
+    c                              shift and go to state 105
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 69
+
+    (38) reading_variables -> READ idrepInput .
+
+    EXIT            reduce using rule 38 (reading_variables -> READ idrepInput .)
+    PRINT           reduce using rule 38 (reading_variables -> READ idrepInput .)
+    IF              reduce using rule 38 (reading_variables -> READ idrepInput .)
+    FOR             reduce using rule 38 (reading_variables -> READ idrepInput .)
+    DO              reduce using rule 38 (reading_variables -> READ idrepInput .)
+    LOOP            reduce using rule 38 (reading_variables -> READ idrepInput .)
+    CALL            reduce using rule 38 (reading_variables -> READ idrepInput .)
+    READ            reduce using rule 38 (reading_variables -> READ idrepInput .)
+    ID              reduce using rule 38 (reading_variables -> READ idrepInput .)
+    END_SUBROUTINE  reduce using rule 38 (reading_variables -> READ idrepInput .)
+    END             reduce using rule 38 (reading_variables -> READ idrepInput .)
+    END_LOOP        reduce using rule 38 (reading_variables -> READ idrepInput .)
+    WHILE           reduce using rule 38 (reading_variables -> READ idrepInput .)
+    ELSIF           reduce using rule 38 (reading_variables -> READ idrepInput .)
+    ELSE            reduce using rule 38 (reading_variables -> READ idrepInput .)
+    END_IF          reduce using rule 38 (reading_variables -> READ idrepInput .)
+    END_FOR         reduce using rule 38 (reading_variables -> READ idrepInput .)
+
+
+state 70
+
+    (39) idrepInput -> idInput .
+    (40) idrepInput -> idInput . COMMA idrepInput
+
+    EXIT            reduce using rule 39 (idrepInput -> idInput .)
+    PRINT           reduce using rule 39 (idrepInput -> idInput .)
+    IF              reduce using rule 39 (idrepInput -> idInput .)
+    FOR             reduce using rule 39 (idrepInput -> idInput .)
+    DO              reduce using rule 39 (idrepInput -> idInput .)
+    LOOP            reduce using rule 39 (idrepInput -> idInput .)
+    CALL            reduce using rule 39 (idrepInput -> idInput .)
+    READ            reduce using rule 39 (idrepInput -> idInput .)
+    ID              reduce using rule 39 (idrepInput -> idInput .)
+    END_SUBROUTINE  reduce using rule 39 (idrepInput -> idInput .)
+    END             reduce using rule 39 (idrepInput -> idInput .)
+    END_LOOP        reduce using rule 39 (idrepInput -> idInput .)
+    WHILE           reduce using rule 39 (idrepInput -> idInput .)
+    ELSIF           reduce using rule 39 (idrepInput -> idInput .)
+    ELSE            reduce using rule 39 (idrepInput -> idInput .)
+    END_IF          reduce using rule 39 (idrepInput -> idInput .)
+    END_FOR         reduce using rule 39 (idrepInput -> idInput .)
+    COMMA           shift and go to state 111
+
+
+state 71
+
+    (41) idInput -> ID .
+
+    COMMA           reduce using rule 41 (idInput -> ID .)
+    EXIT            reduce using rule 41 (idInput -> ID .)
+    PRINT           reduce using rule 41 (idInput -> ID .)
+    IF              reduce using rule 41 (idInput -> ID .)
+    FOR             reduce using rule 41 (idInput -> ID .)
+    DO              reduce using rule 41 (idInput -> ID .)
+    LOOP            reduce using rule 41 (idInput -> ID .)
+    CALL            reduce using rule 41 (idInput -> ID .)
+    READ            reduce using rule 41 (idInput -> ID .)
+    ID              reduce using rule 41 (idInput -> ID .)
+    END_SUBROUTINE  reduce using rule 41 (idInput -> ID .)
+    END             reduce using rule 41 (idInput -> ID .)
+    END_LOOP        reduce using rule 41 (idInput -> ID .)
+    WHILE           reduce using rule 41 (idInput -> ID .)
+    ELSIF           reduce using rule 41 (idInput -> ID .)
+    ELSE            reduce using rule 41 (idInput -> ID .)
+    END_IF          reduce using rule 41 (idInput -> ID .)
+    END_FOR         reduce using rule 41 (idInput -> ID .)
+
+
+state 72
+
+    (6) var_assign -> type_definition COLONS COLONS var_local var_dimensiones . create_var_table var_assign
+    (12) create_var_table -> . empty
+    (99) empty -> .
+
+    INT_TYPE        reduce using rule 99 (empty -> .)
+    FLOAT_TYPE      reduce using rule 99 (empty -> .)
+    SUBROUTINE      reduce using rule 99 (empty -> .)
+    BEGIN           reduce using rule 99 (empty -> .)
+
+    create_var_table               shift and go to state 112
+    empty                          shift and go to state 113
+
+state 73
+
+    (8) var_dimensiones -> LARR . Decnumsize RARR
+    (10) Decnumsize -> . INT empty
+    (11) Decnumsize -> . INT COMMA INT
+
+    INT             shift and go to state 115
+
+    Decnumsize                     shift and go to state 114
+
+state 74
+
+    (9) var_dimensiones -> empty .
+
+    INT_TYPE        reduce using rule 9 (var_dimensiones -> empty .)
+    FLOAT_TYPE      reduce using rule 9 (var_dimensiones -> empty .)
+    SUBROUTINE      reduce using rule 9 (var_dimensiones -> empty .)
+    BEGIN           reduce using rule 9 (var_dimensiones -> empty .)
+
+
+state 75
+
+    (13) var_local -> ID COMMA . var_local
+    (13) var_local -> . ID COMMA var_local
+    (14) var_local -> . ID
+
+    ID              shift and go to state 43
+
+    var_local                      shift and go to state 116
+
+state 76
+
+    (1) program -> PROGRAM ID primerCuad var_assign subrutinas rellenaCuad a END PROGRAM . ID
+
+    ID              shift and go to state 117
+
+
+state 77
+
+    (21) a -> BEGIN d END .
+
+    END             reduce using rule 21 (a -> BEGIN d END .)
+
+
+state 78
+
+    (17) f_local -> SUBROUTINE idSub d crearCuadruploReturn END_SUBROUTINE . f_local
+    (18) f_local -> SUBROUTINE idSub d crearCuadruploReturn END_SUBROUTINE .
+    (17) f_local -> . SUBROUTINE idSub d crearCuadruploReturn END_SUBROUTINE f_local
+    (18) f_local -> . SUBROUTINE idSub d crearCuadruploReturn END_SUBROUTINE
+
+    BEGIN           reduce using rule 18 (f_local -> SUBROUTINE idSub d crearCuadruploReturn END_SUBROUTINE .)
+    SUBROUTINE      shift and go to state 14
+
+    f_local                        shift and go to state 118
+
+state 79
+
+    (51) Output -> LPAREN StringOut . RPAREN
+
+    RPAREN          shift and go to state 119
+
+
+state 80
+
+    (52) StringOut -> empty .
+
+    RPAREN          reduce using rule 52 (StringOut -> empty .)
+
+
+state 81
+
+    (53) StringOut -> ID . StringOut
+    (52) StringOut -> . empty
+    (53) StringOut -> . ID StringOut
+    (54) StringOut -> . constante_entero StringOut
+    (55) StringOut -> . constante_flotante StringOut
+    (56) StringOut -> . COLONS StringOut
+    (57) StringOut -> . COMMA StringOut
+    (58) StringOut -> . QUESTION StringOut
+    (99) empty -> .
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 81
+    COLONS          shift and go to state 84
+    COMMA           shift and go to state 85
+    QUESTION        shift and go to state 86
+    RPAREN          reduce using rule 99 (empty -> .)
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    StringOut                      shift and go to state 120
+    empty                          shift and go to state 80
+    constante_entero               shift and go to state 82
+    constante_flotante             shift and go to state 83
+
+state 82
+
+    (54) StringOut -> constante_entero . StringOut
+    (52) StringOut -> . empty
+    (53) StringOut -> . ID StringOut
+    (54) StringOut -> . constante_entero StringOut
+    (55) StringOut -> . constante_flotante StringOut
+    (56) StringOut -> . COLONS StringOut
+    (57) StringOut -> . COMMA StringOut
+    (58) StringOut -> . QUESTION StringOut
+    (99) empty -> .
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 81
+    COLONS          shift and go to state 84
+    COMMA           shift and go to state 85
+    QUESTION        shift and go to state 86
+    RPAREN          reduce using rule 99 (empty -> .)
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    constante_entero               shift and go to state 82
+    StringOut                      shift and go to state 121
+    empty                          shift and go to state 80
+    constante_flotante             shift and go to state 83
+
+state 83
+
+    (55) StringOut -> constante_flotante . StringOut
+    (52) StringOut -> . empty
+    (53) StringOut -> . ID StringOut
+    (54) StringOut -> . constante_entero StringOut
+    (55) StringOut -> . constante_flotante StringOut
+    (56) StringOut -> . COLONS StringOut
+    (57) StringOut -> . COMMA StringOut
+    (58) StringOut -> . QUESTION StringOut
+    (99) empty -> .
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 81
+    COLONS          shift and go to state 84
+    COMMA           shift and go to state 85
+    QUESTION        shift and go to state 86
+    RPAREN          reduce using rule 99 (empty -> .)
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    constante_flotante             shift and go to state 83
+    StringOut                      shift and go to state 122
+    empty                          shift and go to state 80
+    constante_entero               shift and go to state 82
+
+state 84
+
+    (56) StringOut -> COLONS . StringOut
+    (52) StringOut -> . empty
+    (53) StringOut -> . ID StringOut
+    (54) StringOut -> . constante_entero StringOut
+    (55) StringOut -> . constante_flotante StringOut
+    (56) StringOut -> . COLONS StringOut
+    (57) StringOut -> . COMMA StringOut
+    (58) StringOut -> . QUESTION StringOut
+    (99) empty -> .
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 81
+    COLONS          shift and go to state 84
+    COMMA           shift and go to state 85
+    QUESTION        shift and go to state 86
+    RPAREN          reduce using rule 99 (empty -> .)
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    StringOut                      shift and go to state 123
+    empty                          shift and go to state 80
+    constante_entero               shift and go to state 82
+    constante_flotante             shift and go to state 83
+
+state 85
+
+    (57) StringOut -> COMMA . StringOut
+    (52) StringOut -> . empty
+    (53) StringOut -> . ID StringOut
+    (54) StringOut -> . constante_entero StringOut
+    (55) StringOut -> . constante_flotante StringOut
+    (56) StringOut -> . COLONS StringOut
+    (57) StringOut -> . COMMA StringOut
+    (58) StringOut -> . QUESTION StringOut
+    (99) empty -> .
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 81
+    COLONS          shift and go to state 84
+    COMMA           shift and go to state 85
+    QUESTION        shift and go to state 86
+    RPAREN          reduce using rule 99 (empty -> .)
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    StringOut                      shift and go to state 124
+    empty                          shift and go to state 80
+    constante_entero               shift and go to state 82
+    constante_flotante             shift and go to state 83
+
+state 86
+
+    (58) StringOut -> QUESTION . StringOut
+    (52) StringOut -> . empty
+    (53) StringOut -> . ID StringOut
+    (54) StringOut -> . constante_entero StringOut
+    (55) StringOut -> . constante_flotante StringOut
+    (56) StringOut -> . COLONS StringOut
+    (57) StringOut -> . COMMA StringOut
+    (58) StringOut -> . QUESTION StringOut
+    (99) empty -> .
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 81
+    COLONS          shift and go to state 84
+    COMMA           shift and go to state 85
+    QUESTION        shift and go to state 86
+    RPAREN          reduce using rule 99 (empty -> .)
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    StringOut                      shift and go to state 125
+    empty                          shift and go to state 80
+    constante_entero               shift and go to state 82
+    constante_flotante             shift and go to state 83
+
+state 87
+
+    (91) constante_entero -> INT .
+
+    ID              reduce using rule 91 (constante_entero -> INT .)
+    COLONS          reduce using rule 91 (constante_entero -> INT .)
+    COMMA           reduce using rule 91 (constante_entero -> INT .)
+    QUESTION        reduce using rule 91 (constante_entero -> INT .)
+    INT             reduce using rule 91 (constante_entero -> INT .)
+    FLOAT           reduce using rule 91 (constante_entero -> INT .)
+    RPAREN          reduce using rule 91 (constante_entero -> INT .)
+    MULTIPLY        reduce using rule 91 (constante_entero -> INT .)
+    DIVIDE          reduce using rule 91 (constante_entero -> INT .)
+    PLUS            reduce using rule 91 (constante_entero -> INT .)
+    MINUS           reduce using rule 91 (constante_entero -> INT .)
+    EXIT            reduce using rule 91 (constante_entero -> INT .)
+    PRINT           reduce using rule 91 (constante_entero -> INT .)
+    IF              reduce using rule 91 (constante_entero -> INT .)
+    FOR             reduce using rule 91 (constante_entero -> INT .)
+    DO              reduce using rule 91 (constante_entero -> INT .)
+    LOOP            reduce using rule 91 (constante_entero -> INT .)
+    CALL            reduce using rule 91 (constante_entero -> INT .)
+    READ            reduce using rule 91 (constante_entero -> INT .)
+    END_SUBROUTINE  reduce using rule 91 (constante_entero -> INT .)
+    END             reduce using rule 91 (constante_entero -> INT .)
+    END_LOOP        reduce using rule 91 (constante_entero -> INT .)
+    WHILE           reduce using rule 91 (constante_entero -> INT .)
+    ELSIF           reduce using rule 91 (constante_entero -> INT .)
+    ELSE            reduce using rule 91 (constante_entero -> INT .)
+    END_IF          reduce using rule 91 (constante_entero -> INT .)
+    END_FOR         reduce using rule 91 (constante_entero -> INT .)
+    RARR            reduce using rule 91 (constante_entero -> INT .)
+
+
+state 88
+
+    (92) constante_flotante -> FLOAT .
+
+    ID              reduce using rule 92 (constante_flotante -> FLOAT .)
+    COLONS          reduce using rule 92 (constante_flotante -> FLOAT .)
+    COMMA           reduce using rule 92 (constante_flotante -> FLOAT .)
+    QUESTION        reduce using rule 92 (constante_flotante -> FLOAT .)
+    INT             reduce using rule 92 (constante_flotante -> FLOAT .)
+    FLOAT           reduce using rule 92 (constante_flotante -> FLOAT .)
+    RPAREN          reduce using rule 92 (constante_flotante -> FLOAT .)
+    MULTIPLY        reduce using rule 92 (constante_flotante -> FLOAT .)
+    DIVIDE          reduce using rule 92 (constante_flotante -> FLOAT .)
+    PLUS            reduce using rule 92 (constante_flotante -> FLOAT .)
+    MINUS           reduce using rule 92 (constante_flotante -> FLOAT .)
+    EXIT            reduce using rule 92 (constante_flotante -> FLOAT .)
+    PRINT           reduce using rule 92 (constante_flotante -> FLOAT .)
+    IF              reduce using rule 92 (constante_flotante -> FLOAT .)
+    FOR             reduce using rule 92 (constante_flotante -> FLOAT .)
+    DO              reduce using rule 92 (constante_flotante -> FLOAT .)
+    LOOP            reduce using rule 92 (constante_flotante -> FLOAT .)
+    CALL            reduce using rule 92 (constante_flotante -> FLOAT .)
+    READ            reduce using rule 92 (constante_flotante -> FLOAT .)
+    END_SUBROUTINE  reduce using rule 92 (constante_flotante -> FLOAT .)
+    END             reduce using rule 92 (constante_flotante -> FLOAT .)
+    END_LOOP        reduce using rule 92 (constante_flotante -> FLOAT .)
+    WHILE           reduce using rule 92 (constante_flotante -> FLOAT .)
+    ELSIF           reduce using rule 92 (constante_flotante -> FLOAT .)
+    ELSE            reduce using rule 92 (constante_flotante -> FLOAT .)
+    END_IF          reduce using rule 92 (constante_flotante -> FLOAT .)
+    END_FOR         reduce using rule 92 (constante_flotante -> FLOAT .)
+    RARR            reduce using rule 92 (constante_flotante -> FLOAT .)
+
+
+state 89
+
+    (43) if_expression -> IF expression_logic paso1IF . THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> IF expression_logic paso1IF . THEN if_expression_local paso3IF END_IF
+
+    THEN            shift and go to state 126
+
+
+state 90
+
+    (77) expression_logic -> expression_logic OR . g
+    (79) g -> . g AND ge
+    (80) g -> . ge
+    (81) ge -> . ID GT ID
+    (82) ge -> . ID LT ID
+    (83) ge -> . ID GE ID
+    (84) ge -> . ID LE ID
+    (85) ge -> . ID NE ID
+    (86) ge -> . ID EQUAL ID
+    (87) ge -> . LPAREN expression_logic RPAREN
+
+    ID              shift and go to state 58
+    LPAREN          shift and go to state 59
+
+    g                              shift and go to state 127
+    ge                             shift and go to state 57
+
+state 91
+
+    (88) paso1IF -> empty .
+
+    THEN            reduce using rule 88 (paso1IF -> empty .)
+
+
+state 92
+
+    (79) g -> g AND . ge
+    (81) ge -> . ID GT ID
+    (82) ge -> . ID LT ID
+    (83) ge -> . ID GE ID
+    (84) ge -> . ID LE ID
+    (85) ge -> . ID NE ID
+    (86) ge -> . ID EQUAL ID
+    (87) ge -> . LPAREN expression_logic RPAREN
+
+    ID              shift and go to state 58
+    LPAREN          shift and go to state 59
+
+    ge                             shift and go to state 128
+
+state 93
+
+    (81) ge -> ID GT . ID
+
+    ID              shift and go to state 129
+
+
+state 94
+
+    (82) ge -> ID LT . ID
+
+    ID              shift and go to state 130
+
+
+state 95
+
+    (83) ge -> ID GE . ID
+
+    ID              shift and go to state 131
+
+
+state 96
+
+    (84) ge -> ID LE . ID
+
+    ID              shift and go to state 132
+
+
+state 97
+
+    (85) ge -> ID NE . ID
+
+    ID              shift and go to state 133
+
+
+state 98
+
+    (86) ge -> ID EQUAL . ID
+
+    ID              shift and go to state 134
+
+
+state 99
+
+    (87) ge -> LPAREN expression_logic . RPAREN
+    (77) expression_logic -> expression_logic . OR g
+
+    RPAREN          shift and go to state 135
+    OR              shift and go to state 90
+
+
+state 100
+
+    (31) do_loops -> FOR paso1FOR ASSIGN . expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (65) expression_arith -> . expression_arith PLUS c
+    (66) expression_arith -> . expression_arith MINUS c
+    (67) expression_arith -> . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    expression_arith               shift and go to state 136
+    c                              shift and go to state 105
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 101
+
+    (32) do_loops -> DO paso1DO LOOP . d WHILE expression_logic END_DO paso2DO
+    (22) d -> . b
+    (23) d -> . b d
+    (24) b -> . variable_matrix_assign
+    (25) b -> . printing_variables
+    (26) b -> . if_expression
+    (27) b -> . do_loops
+    (28) b -> . call_subroutine
+    (29) b -> . reading_variables
+    (30) b -> . EXIT paso4DoExit
+    (60) variable_matrix_assign -> . otro1
+    (61) variable_matrix_assign -> . otro
+    (49) printing_variables -> . PRINT Output
+    (43) if_expression -> . IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> . IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
+    (31) do_loops -> . FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (32) do_loops -> . DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+    (33) do_loops -> . LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
+    (42) call_subroutine -> . CALL ID
+    (38) reading_variables -> . READ idrepInput
+    (64) otro1 -> . ID ASSIGN expression_arith
+    (62) otro -> . ID LARR expression_arith RARR ASSIGN expression_arith
+    (63) otro -> . ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+
+    EXIT            shift and go to state 31
+    PRINT           shift and go to state 34
+    IF              shift and go to state 35
+    FOR             shift and go to state 36
+    DO              shift and go to state 37
+    LOOP            shift and go to state 38
+    CALL            shift and go to state 39
+    READ            shift and go to state 41
+    ID              shift and go to state 40
+
+    d                              shift and go to state 137
+    b                              shift and go to state 24
+    variable_matrix_assign         shift and go to state 25
+    printing_variables             shift and go to state 26
+    if_expression                  shift and go to state 27
+    do_loops                       shift and go to state 28
+    call_subroutine                shift and go to state 29
+    reading_variables              shift and go to state 30
+    otro1                          shift and go to state 32
+    otro                           shift and go to state 33
+
+state 102
+
+    (33) do_loops -> LOOP paso1DoExit d . END_LOOP paso2DoExit paso3DoExit
+
+    END_LOOP        shift and go to state 138
+
+
+state 103
+
+    (71) te -> ID .
+    (74) te -> ID . LARR expression_arith RARR
+    (75) te -> ID . LARR expression_arith COMMA expression_arith RARR
+
+    MULTIPLY        reduce using rule 71 (te -> ID .)
+    DIVIDE          reduce using rule 71 (te -> ID .)
+    PLUS            reduce using rule 71 (te -> ID .)
+    MINUS           reduce using rule 71 (te -> ID .)
+    EXIT            reduce using rule 71 (te -> ID .)
+    PRINT           reduce using rule 71 (te -> ID .)
+    IF              reduce using rule 71 (te -> ID .)
+    FOR             reduce using rule 71 (te -> ID .)
+    DO              reduce using rule 71 (te -> ID .)
+    LOOP            reduce using rule 71 (te -> ID .)
+    CALL            reduce using rule 71 (te -> ID .)
+    READ            reduce using rule 71 (te -> ID .)
+    ID              reduce using rule 71 (te -> ID .)
+    END_SUBROUTINE  reduce using rule 71 (te -> ID .)
+    END             reduce using rule 71 (te -> ID .)
+    END_LOOP        reduce using rule 71 (te -> ID .)
+    WHILE           reduce using rule 71 (te -> ID .)
+    ELSIF           reduce using rule 71 (te -> ID .)
+    ELSE            reduce using rule 71 (te -> ID .)
+    END_IF          reduce using rule 71 (te -> ID .)
+    END_FOR         reduce using rule 71 (te -> ID .)
+    RARR            reduce using rule 71 (te -> ID .)
+    COMMA           reduce using rule 71 (te -> ID .)
+    RPAREN          reduce using rule 71 (te -> ID .)
+    LARR            shift and go to state 139
+
+
+state 104
+
+    (64) otro1 -> ID ASSIGN expression_arith .
+    (65) expression_arith -> expression_arith . PLUS c
+    (66) expression_arith -> expression_arith . MINUS c
+
+    EXIT            reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    PRINT           reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    IF              reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    FOR             reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    DO              reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    LOOP            reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    CALL            reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    READ            reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    ID              reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    END_SUBROUTINE  reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    END             reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    END_LOOP        reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    WHILE           reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    ELSIF           reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    ELSE            reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    END_IF          reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    END_FOR         reduce using rule 64 (otro1 -> ID ASSIGN expression_arith .)
+    PLUS            shift and go to state 140
+    MINUS           shift and go to state 141
+
+
+state 105
+
+    (67) expression_arith -> c .
+    (68) c -> c . MULTIPLY te
+    (69) c -> c . DIVIDE te
+
+    PLUS            reduce using rule 67 (expression_arith -> c .)
+    MINUS           reduce using rule 67 (expression_arith -> c .)
+    EXIT            reduce using rule 67 (expression_arith -> c .)
+    PRINT           reduce using rule 67 (expression_arith -> c .)
+    IF              reduce using rule 67 (expression_arith -> c .)
+    FOR             reduce using rule 67 (expression_arith -> c .)
+    DO              reduce using rule 67 (expression_arith -> c .)
+    LOOP            reduce using rule 67 (expression_arith -> c .)
+    CALL            reduce using rule 67 (expression_arith -> c .)
+    READ            reduce using rule 67 (expression_arith -> c .)
+    ID              reduce using rule 67 (expression_arith -> c .)
+    END_SUBROUTINE  reduce using rule 67 (expression_arith -> c .)
+    END             reduce using rule 67 (expression_arith -> c .)
+    END_LOOP        reduce using rule 67 (expression_arith -> c .)
+    WHILE           reduce using rule 67 (expression_arith -> c .)
+    ELSIF           reduce using rule 67 (expression_arith -> c .)
+    ELSE            reduce using rule 67 (expression_arith -> c .)
+    END_IF          reduce using rule 67 (expression_arith -> c .)
+    END_FOR         reduce using rule 67 (expression_arith -> c .)
+    RARR            reduce using rule 67 (expression_arith -> c .)
+    COMMA           reduce using rule 67 (expression_arith -> c .)
+    RPAREN          reduce using rule 67 (expression_arith -> c .)
+    MULTIPLY        shift and go to state 142
+    DIVIDE          shift and go to state 143
+
+
+state 106
+
+    (70) c -> te .
+
+    MULTIPLY        reduce using rule 70 (c -> te .)
+    DIVIDE          reduce using rule 70 (c -> te .)
+    PLUS            reduce using rule 70 (c -> te .)
+    MINUS           reduce using rule 70 (c -> te .)
+    EXIT            reduce using rule 70 (c -> te .)
+    PRINT           reduce using rule 70 (c -> te .)
+    IF              reduce using rule 70 (c -> te .)
+    FOR             reduce using rule 70 (c -> te .)
+    DO              reduce using rule 70 (c -> te .)
+    LOOP            reduce using rule 70 (c -> te .)
+    CALL            reduce using rule 70 (c -> te .)
+    READ            reduce using rule 70 (c -> te .)
+    ID              reduce using rule 70 (c -> te .)
+    END_SUBROUTINE  reduce using rule 70 (c -> te .)
+    END             reduce using rule 70 (c -> te .)
+    END_LOOP        reduce using rule 70 (c -> te .)
+    WHILE           reduce using rule 70 (c -> te .)
+    ELSIF           reduce using rule 70 (c -> te .)
+    ELSE            reduce using rule 70 (c -> te .)
+    END_IF          reduce using rule 70 (c -> te .)
+    END_FOR         reduce using rule 70 (c -> te .)
+    RARR            reduce using rule 70 (c -> te .)
+    COMMA           reduce using rule 70 (c -> te .)
+    RPAREN          reduce using rule 70 (c -> te .)
+
+
+state 107
+
+    (72) te -> constante_entero .
+
+    MULTIPLY        reduce using rule 72 (te -> constante_entero .)
+    DIVIDE          reduce using rule 72 (te -> constante_entero .)
+    PLUS            reduce using rule 72 (te -> constante_entero .)
+    MINUS           reduce using rule 72 (te -> constante_entero .)
+    EXIT            reduce using rule 72 (te -> constante_entero .)
+    PRINT           reduce using rule 72 (te -> constante_entero .)
+    IF              reduce using rule 72 (te -> constante_entero .)
+    FOR             reduce using rule 72 (te -> constante_entero .)
+    DO              reduce using rule 72 (te -> constante_entero .)
+    LOOP            reduce using rule 72 (te -> constante_entero .)
+    CALL            reduce using rule 72 (te -> constante_entero .)
+    READ            reduce using rule 72 (te -> constante_entero .)
+    ID              reduce using rule 72 (te -> constante_entero .)
+    END_SUBROUTINE  reduce using rule 72 (te -> constante_entero .)
+    END             reduce using rule 72 (te -> constante_entero .)
+    END_LOOP        reduce using rule 72 (te -> constante_entero .)
+    WHILE           reduce using rule 72 (te -> constante_entero .)
+    ELSIF           reduce using rule 72 (te -> constante_entero .)
+    ELSE            reduce using rule 72 (te -> constante_entero .)
+    END_IF          reduce using rule 72 (te -> constante_entero .)
+    END_FOR         reduce using rule 72 (te -> constante_entero .)
+    RARR            reduce using rule 72 (te -> constante_entero .)
+    COMMA           reduce using rule 72 (te -> constante_entero .)
+    RPAREN          reduce using rule 72 (te -> constante_entero .)
+
+
+state 108
+
+    (73) te -> constante_flotante .
+
+    MULTIPLY        reduce using rule 73 (te -> constante_flotante .)
+    DIVIDE          reduce using rule 73 (te -> constante_flotante .)
+    PLUS            reduce using rule 73 (te -> constante_flotante .)
+    MINUS           reduce using rule 73 (te -> constante_flotante .)
+    EXIT            reduce using rule 73 (te -> constante_flotante .)
+    PRINT           reduce using rule 73 (te -> constante_flotante .)
+    IF              reduce using rule 73 (te -> constante_flotante .)
+    FOR             reduce using rule 73 (te -> constante_flotante .)
+    DO              reduce using rule 73 (te -> constante_flotante .)
+    LOOP            reduce using rule 73 (te -> constante_flotante .)
+    CALL            reduce using rule 73 (te -> constante_flotante .)
+    READ            reduce using rule 73 (te -> constante_flotante .)
+    ID              reduce using rule 73 (te -> constante_flotante .)
+    END_SUBROUTINE  reduce using rule 73 (te -> constante_flotante .)
+    END             reduce using rule 73 (te -> constante_flotante .)
+    END_LOOP        reduce using rule 73 (te -> constante_flotante .)
+    WHILE           reduce using rule 73 (te -> constante_flotante .)
+    ELSIF           reduce using rule 73 (te -> constante_flotante .)
+    ELSE            reduce using rule 73 (te -> constante_flotante .)
+    END_IF          reduce using rule 73 (te -> constante_flotante .)
+    END_FOR         reduce using rule 73 (te -> constante_flotante .)
+    RARR            reduce using rule 73 (te -> constante_flotante .)
+    COMMA           reduce using rule 73 (te -> constante_flotante .)
+    RPAREN          reduce using rule 73 (te -> constante_flotante .)
+
+
+state 109
+
+    (76) te -> LPAREN . expression_arith RPAREN
+    (65) expression_arith -> . expression_arith PLUS c
+    (66) expression_arith -> . expression_arith MINUS c
+    (67) expression_arith -> . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    expression_arith               shift and go to state 144
+    c                              shift and go to state 105
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 110
+
+    (62) otro -> ID LARR expression_arith . RARR ASSIGN expression_arith
+    (63) otro -> ID LARR expression_arith . COMMA expression_arith RARR ASSIGN expression_arith
+    (65) expression_arith -> expression_arith . PLUS c
+    (66) expression_arith -> expression_arith . MINUS c
+
+    RARR            shift and go to state 145
+    COMMA           shift and go to state 146
+    PLUS            shift and go to state 140
+    MINUS           shift and go to state 141
+
+
+state 111
+
+    (40) idrepInput -> idInput COMMA . idrepInput
+    (39) idrepInput -> . idInput
+    (40) idrepInput -> . idInput COMMA idrepInput
+    (41) idInput -> . ID
+
+    ID              shift and go to state 71
+
+    idInput                        shift and go to state 70
+    idrepInput                     shift and go to state 147
+
+state 112
+
+    (6) var_assign -> type_definition COLONS COLONS var_local var_dimensiones create_var_table . var_assign
+    (6) var_assign -> . type_definition COLONS COLONS var_local var_dimensiones create_var_table var_assign
+    (7) var_assign -> . empty
+    (4) type_definition -> . INT_TYPE
+    (5) type_definition -> . FLOAT_TYPE
+    (99) empty -> .
+
+    INT_TYPE        shift and go to state 9
+    FLOAT_TYPE      shift and go to state 10
+    SUBROUTINE      reduce using rule 99 (empty -> .)
+    BEGIN           reduce using rule 99 (empty -> .)
+
+    type_definition                shift and go to state 7
+    var_assign                     shift and go to state 148
+    empty                          shift and go to state 8
+
+state 113
+
+    (12) create_var_table -> empty .
+
+    INT_TYPE        reduce using rule 12 (create_var_table -> empty .)
+    FLOAT_TYPE      reduce using rule 12 (create_var_table -> empty .)
+    SUBROUTINE      reduce using rule 12 (create_var_table -> empty .)
+    BEGIN           reduce using rule 12 (create_var_table -> empty .)
+
+
+state 114
+
+    (8) var_dimensiones -> LARR Decnumsize . RARR
+
+    RARR            shift and go to state 149
+
+
+state 115
+
+    (10) Decnumsize -> INT . empty
+    (11) Decnumsize -> INT . COMMA INT
+    (99) empty -> .
+
+    COMMA           shift and go to state 151
+    RARR            reduce using rule 99 (empty -> .)
+
+    empty                          shift and go to state 150
+
+state 116
+
+    (13) var_local -> ID COMMA var_local .
+
+    LARR            reduce using rule 13 (var_local -> ID COMMA var_local .)
+    INT_TYPE        reduce using rule 13 (var_local -> ID COMMA var_local .)
+    FLOAT_TYPE      reduce using rule 13 (var_local -> ID COMMA var_local .)
+    SUBROUTINE      reduce using rule 13 (var_local -> ID COMMA var_local .)
+    BEGIN           reduce using rule 13 (var_local -> ID COMMA var_local .)
+
+
+state 117
+
+    (1) program -> PROGRAM ID primerCuad var_assign subrutinas rellenaCuad a END PROGRAM ID .
+
+    $end            reduce using rule 1 (program -> PROGRAM ID primerCuad var_assign subrutinas rellenaCuad a END PROGRAM ID .)
+
+
+state 118
+
+    (17) f_local -> SUBROUTINE idSub d crearCuadruploReturn END_SUBROUTINE f_local .
+
+    BEGIN           reduce using rule 17 (f_local -> SUBROUTINE idSub d crearCuadruploReturn END_SUBROUTINE f_local .)
+
+
+state 119
+
+    (51) Output -> LPAREN StringOut RPAREN .
+
+    EXIT            reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    PRINT           reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    IF              reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    FOR             reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    DO              reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    LOOP            reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    CALL            reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    READ            reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    ID              reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    END_SUBROUTINE  reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    END             reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    END_LOOP        reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    WHILE           reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    ELSIF           reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    ELSE            reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    END_IF          reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+    END_FOR         reduce using rule 51 (Output -> LPAREN StringOut RPAREN .)
+
+
+state 120
+
+    (53) StringOut -> ID StringOut .
+
+    RPAREN          reduce using rule 53 (StringOut -> ID StringOut .)
+
+
+state 121
+
+    (54) StringOut -> constante_entero StringOut .
+
+    RPAREN          reduce using rule 54 (StringOut -> constante_entero StringOut .)
+
+
+state 122
+
+    (55) StringOut -> constante_flotante StringOut .
+
+    RPAREN          reduce using rule 55 (StringOut -> constante_flotante StringOut .)
+
+
+state 123
+
+    (56) StringOut -> COLONS StringOut .
+
+    RPAREN          reduce using rule 56 (StringOut -> COLONS StringOut .)
+
+
+state 124
+
+    (57) StringOut -> COMMA StringOut .
+
+    RPAREN          reduce using rule 57 (StringOut -> COMMA StringOut .)
+
+
+state 125
+
+    (58) StringOut -> QUESTION StringOut .
+
+    RPAREN          reduce using rule 58 (StringOut -> QUESTION StringOut .)
+
+
+state 126
+
+    (43) if_expression -> IF expression_logic paso1IF THEN . if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> IF expression_logic paso1IF THEN . if_expression_local paso3IF END_IF
+    (45) if_expression_local -> . d
+    (46) if_expression_local -> . empty
+    (22) d -> . b
+    (23) d -> . b d
+    (99) empty -> .
+    (24) b -> . variable_matrix_assign
+    (25) b -> . printing_variables
+    (26) b -> . if_expression
+    (27) b -> . do_loops
+    (28) b -> . call_subroutine
+    (29) b -> . reading_variables
+    (30) b -> . EXIT paso4DoExit
+    (60) variable_matrix_assign -> . otro1
+    (61) variable_matrix_assign -> . otro
+    (49) printing_variables -> . PRINT Output
+    (43) if_expression -> . IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> . IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
+    (31) do_loops -> . FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (32) do_loops -> . DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+    (33) do_loops -> . LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
+    (42) call_subroutine -> . CALL ID
+    (38) reading_variables -> . READ idrepInput
+    (64) otro1 -> . ID ASSIGN expression_arith
+    (62) otro -> . ID LARR expression_arith RARR ASSIGN expression_arith
+    (63) otro -> . ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+
+    ELSIF           reduce using rule 99 (empty -> .)
+    ELSE            reduce using rule 99 (empty -> .)
+    END_IF          reduce using rule 99 (empty -> .)
+    EXIT            shift and go to state 31
+    PRINT           shift and go to state 34
+    IF              shift and go to state 35
+    FOR             shift and go to state 36
+    DO              shift and go to state 37
+    LOOP            shift and go to state 38
+    CALL            shift and go to state 39
+    READ            shift and go to state 41
+    ID              shift and go to state 40
+
+    if_expression_local            shift and go to state 152
+    d                              shift and go to state 153
+    empty                          shift and go to state 154
+    b                              shift and go to state 24
+    variable_matrix_assign         shift and go to state 25
+    printing_variables             shift and go to state 26
+    if_expression                  shift and go to state 27
+    do_loops                       shift and go to state 28
+    call_subroutine                shift and go to state 29
+    reading_variables              shift and go to state 30
+    otro1                          shift and go to state 32
+    otro                           shift and go to state 33
+
+state 127
+
+    (77) expression_logic -> expression_logic OR g .
+    (79) g -> g . AND ge
+
+    OR              reduce using rule 77 (expression_logic -> expression_logic OR g .)
+    THEN            reduce using rule 77 (expression_logic -> expression_logic OR g .)
+    RPAREN          reduce using rule 77 (expression_logic -> expression_logic OR g .)
+    END_DO          reduce using rule 77 (expression_logic -> expression_logic OR g .)
+    AND             shift and go to state 92
+
+
+state 128
+
+    (79) g -> g AND ge .
+
+    AND             reduce using rule 79 (g -> g AND ge .)
+    OR              reduce using rule 79 (g -> g AND ge .)
+    THEN            reduce using rule 79 (g -> g AND ge .)
+    RPAREN          reduce using rule 79 (g -> g AND ge .)
+    END_DO          reduce using rule 79 (g -> g AND ge .)
+
+
+state 129
+
+    (81) ge -> ID GT ID .
+
+    AND             reduce using rule 81 (ge -> ID GT ID .)
+    OR              reduce using rule 81 (ge -> ID GT ID .)
+    THEN            reduce using rule 81 (ge -> ID GT ID .)
+    RPAREN          reduce using rule 81 (ge -> ID GT ID .)
+    END_DO          reduce using rule 81 (ge -> ID GT ID .)
+
+
+state 130
+
+    (82) ge -> ID LT ID .
+
+    AND             reduce using rule 82 (ge -> ID LT ID .)
+    OR              reduce using rule 82 (ge -> ID LT ID .)
+    THEN            reduce using rule 82 (ge -> ID LT ID .)
+    RPAREN          reduce using rule 82 (ge -> ID LT ID .)
+    END_DO          reduce using rule 82 (ge -> ID LT ID .)
+
+
+state 131
+
+    (83) ge -> ID GE ID .
+
+    AND             reduce using rule 83 (ge -> ID GE ID .)
+    OR              reduce using rule 83 (ge -> ID GE ID .)
+    THEN            reduce using rule 83 (ge -> ID GE ID .)
+    RPAREN          reduce using rule 83 (ge -> ID GE ID .)
+    END_DO          reduce using rule 83 (ge -> ID GE ID .)
+
+
+state 132
+
+    (84) ge -> ID LE ID .
+
+    AND             reduce using rule 84 (ge -> ID LE ID .)
+    OR              reduce using rule 84 (ge -> ID LE ID .)
+    THEN            reduce using rule 84 (ge -> ID LE ID .)
+    RPAREN          reduce using rule 84 (ge -> ID LE ID .)
+    END_DO          reduce using rule 84 (ge -> ID LE ID .)
+
+
+state 133
+
+    (85) ge -> ID NE ID .
+
+    AND             reduce using rule 85 (ge -> ID NE ID .)
+    OR              reduce using rule 85 (ge -> ID NE ID .)
+    THEN            reduce using rule 85 (ge -> ID NE ID .)
+    RPAREN          reduce using rule 85 (ge -> ID NE ID .)
+    END_DO          reduce using rule 85 (ge -> ID NE ID .)
+
+
+state 134
+
+    (86) ge -> ID EQUAL ID .
+
+    AND             reduce using rule 86 (ge -> ID EQUAL ID .)
+    OR              reduce using rule 86 (ge -> ID EQUAL ID .)
+    THEN            reduce using rule 86 (ge -> ID EQUAL ID .)
+    RPAREN          reduce using rule 86 (ge -> ID EQUAL ID .)
+    END_DO          reduce using rule 86 (ge -> ID EQUAL ID .)
+
+
+state 135
+
+    (87) ge -> LPAREN expression_logic RPAREN .
+
+    AND             reduce using rule 87 (ge -> LPAREN expression_logic RPAREN .)
+    OR              reduce using rule 87 (ge -> LPAREN expression_logic RPAREN .)
+    THEN            reduce using rule 87 (ge -> LPAREN expression_logic RPAREN .)
+    RPAREN          reduce using rule 87 (ge -> LPAREN expression_logic RPAREN .)
+    END_DO          reduce using rule 87 (ge -> LPAREN expression_logic RPAREN .)
+
+
+state 136
+
+    (31) do_loops -> FOR paso1FOR ASSIGN expression_arith . paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (65) expression_arith -> expression_arith . PLUS c
+    (66) expression_arith -> expression_arith . MINUS c
+    (35) paso2FOR -> . empty
+    (99) empty -> .
+
+    PLUS            shift and go to state 140
+    MINUS           shift and go to state 141
+    COMMA           reduce using rule 99 (empty -> .)
+
+    paso2FOR                       shift and go to state 155
+    empty                          shift and go to state 156
+
+state 137
+
+    (32) do_loops -> DO paso1DO LOOP d . WHILE expression_logic END_DO paso2DO
+
+    WHILE           shift and go to state 157
+
+
+state 138
+
+    (33) do_loops -> LOOP paso1DoExit d END_LOOP . paso2DoExit paso3DoExit
+    (96) paso2DoExit -> . empty
+    (99) empty -> .
+
+    EXIT            reduce using rule 99 (empty -> .)
+    PRINT           reduce using rule 99 (empty -> .)
+    IF              reduce using rule 99 (empty -> .)
+    FOR             reduce using rule 99 (empty -> .)
+    DO              reduce using rule 99 (empty -> .)
+    LOOP            reduce using rule 99 (empty -> .)
+    CALL            reduce using rule 99 (empty -> .)
+    READ            reduce using rule 99 (empty -> .)
+    ID              reduce using rule 99 (empty -> .)
+    END_SUBROUTINE  reduce using rule 99 (empty -> .)
+    END             reduce using rule 99 (empty -> .)
+    END_LOOP        reduce using rule 99 (empty -> .)
+    WHILE           reduce using rule 99 (empty -> .)
+    ELSIF           reduce using rule 99 (empty -> .)
+    ELSE            reduce using rule 99 (empty -> .)
+    END_IF          reduce using rule 99 (empty -> .)
+    END_FOR         reduce using rule 99 (empty -> .)
+
+    paso2DoExit                    shift and go to state 158
+    empty                          shift and go to state 159
+
+state 139
+
+    (74) te -> ID LARR . expression_arith RARR
+    (75) te -> ID LARR . expression_arith COMMA expression_arith RARR
+    (65) expression_arith -> . expression_arith PLUS c
+    (66) expression_arith -> . expression_arith MINUS c
+    (67) expression_arith -> . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    expression_arith               shift and go to state 160
+    c                              shift and go to state 105
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 140
+
+    (65) expression_arith -> expression_arith PLUS . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    c                              shift and go to state 161
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 141
+
+    (66) expression_arith -> expression_arith MINUS . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    c                              shift and go to state 162
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 142
+
+    (68) c -> c MULTIPLY . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    te                             shift and go to state 163
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 143
+
+    (69) c -> c DIVIDE . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    te                             shift and go to state 164
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 144
+
+    (76) te -> LPAREN expression_arith . RPAREN
+    (65) expression_arith -> expression_arith . PLUS c
+    (66) expression_arith -> expression_arith . MINUS c
+
+    RPAREN          shift and go to state 165
+    PLUS            shift and go to state 140
+    MINUS           shift and go to state 141
+
+
+state 145
+
+    (62) otro -> ID LARR expression_arith RARR . ASSIGN expression_arith
+
+    ASSIGN          shift and go to state 166
+
+
+state 146
+
+    (63) otro -> ID LARR expression_arith COMMA . expression_arith RARR ASSIGN expression_arith
+    (65) expression_arith -> . expression_arith PLUS c
+    (66) expression_arith -> . expression_arith MINUS c
+    (67) expression_arith -> . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    expression_arith               shift and go to state 167
+    c                              shift and go to state 105
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 147
+
+    (40) idrepInput -> idInput COMMA idrepInput .
+
+    EXIT            reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    PRINT           reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    IF              reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    FOR             reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    DO              reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    LOOP            reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    CALL            reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    READ            reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    ID              reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    END_SUBROUTINE  reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    END             reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    END_LOOP        reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    WHILE           reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    ELSIF           reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    ELSE            reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    END_IF          reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+    END_FOR         reduce using rule 40 (idrepInput -> idInput COMMA idrepInput .)
+
+
+state 148
+
+    (6) var_assign -> type_definition COLONS COLONS var_local var_dimensiones create_var_table var_assign .
+
+    SUBROUTINE      reduce using rule 6 (var_assign -> type_definition COLONS COLONS var_local var_dimensiones create_var_table var_assign .)
+    BEGIN           reduce using rule 6 (var_assign -> type_definition COLONS COLONS var_local var_dimensiones create_var_table var_assign .)
+
+
+state 149
+
+    (8) var_dimensiones -> LARR Decnumsize RARR .
+
+    INT_TYPE        reduce using rule 8 (var_dimensiones -> LARR Decnumsize RARR .)
+    FLOAT_TYPE      reduce using rule 8 (var_dimensiones -> LARR Decnumsize RARR .)
+    SUBROUTINE      reduce using rule 8 (var_dimensiones -> LARR Decnumsize RARR .)
+    BEGIN           reduce using rule 8 (var_dimensiones -> LARR Decnumsize RARR .)
+
+
+state 150
+
+    (10) Decnumsize -> INT empty .
+
+    RARR            reduce using rule 10 (Decnumsize -> INT empty .)
+
+
+state 151
+
+    (11) Decnumsize -> INT COMMA . INT
+
+    INT             shift and go to state 168
+
+
+state 152
+
+    (43) if_expression -> IF expression_logic paso1IF THEN if_expression_local . if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> IF expression_logic paso1IF THEN if_expression_local . paso3IF END_IF
+    (47) if_expression_local2 -> . ELSIF expression_logic THEN if_expression_local if_expression_local2
+    (48) if_expression_local2 -> . empty
+    (90) paso3IF -> . empty
+    (99) empty -> .
+
+    ELSIF           shift and go to state 171
+    ELSE            reduce using rule 99 (empty -> .)
+    END_IF          reduce using rule 99 (empty -> .)
+
+    if_expression_local2           shift and go to state 169
+    paso3IF                        shift and go to state 170
+    empty                          shift and go to state 172
+
+state 153
+
+    (45) if_expression_local -> d .
+
+    ELSIF           reduce using rule 45 (if_expression_local -> d .)
+    ELSE            reduce using rule 45 (if_expression_local -> d .)
+    END_IF          reduce using rule 45 (if_expression_local -> d .)
+
+
+state 154
+
+    (46) if_expression_local -> empty .
+
+    ELSIF           reduce using rule 46 (if_expression_local -> empty .)
+    ELSE            reduce using rule 46 (if_expression_local -> empty .)
+    END_IF          reduce using rule 46 (if_expression_local -> empty .)
+
+
+state 155
+
+    (31) do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR . COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+
+    COMMA           shift and go to state 173
+
+
+state 156
+
+    (35) paso2FOR -> empty .
+
+    COMMA           reduce using rule 35 (paso2FOR -> empty .)
+
+
+state 157
+
+    (32) do_loops -> DO paso1DO LOOP d WHILE . expression_logic END_DO paso2DO
+    (77) expression_logic -> . expression_logic OR g
+    (78) expression_logic -> . g
+    (79) g -> . g AND ge
+    (80) g -> . ge
+    (81) ge -> . ID GT ID
+    (82) ge -> . ID LT ID
+    (83) ge -> . ID GE ID
+    (84) ge -> . ID LE ID
+    (85) ge -> . ID NE ID
+    (86) ge -> . ID EQUAL ID
+    (87) ge -> . LPAREN expression_logic RPAREN
+
+    ID              shift and go to state 58
+    LPAREN          shift and go to state 59
+
+    expression_logic               shift and go to state 174
+    g                              shift and go to state 56
+    ge                             shift and go to state 57
+
+state 158
+
+    (33) do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit . paso3DoExit
+    (97) paso3DoExit -> . empty
+    (99) empty -> .
+
+    EXIT            reduce using rule 99 (empty -> .)
+    PRINT           reduce using rule 99 (empty -> .)
+    IF              reduce using rule 99 (empty -> .)
+    FOR             reduce using rule 99 (empty -> .)
+    DO              reduce using rule 99 (empty -> .)
+    LOOP            reduce using rule 99 (empty -> .)
+    CALL            reduce using rule 99 (empty -> .)
+    READ            reduce using rule 99 (empty -> .)
+    ID              reduce using rule 99 (empty -> .)
+    END_SUBROUTINE  reduce using rule 99 (empty -> .)
+    END             reduce using rule 99 (empty -> .)
+    END_LOOP        reduce using rule 99 (empty -> .)
+    WHILE           reduce using rule 99 (empty -> .)
+    ELSIF           reduce using rule 99 (empty -> .)
+    ELSE            reduce using rule 99 (empty -> .)
+    END_IF          reduce using rule 99 (empty -> .)
+    END_FOR         reduce using rule 99 (empty -> .)
+
+    paso3DoExit                    shift and go to state 175
+    empty                          shift and go to state 176
+
+state 159
+
+    (96) paso2DoExit -> empty .
+
+    EXIT            reduce using rule 96 (paso2DoExit -> empty .)
+    PRINT           reduce using rule 96 (paso2DoExit -> empty .)
+    IF              reduce using rule 96 (paso2DoExit -> empty .)
+    FOR             reduce using rule 96 (paso2DoExit -> empty .)
+    DO              reduce using rule 96 (paso2DoExit -> empty .)
+    LOOP            reduce using rule 96 (paso2DoExit -> empty .)
+    CALL            reduce using rule 96 (paso2DoExit -> empty .)
+    READ            reduce using rule 96 (paso2DoExit -> empty .)
+    ID              reduce using rule 96 (paso2DoExit -> empty .)
+    END_SUBROUTINE  reduce using rule 96 (paso2DoExit -> empty .)
+    END             reduce using rule 96 (paso2DoExit -> empty .)
+    END_LOOP        reduce using rule 96 (paso2DoExit -> empty .)
+    WHILE           reduce using rule 96 (paso2DoExit -> empty .)
+    ELSIF           reduce using rule 96 (paso2DoExit -> empty .)
+    ELSE            reduce using rule 96 (paso2DoExit -> empty .)
+    END_IF          reduce using rule 96 (paso2DoExit -> empty .)
+    END_FOR         reduce using rule 96 (paso2DoExit -> empty .)
+
+
+state 160
+
+    (74) te -> ID LARR expression_arith . RARR
+    (75) te -> ID LARR expression_arith . COMMA expression_arith RARR
+    (65) expression_arith -> expression_arith . PLUS c
+    (66) expression_arith -> expression_arith . MINUS c
+
+    RARR            shift and go to state 177
+    COMMA           shift and go to state 178
+    PLUS            shift and go to state 140
+    MINUS           shift and go to state 141
+
+
+state 161
+
+    (65) expression_arith -> expression_arith PLUS c .
+    (68) c -> c . MULTIPLY te
+    (69) c -> c . DIVIDE te
+
+    PLUS            reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    MINUS           reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    EXIT            reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    PRINT           reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    IF              reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    FOR             reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    DO              reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    LOOP            reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    CALL            reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    READ            reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    ID              reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    END_SUBROUTINE  reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    END             reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    END_LOOP        reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    WHILE           reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    ELSIF           reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    ELSE            reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    END_IF          reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    END_FOR         reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    RARR            reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    COMMA           reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    RPAREN          reduce using rule 65 (expression_arith -> expression_arith PLUS c .)
+    MULTIPLY        shift and go to state 142
+    DIVIDE          shift and go to state 143
+
+
+state 162
+
+    (66) expression_arith -> expression_arith MINUS c .
+    (68) c -> c . MULTIPLY te
+    (69) c -> c . DIVIDE te
+
+    PLUS            reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    MINUS           reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    EXIT            reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    PRINT           reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    IF              reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    FOR             reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    DO              reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    LOOP            reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    CALL            reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    READ            reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    ID              reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    END_SUBROUTINE  reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    END             reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    END_LOOP        reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    WHILE           reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    ELSIF           reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    ELSE            reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    END_IF          reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    END_FOR         reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    RARR            reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    COMMA           reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    RPAREN          reduce using rule 66 (expression_arith -> expression_arith MINUS c .)
+    MULTIPLY        shift and go to state 142
+    DIVIDE          shift and go to state 143
+
+
+state 163
+
+    (68) c -> c MULTIPLY te .
+
+    MULTIPLY        reduce using rule 68 (c -> c MULTIPLY te .)
+    DIVIDE          reduce using rule 68 (c -> c MULTIPLY te .)
+    PLUS            reduce using rule 68 (c -> c MULTIPLY te .)
+    MINUS           reduce using rule 68 (c -> c MULTIPLY te .)
+    EXIT            reduce using rule 68 (c -> c MULTIPLY te .)
+    PRINT           reduce using rule 68 (c -> c MULTIPLY te .)
+    IF              reduce using rule 68 (c -> c MULTIPLY te .)
+    FOR             reduce using rule 68 (c -> c MULTIPLY te .)
+    DO              reduce using rule 68 (c -> c MULTIPLY te .)
+    LOOP            reduce using rule 68 (c -> c MULTIPLY te .)
+    CALL            reduce using rule 68 (c -> c MULTIPLY te .)
+    READ            reduce using rule 68 (c -> c MULTIPLY te .)
+    ID              reduce using rule 68 (c -> c MULTIPLY te .)
+    END_SUBROUTINE  reduce using rule 68 (c -> c MULTIPLY te .)
+    END             reduce using rule 68 (c -> c MULTIPLY te .)
+    END_LOOP        reduce using rule 68 (c -> c MULTIPLY te .)
+    WHILE           reduce using rule 68 (c -> c MULTIPLY te .)
+    ELSIF           reduce using rule 68 (c -> c MULTIPLY te .)
+    ELSE            reduce using rule 68 (c -> c MULTIPLY te .)
+    END_IF          reduce using rule 68 (c -> c MULTIPLY te .)
+    END_FOR         reduce using rule 68 (c -> c MULTIPLY te .)
+    RARR            reduce using rule 68 (c -> c MULTIPLY te .)
+    COMMA           reduce using rule 68 (c -> c MULTIPLY te .)
+    RPAREN          reduce using rule 68 (c -> c MULTIPLY te .)
+
+
+state 164
+
+    (69) c -> c DIVIDE te .
+
+    MULTIPLY        reduce using rule 69 (c -> c DIVIDE te .)
+    DIVIDE          reduce using rule 69 (c -> c DIVIDE te .)
+    PLUS            reduce using rule 69 (c -> c DIVIDE te .)
+    MINUS           reduce using rule 69 (c -> c DIVIDE te .)
+    EXIT            reduce using rule 69 (c -> c DIVIDE te .)
+    PRINT           reduce using rule 69 (c -> c DIVIDE te .)
+    IF              reduce using rule 69 (c -> c DIVIDE te .)
+    FOR             reduce using rule 69 (c -> c DIVIDE te .)
+    DO              reduce using rule 69 (c -> c DIVIDE te .)
+    LOOP            reduce using rule 69 (c -> c DIVIDE te .)
+    CALL            reduce using rule 69 (c -> c DIVIDE te .)
+    READ            reduce using rule 69 (c -> c DIVIDE te .)
+    ID              reduce using rule 69 (c -> c DIVIDE te .)
+    END_SUBROUTINE  reduce using rule 69 (c -> c DIVIDE te .)
+    END             reduce using rule 69 (c -> c DIVIDE te .)
+    END_LOOP        reduce using rule 69 (c -> c DIVIDE te .)
+    WHILE           reduce using rule 69 (c -> c DIVIDE te .)
+    ELSIF           reduce using rule 69 (c -> c DIVIDE te .)
+    ELSE            reduce using rule 69 (c -> c DIVIDE te .)
+    END_IF          reduce using rule 69 (c -> c DIVIDE te .)
+    END_FOR         reduce using rule 69 (c -> c DIVIDE te .)
+    RARR            reduce using rule 69 (c -> c DIVIDE te .)
+    COMMA           reduce using rule 69 (c -> c DIVIDE te .)
+    RPAREN          reduce using rule 69 (c -> c DIVIDE te .)
+
+
+state 165
+
+    (76) te -> LPAREN expression_arith RPAREN .
+
+    MULTIPLY        reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    DIVIDE          reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    PLUS            reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    MINUS           reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    EXIT            reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    PRINT           reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    IF              reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    FOR             reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    DO              reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    LOOP            reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    CALL            reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    READ            reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    ID              reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    END_SUBROUTINE  reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    END             reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    END_LOOP        reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    WHILE           reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    ELSIF           reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    ELSE            reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    END_IF          reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    END_FOR         reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    RARR            reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    COMMA           reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+    RPAREN          reduce using rule 76 (te -> LPAREN expression_arith RPAREN .)
+
+
+state 166
+
+    (62) otro -> ID LARR expression_arith RARR ASSIGN . expression_arith
+    (65) expression_arith -> . expression_arith PLUS c
+    (66) expression_arith -> . expression_arith MINUS c
+    (67) expression_arith -> . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    expression_arith               shift and go to state 179
+    c                              shift and go to state 105
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 167
+
+    (63) otro -> ID LARR expression_arith COMMA expression_arith . RARR ASSIGN expression_arith
+    (65) expression_arith -> expression_arith . PLUS c
+    (66) expression_arith -> expression_arith . MINUS c
+
+    RARR            shift and go to state 180
+    PLUS            shift and go to state 140
+    MINUS           shift and go to state 141
+
+
+state 168
+
+    (11) Decnumsize -> INT COMMA INT .
+
+    RARR            reduce using rule 11 (Decnumsize -> INT COMMA INT .)
+
+
+state 169
+
+    (43) if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 . paso2IF ELSE if_expression_local paso3IF END_IF
+    (89) paso2IF -> . empty
+    (99) empty -> .
+
+    ELSE            reduce using rule 99 (empty -> .)
+
+    paso2IF                        shift and go to state 181
+    empty                          shift and go to state 182
+
+state 170
+
+    (44) if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF . END_IF
+
+    END_IF          shift and go to state 183
+
+
+state 171
+
+    (47) if_expression_local2 -> ELSIF . expression_logic THEN if_expression_local if_expression_local2
+    (77) expression_logic -> . expression_logic OR g
+    (78) expression_logic -> . g
+    (79) g -> . g AND ge
+    (80) g -> . ge
+    (81) ge -> . ID GT ID
+    (82) ge -> . ID LT ID
+    (83) ge -> . ID GE ID
+    (84) ge -> . ID LE ID
+    (85) ge -> . ID NE ID
+    (86) ge -> . ID EQUAL ID
+    (87) ge -> . LPAREN expression_logic RPAREN
+
+    ID              shift and go to state 58
+    LPAREN          shift and go to state 59
+
+    expression_logic               shift and go to state 184
+    g                              shift and go to state 56
+    ge                             shift and go to state 57
+
+state 172
+
+    (48) if_expression_local2 -> empty .
+    (90) paso3IF -> empty .
+
+    ELSE            reduce using rule 48 (if_expression_local2 -> empty .)
+    END_IF          reduce using rule 90 (paso3IF -> empty .)
+
+
+state 173
+
+    (31) do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA . expression_arith paso3FOR DO d paso4FOR END_FOR
+    (65) expression_arith -> . expression_arith PLUS c
+    (66) expression_arith -> . expression_arith MINUS c
+    (67) expression_arith -> . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    expression_arith               shift and go to state 185
+    c                              shift and go to state 105
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 174
+
+    (32) do_loops -> DO paso1DO LOOP d WHILE expression_logic . END_DO paso2DO
+    (77) expression_logic -> expression_logic . OR g
+
+    END_DO          shift and go to state 186
+    OR              shift and go to state 90
+
+
+state 175
+
+    (33) do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .
+
+    EXIT            reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    PRINT           reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    IF              reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    FOR             reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    DO              reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    LOOP            reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    CALL            reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    READ            reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    ID              reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    END_SUBROUTINE  reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    END             reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    END_LOOP        reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    WHILE           reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    ELSIF           reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    ELSE            reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    END_IF          reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+    END_FOR         reduce using rule 33 (do_loops -> LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit .)
+
+
+state 176
+
+    (97) paso3DoExit -> empty .
+
+    EXIT            reduce using rule 97 (paso3DoExit -> empty .)
+    PRINT           reduce using rule 97 (paso3DoExit -> empty .)
+    IF              reduce using rule 97 (paso3DoExit -> empty .)
+    FOR             reduce using rule 97 (paso3DoExit -> empty .)
+    DO              reduce using rule 97 (paso3DoExit -> empty .)
+    LOOP            reduce using rule 97 (paso3DoExit -> empty .)
+    CALL            reduce using rule 97 (paso3DoExit -> empty .)
+    READ            reduce using rule 97 (paso3DoExit -> empty .)
+    ID              reduce using rule 97 (paso3DoExit -> empty .)
+    END_SUBROUTINE  reduce using rule 97 (paso3DoExit -> empty .)
+    END             reduce using rule 97 (paso3DoExit -> empty .)
+    END_LOOP        reduce using rule 97 (paso3DoExit -> empty .)
+    WHILE           reduce using rule 97 (paso3DoExit -> empty .)
+    ELSIF           reduce using rule 97 (paso3DoExit -> empty .)
+    ELSE            reduce using rule 97 (paso3DoExit -> empty .)
+    END_IF          reduce using rule 97 (paso3DoExit -> empty .)
+    END_FOR         reduce using rule 97 (paso3DoExit -> empty .)
+
+
+state 177
+
+    (74) te -> ID LARR expression_arith RARR .
+
+    MULTIPLY        reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    DIVIDE          reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    PLUS            reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    MINUS           reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    EXIT            reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    PRINT           reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    IF              reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    FOR             reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    DO              reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    LOOP            reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    CALL            reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    READ            reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    ID              reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    END_SUBROUTINE  reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    END             reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    END_LOOP        reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    WHILE           reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    ELSIF           reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    ELSE            reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    END_IF          reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    END_FOR         reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    RARR            reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    COMMA           reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+    RPAREN          reduce using rule 74 (te -> ID LARR expression_arith RARR .)
+
+
+state 178
+
+    (75) te -> ID LARR expression_arith COMMA . expression_arith RARR
+    (65) expression_arith -> . expression_arith PLUS c
+    (66) expression_arith -> . expression_arith MINUS c
+    (67) expression_arith -> . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    expression_arith               shift and go to state 187
+    c                              shift and go to state 105
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 179
+
+    (62) otro -> ID LARR expression_arith RARR ASSIGN expression_arith .
+    (65) expression_arith -> expression_arith . PLUS c
+    (66) expression_arith -> expression_arith . MINUS c
+
+    EXIT            reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    PRINT           reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    IF              reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    FOR             reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    DO              reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    LOOP            reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    CALL            reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    READ            reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    ID              reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    END_SUBROUTINE  reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    END             reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    END_LOOP        reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    WHILE           reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    ELSIF           reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    ELSE            reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    END_IF          reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    END_FOR         reduce using rule 62 (otro -> ID LARR expression_arith RARR ASSIGN expression_arith .)
+    PLUS            shift and go to state 140
+    MINUS           shift and go to state 141
+
+
+state 180
+
+    (63) otro -> ID LARR expression_arith COMMA expression_arith RARR . ASSIGN expression_arith
+
+    ASSIGN          shift and go to state 188
+
+
+state 181
+
+    (43) if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF . ELSE if_expression_local paso3IF END_IF
+
+    ELSE            shift and go to state 189
+
+
+state 182
+
+    (89) paso2IF -> empty .
+
+    ELSE            reduce using rule 89 (paso2IF -> empty .)
+
+
+state 183
+
+    (44) if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .
+
+    EXIT            reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    PRINT           reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    IF              reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    FOR             reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    DO              reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    LOOP            reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    CALL            reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    READ            reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    ID              reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    END_SUBROUTINE  reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    END             reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    END_LOOP        reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    WHILE           reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    ELSIF           reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    ELSE            reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    END_IF          reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+    END_FOR         reduce using rule 44 (if_expression -> IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF .)
+
+
+state 184
+
+    (47) if_expression_local2 -> ELSIF expression_logic . THEN if_expression_local if_expression_local2
+    (77) expression_logic -> expression_logic . OR g
+
+    THEN            shift and go to state 190
+    OR              shift and go to state 90
+
+
+state 185
+
+    (31) do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith . paso3FOR DO d paso4FOR END_FOR
+    (65) expression_arith -> expression_arith . PLUS c
+    (66) expression_arith -> expression_arith . MINUS c
+    (36) paso3FOR -> . empty
+    (99) empty -> .
+
+    PLUS            shift and go to state 140
+    MINUS           shift and go to state 141
+    DO              reduce using rule 99 (empty -> .)
+
+    paso3FOR                       shift and go to state 191
+    empty                          shift and go to state 192
+
+state 186
+
+    (32) do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO . paso2DO
+    (94) paso2DO -> . empty
+    (99) empty -> .
+
+    EXIT            reduce using rule 99 (empty -> .)
+    PRINT           reduce using rule 99 (empty -> .)
+    IF              reduce using rule 99 (empty -> .)
+    FOR             reduce using rule 99 (empty -> .)
+    DO              reduce using rule 99 (empty -> .)
+    LOOP            reduce using rule 99 (empty -> .)
+    CALL            reduce using rule 99 (empty -> .)
+    READ            reduce using rule 99 (empty -> .)
+    ID              reduce using rule 99 (empty -> .)
+    END_SUBROUTINE  reduce using rule 99 (empty -> .)
+    END             reduce using rule 99 (empty -> .)
+    END_LOOP        reduce using rule 99 (empty -> .)
+    WHILE           reduce using rule 99 (empty -> .)
+    ELSIF           reduce using rule 99 (empty -> .)
+    ELSE            reduce using rule 99 (empty -> .)
+    END_IF          reduce using rule 99 (empty -> .)
+    END_FOR         reduce using rule 99 (empty -> .)
+
+    paso2DO                        shift and go to state 193
+    empty                          shift and go to state 194
+
+state 187
+
+    (75) te -> ID LARR expression_arith COMMA expression_arith . RARR
+    (65) expression_arith -> expression_arith . PLUS c
+    (66) expression_arith -> expression_arith . MINUS c
+
+    RARR            shift and go to state 195
+    PLUS            shift and go to state 140
+    MINUS           shift and go to state 141
+
+
+state 188
+
+    (63) otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN . expression_arith
+    (65) expression_arith -> . expression_arith PLUS c
+    (66) expression_arith -> . expression_arith MINUS c
+    (67) expression_arith -> . c
+    (68) c -> . c MULTIPLY te
+    (69) c -> . c DIVIDE te
+    (70) c -> . te
+    (71) te -> . ID
+    (72) te -> . constante_entero
+    (73) te -> . constante_flotante
+    (74) te -> . ID LARR expression_arith RARR
+    (75) te -> . ID LARR expression_arith COMMA expression_arith RARR
+    (76) te -> . LPAREN expression_arith RPAREN
+    (91) constante_entero -> . INT
+    (92) constante_flotante -> . FLOAT
+
+    ID              shift and go to state 103
+    LPAREN          shift and go to state 109
+    INT             shift and go to state 87
+    FLOAT           shift and go to state 88
+
+    expression_arith               shift and go to state 196
+    c                              shift and go to state 105
+    te                             shift and go to state 106
+    constante_entero               shift and go to state 107
+    constante_flotante             shift and go to state 108
+
+state 189
+
+    (43) if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE . if_expression_local paso3IF END_IF
+    (45) if_expression_local -> . d
+    (46) if_expression_local -> . empty
+    (22) d -> . b
+    (23) d -> . b d
+    (99) empty -> .
+    (24) b -> . variable_matrix_assign
+    (25) b -> . printing_variables
+    (26) b -> . if_expression
+    (27) b -> . do_loops
+    (28) b -> . call_subroutine
+    (29) b -> . reading_variables
+    (30) b -> . EXIT paso4DoExit
+    (60) variable_matrix_assign -> . otro1
+    (61) variable_matrix_assign -> . otro
+    (49) printing_variables -> . PRINT Output
+    (43) if_expression -> . IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> . IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
+    (31) do_loops -> . FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (32) do_loops -> . DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+    (33) do_loops -> . LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
+    (42) call_subroutine -> . CALL ID
+    (38) reading_variables -> . READ idrepInput
+    (64) otro1 -> . ID ASSIGN expression_arith
+    (62) otro -> . ID LARR expression_arith RARR ASSIGN expression_arith
+    (63) otro -> . ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+
+    END_IF          reduce using rule 99 (empty -> .)
+    EXIT            shift and go to state 31
+    PRINT           shift and go to state 34
+    IF              shift and go to state 35
+    FOR             shift and go to state 36
+    DO              shift and go to state 37
+    LOOP            shift and go to state 38
+    CALL            shift and go to state 39
+    READ            shift and go to state 41
+    ID              shift and go to state 40
+
+    if_expression_local            shift and go to state 197
+    d                              shift and go to state 153
+    empty                          shift and go to state 154
+    b                              shift and go to state 24
+    variable_matrix_assign         shift and go to state 25
+    printing_variables             shift and go to state 26
+    if_expression                  shift and go to state 27
+    do_loops                       shift and go to state 28
+    call_subroutine                shift and go to state 29
+    reading_variables              shift and go to state 30
+    otro1                          shift and go to state 32
+    otro                           shift and go to state 33
+
+state 190
+
+    (47) if_expression_local2 -> ELSIF expression_logic THEN . if_expression_local if_expression_local2
+    (45) if_expression_local -> . d
+    (46) if_expression_local -> . empty
+    (22) d -> . b
+    (23) d -> . b d
+    (99) empty -> .
+    (24) b -> . variable_matrix_assign
+    (25) b -> . printing_variables
+    (26) b -> . if_expression
+    (27) b -> . do_loops
+    (28) b -> . call_subroutine
+    (29) b -> . reading_variables
+    (30) b -> . EXIT paso4DoExit
+    (60) variable_matrix_assign -> . otro1
+    (61) variable_matrix_assign -> . otro
+    (49) printing_variables -> . PRINT Output
+    (43) if_expression -> . IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> . IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
+    (31) do_loops -> . FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (32) do_loops -> . DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+    (33) do_loops -> . LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
+    (42) call_subroutine -> . CALL ID
+    (38) reading_variables -> . READ idrepInput
+    (64) otro1 -> . ID ASSIGN expression_arith
+    (62) otro -> . ID LARR expression_arith RARR ASSIGN expression_arith
+    (63) otro -> . ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+
+    ELSIF           reduce using rule 99 (empty -> .)
+    ELSE            reduce using rule 99 (empty -> .)
+    EXIT            shift and go to state 31
+    PRINT           shift and go to state 34
+    IF              shift and go to state 35
+    FOR             shift and go to state 36
+    DO              shift and go to state 37
+    LOOP            shift and go to state 38
+    CALL            shift and go to state 39
+    READ            shift and go to state 41
+    ID              shift and go to state 40
+
+    if_expression_local            shift and go to state 198
+    d                              shift and go to state 153
+    empty                          shift and go to state 154
+    b                              shift and go to state 24
+    variable_matrix_assign         shift and go to state 25
+    printing_variables             shift and go to state 26
+    if_expression                  shift and go to state 27
+    do_loops                       shift and go to state 28
+    call_subroutine                shift and go to state 29
+    reading_variables              shift and go to state 30
+    otro1                          shift and go to state 32
+    otro                           shift and go to state 33
+
+state 191
+
+    (31) do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR . DO d paso4FOR END_FOR
+
+    DO              shift and go to state 199
+
+
+state 192
+
+    (36) paso3FOR -> empty .
+
+    DO              reduce using rule 36 (paso3FOR -> empty .)
+
+
+state 193
+
+    (32) do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .
+
+    EXIT            reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    PRINT           reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    IF              reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    FOR             reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    DO              reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    LOOP            reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    CALL            reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    READ            reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    ID              reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    END_SUBROUTINE  reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    END             reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    END_LOOP        reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    WHILE           reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    ELSIF           reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    ELSE            reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    END_IF          reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+    END_FOR         reduce using rule 32 (do_loops -> DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO .)
+
+
+state 194
+
+    (94) paso2DO -> empty .
+
+    EXIT            reduce using rule 94 (paso2DO -> empty .)
+    PRINT           reduce using rule 94 (paso2DO -> empty .)
+    IF              reduce using rule 94 (paso2DO -> empty .)
+    FOR             reduce using rule 94 (paso2DO -> empty .)
+    DO              reduce using rule 94 (paso2DO -> empty .)
+    LOOP            reduce using rule 94 (paso2DO -> empty .)
+    CALL            reduce using rule 94 (paso2DO -> empty .)
+    READ            reduce using rule 94 (paso2DO -> empty .)
+    ID              reduce using rule 94 (paso2DO -> empty .)
+    END_SUBROUTINE  reduce using rule 94 (paso2DO -> empty .)
+    END             reduce using rule 94 (paso2DO -> empty .)
+    END_LOOP        reduce using rule 94 (paso2DO -> empty .)
+    WHILE           reduce using rule 94 (paso2DO -> empty .)
+    ELSIF           reduce using rule 94 (paso2DO -> empty .)
+    ELSE            reduce using rule 94 (paso2DO -> empty .)
+    END_IF          reduce using rule 94 (paso2DO -> empty .)
+    END_FOR         reduce using rule 94 (paso2DO -> empty .)
+
+
+state 195
+
+    (75) te -> ID LARR expression_arith COMMA expression_arith RARR .
+
+    MULTIPLY        reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    DIVIDE          reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    PLUS            reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    MINUS           reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    EXIT            reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    PRINT           reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    IF              reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    FOR             reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    DO              reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    LOOP            reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    CALL            reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    READ            reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    ID              reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    END_SUBROUTINE  reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    END             reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    END_LOOP        reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    WHILE           reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    ELSIF           reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    ELSE            reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    END_IF          reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    END_FOR         reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    RARR            reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    COMMA           reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+    RPAREN          reduce using rule 75 (te -> ID LARR expression_arith COMMA expression_arith RARR .)
+
+
+state 196
+
+    (63) otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .
+    (65) expression_arith -> expression_arith . PLUS c
+    (66) expression_arith -> expression_arith . MINUS c
+
+    EXIT            reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    PRINT           reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    IF              reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    FOR             reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    DO              reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    LOOP            reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    CALL            reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    READ            reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    ID              reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    END_SUBROUTINE  reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    END             reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    END_LOOP        reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    WHILE           reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    ELSIF           reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    ELSE            reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    END_IF          reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    END_FOR         reduce using rule 63 (otro -> ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith .)
+    PLUS            shift and go to state 140
+    MINUS           shift and go to state 141
+
+
+state 197
+
+    (43) if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local . paso3IF END_IF
+    (90) paso3IF -> . empty
+    (99) empty -> .
+
+    END_IF          reduce using rule 99 (empty -> .)
+
+    paso3IF                        shift and go to state 200
+    empty                          shift and go to state 201
+
+state 198
+
+    (47) if_expression_local2 -> ELSIF expression_logic THEN if_expression_local . if_expression_local2
+    (47) if_expression_local2 -> . ELSIF expression_logic THEN if_expression_local if_expression_local2
+    (48) if_expression_local2 -> . empty
+    (99) empty -> .
+
+    ELSIF           shift and go to state 171
+    ELSE            reduce using rule 99 (empty -> .)
+
+    if_expression_local2           shift and go to state 202
+    empty                          shift and go to state 203
+
+state 199
+
+    (31) do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO . d paso4FOR END_FOR
+    (22) d -> . b
+    (23) d -> . b d
+    (24) b -> . variable_matrix_assign
+    (25) b -> . printing_variables
+    (26) b -> . if_expression
+    (27) b -> . do_loops
+    (28) b -> . call_subroutine
+    (29) b -> . reading_variables
+    (30) b -> . EXIT paso4DoExit
+    (60) variable_matrix_assign -> . otro1
+    (61) variable_matrix_assign -> . otro
+    (49) printing_variables -> . PRINT Output
+    (43) if_expression -> . IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
+    (44) if_expression -> . IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
+    (31) do_loops -> . FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR
+    (32) do_loops -> . DO paso1DO LOOP d WHILE expression_logic END_DO paso2DO
+    (33) do_loops -> . LOOP paso1DoExit d END_LOOP paso2DoExit paso3DoExit
+    (42) call_subroutine -> . CALL ID
+    (38) reading_variables -> . READ idrepInput
+    (64) otro1 -> . ID ASSIGN expression_arith
+    (62) otro -> . ID LARR expression_arith RARR ASSIGN expression_arith
+    (63) otro -> . ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+
+    EXIT            shift and go to state 31
+    PRINT           shift and go to state 34
+    IF              shift and go to state 35
+    FOR             shift and go to state 36
+    DO              shift and go to state 37
+    LOOP            shift and go to state 38
+    CALL            shift and go to state 39
+    READ            shift and go to state 41
+    ID              shift and go to state 40
+
+    d                              shift and go to state 204
+    b                              shift and go to state 24
+    variable_matrix_assign         shift and go to state 25
+    printing_variables             shift and go to state 26
+    if_expression                  shift and go to state 27
+    do_loops                       shift and go to state 28
+    call_subroutine                shift and go to state 29
+    reading_variables              shift and go to state 30
+    otro1                          shift and go to state 32
+    otro                           shift and go to state 33
+
+state 200
+
+    (43) if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF . END_IF
+
+    END_IF          shift and go to state 205
+
+
+state 201
+
+    (90) paso3IF -> empty .
+
+    END_IF          reduce using rule 90 (paso3IF -> empty .)
+
+
+state 202
+
+    (47) if_expression_local2 -> ELSIF expression_logic THEN if_expression_local if_expression_local2 .
+
+    ELSE            reduce using rule 47 (if_expression_local2 -> ELSIF expression_logic THEN if_expression_local if_expression_local2 .)
+
+
+state 203
+
+    (48) if_expression_local2 -> empty .
+
+    ELSE            reduce using rule 48 (if_expression_local2 -> empty .)
+
+
+state 204
+
+    (31) do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d . paso4FOR END_FOR
+    (37) paso4FOR -> . empty
+    (99) empty -> .
+
+    END_FOR         reduce using rule 99 (empty -> .)
+
+    paso4FOR                       shift and go to state 206
+    empty                          shift and go to state 207
+
+state 205
+
+    (43) if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .
+
+    EXIT            reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    PRINT           reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    IF              reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    FOR             reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    DO              reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    LOOP            reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    CALL            reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    READ            reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    ID              reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    END_SUBROUTINE  reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    END             reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    END_LOOP        reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    WHILE           reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    ELSIF           reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    ELSE            reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    END_IF          reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+    END_FOR         reduce using rule 43 (if_expression -> IF expression_logic paso1IF THEN if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF .)
+
+
+state 206
+
+    (31) do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR . END_FOR
+
+    END_FOR         shift and go to state 208
+
+
+state 207
+
+    (37) paso4FOR -> empty .
+
+    END_FOR         reduce using rule 37 (paso4FOR -> empty .)
+
+
+state 208
+
+    (31) do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .
+
+    EXIT            reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    PRINT           reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    IF              reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    FOR             reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    DO              reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    LOOP            reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    CALL            reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    READ            reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    ID              reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    END_SUBROUTINE  reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    END             reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    END_LOOP        reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    WHILE           reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    ELSIF           reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    ELSE            reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    END_IF          reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
+    END_FOR         reduce using rule 31 (do_loops -> FOR paso1FOR ASSIGN expression_arith paso2FOR COMMA expression_arith paso3FOR DO d paso4FOR END_FOR .)
 

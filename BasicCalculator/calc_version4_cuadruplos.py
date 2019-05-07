@@ -11,6 +11,8 @@ cuboSemantico = CuboSemantico()
 PilaOperandos = []
 PiladeSaltos = []
 PiladeExits = [] 
+PilaLoops = []
+
 
 # Buffers
 Cuadruplos = []
@@ -23,14 +25,63 @@ forID = 0
 tablaVariables = {}
 tablaSubrutinas = []
 tablaDirecciones = []
+espacioMemoria = []
 defaultValues = {'int': 0, 'float': 0.0, 'bool': False}
-AvailTemp = ['$t1', '$t2', '$t3', '$t4','$t5', '$t6', '$t7', '$t8', '$t9', '$t10']
+AvailTemp = ['$t1', '$t2', '$t3', '$t4','$t5', '$t6', '$t7', '$t8', '$t9', '$t10','$t11', '$t12', '$t13', '$t14','$t15', '$t16', '$t17', '$t18', '$t19', '$t20','$t21','$t22','$t23','$t24','$t25','$t26','$t27','$t28','$t29','$t30','$t31','$t32','$t33','$t34','$t35','$t36','$t37','$t38','$t39','$t40','$t41']
 variableIdQueue = []
 currentType = ''
 currentOperator = ''
 stringOutput = ''
-tam1 = 0
-tam2 = 0
+
+tam1 = None
+tam2 = None
+
+def desempacarVariableDimensionadaDestino(variableDimensionada):
+	global tablaVariables
+	nombre = variableDimensionada[0]
+	destino = variableDimensionada[1]
+
+	if isinstance(destino,str):
+		destino = tablaVariables[destino]['value']
+	
+		
+	return nombre, destino
+
+def desempacarVariableDimensionada(variableDimensionada):
+	
+	global tablaVariables
+	nombre = variableDimensionada[0]
+
+	if isinstance(variableDimensionada[1], str):
+		local = tablaVariables[variableDimensionada[1]]['value']
+		valor = tablaVariables[nombre]['value'][str(local)]
+	else:
+		valor = tablaVariables[nombre]['value'][str(variableDimensionada[1])]
+
+	return nombre, valor
+
+def validarVariableDimensionada(variable):
+	global tablaVariables
+	global PilaOperandos
+
+	infoVariable = tablaVariables[variable]
+	d1 = None
+	d2 = None
+
+	if (infoVariable['d1'] is not None):
+		if (infoVariable['d2'] is not None):
+
+		#	d2 = PilaOperandos.pop(0)
+		#	d1 = PilaOperandos.pop(0)
+
+
+			d2 = PilaOperandos.pop(0)
+			d1 = PilaOperandos.pop(0)
+
+		else:
+			d1 = PilaOperandos.pop(0)
+	
+	return d1, d2
 
 def Rellenar(direccion1, direccion2):
 	
@@ -224,15 +275,182 @@ def crearCuadruploAsignacion():
 	
 	
 	OP2 = PilaOperandos.pop()
+	OP2Dim1, OP2Dim2 = validarVariableDimensionada(OP2)
 	OP1 = PilaOperandos.pop()
-	
+	OP1Dim1, OP1Dim2 = validarVariableDimensionada(OP1)
+
 	OP2Type = tablaVariables.get(OP2)
 	OP1Type = tablaVariables.get(OP1)
 	
 	if OP2Type is not None and OP1Type is not None:
 		resultType = cuboSemantico.validarTipoPorOperacion(OP2Type['type'], OP1Type['type'], '=')
-		Cuad = ['=', OP1,'',OP2]
+
+		if (OP2Dim1 is not None):
+			if (OP2Dim2 is not None):
+
+				blabla = OP2Type['d2']
+				tablaVariables[blabla] = {'type': resultType, 'd1': None, 'd2': None, 'value': blabla}
+
+				temporal = AvailTemp.pop()
+				Cuad = ['*', OP2Dim1, OP2Type['d2'],temporal]
+				print("cuad * ARRD ")
+				PilaOperandos.append(temporal)
+				tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+				Cuadruplos.append(Cuad)
+				cont += 1
+				
+				local = PilaOperandos.pop()
+				temporal = AvailTemp.pop()
+				Cuad = ['+', local, OP2Dim2,temporal]
+				print("cuad + ARRD ")
+				PilaOperandos.append(temporal)
+				tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+				Cuadruplos.append(Cuad)
+				cont += 1
+
+				local2 = PilaOperandos.pop()
+				
+				#operand2 = [OP2, ((OP2Dim1 * OP2Type['d2']) + OP2Dim1)]
+				operand2 =[OP2, local2]
+				#operand2 = [OP2, ((OP2Dim1 * OP2Type['d2']) + OP2Dim2)]
+			else:
+				operand2 = [OP2, OP2Dim1]
+		else:
+			operand2 = OP2
+		
+		if (OP1Dim1 is not None):
+			if (OP1Dim2 is not None):
+				blabla = OP1Type['d2']
+				tablaVariables[blabla] = {'type': resultType, 'd1': None, 'd2': None, 'value': blabla}
+
+				temporal = AvailTemp.pop()
+				Cuad = ['*', OP1Dim1, OP1Type['d2'],temporal]
+				print("cuad * ARRD ")
+				PilaOperandos.append(temporal)
+				tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+				Cuadruplos.append(Cuad)
+				cont += 1
+				
+				local = PilaOperandos.pop()
+				temporal = AvailTemp.pop()
+				Cuad = ['+', local, OP1Dim2,temporal]
+				print("cuad + ARRD ")
+				PilaOperandos.append(temporal)
+				tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+				Cuadruplos.append(Cuad)
+				cont += 1
+
+				local2 = PilaOperandos.pop()
+					
+				operand1 =[OP1, local2]
+
+				#operand1 = [OP1, ((OP1Dim1 * OP1Type['d2']) + OP1Dim2)]
+			else:
+				operand1 = [OP1, OP1Dim1]
+		else:
+			operand1 = OP1
+
+		Cuad = ['=', operand1,'',operand2]
 		print("cuad =")
+		Cuadruplos.append(Cuad)
+		cont += 1
+
+		if isinstance(OP2, str):
+			if OP2[0] == '$':
+				AvailTemp.append(OP2)
+		if isinstance(OP1, str):
+			if OP1[0] == '$':
+				AvailTemp.append(OP1)
+	else:
+		print("OPERADORES INCOMPATIBLES")
+
+def crearCuadruploAsignacionARREGLO():
+
+	global PilaOperandos
+	global AvailTemp
+	global Cuadruplos
+	global cont
+	global tablaVariables
+	global AvailTemp
+
+	
+	OP2 = PilaOperandos.pop()
+	OP2Dim1, OP2Dim2 = validarVariableDimensionada(OP2)
+	OP1 = PilaOperandos.pop()
+	OP1Dim1, OP1Dim2 = validarVariableDimensionada(OP1)
+
+	OP2Type = tablaVariables.get(OP2)
+	OP1Type = tablaVariables.get(OP1)
+	
+	if OP2Type is not None and OP1Type is not None:
+		resultType = cuboSemantico.validarTipoPorOperacion(OP2Type['type'], OP1Type['type'], '=')
+
+		if (OP2Dim1 is not None):
+			if (OP2Dim2 is not None):
+
+					blabla = OP2Type['d2']
+					tablaVariables[blabla] = {'type': resultType, 'd1': None, 'd2': None, 'value': blabla}
+	
+					temporal = AvailTemp.pop()
+					Cuad = ['*', OP2Dim1, OP2Type['d2'],temporal]
+					print("cuad * ARRD ")
+					PilaOperandos.append(temporal)
+					tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+					Cuadruplos.append(Cuad)
+					cont += 1
+					
+					local = PilaOperandos.pop()
+					temporal = AvailTemp.pop()
+					Cuad = ['+', local, OP2Dim2,temporal]
+					print("cuad + ARRD ")
+					PilaOperandos.append(temporal)
+					tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+					Cuadruplos.append(Cuad)
+					cont += 1
+
+					local2 = PilaOperandos.pop()
+					
+					#operand2 = [OP2, ((OP2Dim1 * OP2Type['d2']) + OP2Dim1)]
+					operand2 =[OP2, local2]
+			else:
+				operand2 = [OP2, OP2Dim1]
+		else:
+			operand2 = OP2
+		
+		if (OP1Dim1 is not None):
+			if (OP1Dim2 is not None):
+
+				blabla = OP1Type['d2']
+				tablaVariables[blabla] = {'type': resultType, 'd1': None, 'd2': None, 'value': blabla}
+
+				temporal = AvailTemp.pop()
+				Cuad = ['*', OP1Dim1, OP1Type['d2'],temporal]
+				print("cuad * ARRD ")
+				PilaOperandos.append(temporal)
+				tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+				Cuadruplos.append(Cuad)
+				cont += 1
+				
+				local = PilaOperandos.pop()
+				temporal = AvailTemp.pop()
+				Cuad = ['+', local, OP1Dim2,temporal]
+				print("cuad + ARRD ")
+				PilaOperandos.append(temporal)
+				tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+				Cuadruplos.append(Cuad)
+				cont += 1
+
+				local2 = PilaOperandos.pop()
+					
+				operand1 =[OP1, local2]
+				#operand1 = [OP1, ((OP1Dim1 * OP1Type['d2']) + OP1Dim2)]
+			else:
+				operand1 = [OP1, OP1Dim1]
+		else:
+			operand1 = OP1
+
+		Cuad = ['=', operand1,'',operand2]
+		print("cuad arr =")
 		Cuadruplos.append(Cuad)
 		cont += 1
 
@@ -255,8 +473,8 @@ def crearCuadruploAsignacionFOR():
 	global tablaVariables
 	
 	
-	OP2 = PilaOperandos.pop()
-	OP1 = PilaOperandos.pop()
+	OP2 = PilaOperandos.pop() #ID
+	OP1 = PilaOperandos.pop() #E1 
 	
 	OP2Type = tablaVariables.get(OP2)
 	OP1Type = tablaVariables.get(OP1)
@@ -335,7 +553,7 @@ def crearCuadruploMul():
 		Cuad = ['*', OP1,OP2,temporal]
 		print("cuad *")
 		PilaOperandos.append(temporal)
-		tablaVariables[temporal] = {'type': resultType, 'value': defaultValues[resultType]}
+		tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
 		Cuadruplos.append(Cuad)
 		cont += 1
 		
@@ -370,7 +588,7 @@ def crearCuadruploResta():
 		Cuad = ['-', OP1,OP2,temporal]
 		print("cuad -")
 		PilaOperandos.append(temporal)
-		tablaVariables[temporal] = {'type': resultType, 'value': defaultValues[resultType]}
+		tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2':None, 'value': defaultValues[resultType]}
 		Cuadruplos.append(Cuad)
 		cont += 1
 		
@@ -391,21 +609,88 @@ def crearCuadruploSuma():
 	global tablaVariables
 	global cont
 	global PilaOperadoresAritmeticos
-
+	
 
 	OP2 = PilaOperandos.pop()
+	OP2Dim1, OP2Dim2 = validarVariableDimensionada(OP2)
 	OP1 = PilaOperandos.pop()
+	OP1Dim1, OP1Dim2 = validarVariableDimensionada(OP1)
 
 	OP2Type = tablaVariables.get(OP2)
 	OP1Type = tablaVariables.get(OP1)
-	
+
 	if OP2Type is not None and OP1Type is not None:
 		resultType = cuboSemantico.validarTipoPorOperacion(OP2Type['type'], OP1Type['type'], '+')
+
+		if (OP2Dim1 is not None):
+			if (OP2Dim2 is not None):
+
+					blabla = OP2Type['d2']
+					tablaVariables[blabla] = {'type': resultType, 'd1': None, 'd2': None, 'value': blabla}
+	
+					temporal = AvailTemp.pop()
+					Cuad = ['*', OP2Dim1, OP2Type['d2'],temporal]
+					print("cuad * ARRD ")
+					PilaOperandos.append(temporal)
+					tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+					Cuadruplos.append(Cuad)
+					cont += 1
+					
+					local = PilaOperandos.pop()
+					temporal = AvailTemp.pop()
+					Cuad = ['+', local, OP2Dim2,temporal]
+					print("cuad + ARRD ")
+					PilaOperandos.append(temporal)
+					tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+					Cuadruplos.append(Cuad)
+					cont += 1
+
+					local2 = PilaOperandos.pop()
+					
+					#operand2 = [OP2, ((OP2Dim1 * OP2Type['d2']) + OP2Dim1)]
+					operand2 =[OP2, local2]
+
+			else:
+				operand2 = [OP2, OP2Dim1]
+		else:
+			operand2 = OP2
+		
+		if (OP1Dim1 is not None):
+			if (OP1Dim2 is not None):
+
+				blabla = OP1Type['d2']
+				tablaVariables[blabla] = {'type': resultType, 'd1': None, 'd2': None, 'value': blabla}
+
+				temporal = AvailTemp.pop()
+				Cuad = ['*', OP1Dim1, OP1Type['d2'],temporal]
+				print("cuad * ARRD ")
+				PilaOperandos.append(temporal)
+				tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+				Cuadruplos.append(Cuad)
+				cont += 1
+				
+				local = PilaOperandos.pop()
+				temporal = AvailTemp.pop()
+				Cuad = ['+', local, OP1Dim2,temporal]
+				print("cuad + ARRD ")
+				PilaOperandos.append(temporal)
+				tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2': None, 'value': defaultValues[resultType]}
+				Cuadruplos.append(Cuad)
+				cont += 1
+
+				local2 = PilaOperandos.pop()
+					
+				operand1 =[OP1, local2]
+			else:
+				operand1 = [OP1, OP1Dim1]
+		else:
+			operand1 = OP1
+
 		temporal = AvailTemp.pop()
-		Cuad = ['+', OP1,OP2,temporal]
+		Cuad = ['+', operand1,operand2,temporal]
 		print("cuad +")
 		PilaOperandos.append(temporal)
-		tablaVariables[temporal] = {'type': resultType, 'value': defaultValues[resultType]}
+		tablaVariables[temporal] = {'type': resultType, 'd1': None, 'd2':None, 'value': defaultValues[resultType]}
 		Cuadruplos.append(Cuad)
 		cont += 1
 		
@@ -426,7 +711,7 @@ def crearCuadruploSumaFOR():
 	global tablaVariables
 	global cont
 
-	tablaVariables[1] = {'type': 'int', 'value' : 1}
+	tablaVariables[1] = {'type': 'int', 'd1': None, 'd2': None, 'value' : 1}
 
 	OP2 = PilaOperandos.pop(0)
 	OP1 = 1
@@ -784,8 +1069,9 @@ def p_program(p):
 	for x in range(len(Cuadruplos)): 
 		print(Cuadruplos[x]) 
 		
-	print(tablaVariables)
-	print(cont)
+	# print(tablaVariables)
+	# print(cont)
+	# print(espacioMemoria)
 	#print(PiladeSaltos)
 	#print(PilaOperandos)
 
@@ -821,6 +1107,7 @@ def p_var_assign(p):
 				| empty
 	'''
 
+
 def p_var_dimensiones(p):
 	'''
 	var_dimensiones : LARR Decnumsize RARR
@@ -853,14 +1140,30 @@ def p_create_var_table(p):
 	global tablaVariables
 	global currentType
 	global defaultValues
+	global espacioMemoria
 	global tam1
 	global tam2
 
 	while len(variableIdQueue) > 0:
-	 currentVar = variableIdQueue.pop()
-	 tablaVariables[currentVar] = {'type': currentType, 'd1' : tam1, 'd2' : tam2, 'value' : defaultValues[currentType]}
-	 tam1 = 0
-	 tam2 = 0
+		dim = False
+		currentVar = variableIdQueue.pop()
+		malloc = {}
+
+		if (tam1 is not None):
+			if(tam2 is not None):
+				dim = True
+				for i in range(0, (tam1 * tam2)):
+					malloc[str(i)] = defaultValues[currentType]
+					
+			else:
+				dim = True
+				for i in range(0, tam1):
+					malloc[str(i)] = defaultValues[currentType]
+
+		tablaVariables[currentVar] = {'type': currentType, 'd1' : tam1, 'd2' : tam2, 'value' : malloc if dim else defaultValues[currentType]}
+		tam1 = None
+		tam2 = None
+	 	#Crear matriz de dos dimensiones dimension
 	
 def p_var_local(p):
 	'''
@@ -905,7 +1208,6 @@ def p_crearCuadruploReturn(p):
 	'''
 
 	crearCuadruploReturn()
-
 
 #Inicia el "main" del lenguaje
 
@@ -960,7 +1262,6 @@ def p_paso2FOR(p):
 	paso2FOR : empty
 
 	'''
-
 	crearCuadruploAsignacionFOR()
 
 def p_paso3FOR(p):
@@ -968,8 +1269,7 @@ def p_paso3FOR(p):
 	paso3FOR : empty
 
 	'''
-	global cont
-
+	
 	crearCuadruploLE_FOR()
 
 	crearCuadruploGoToF()
@@ -1019,7 +1319,7 @@ def p_call_subroutine(p):
 def p_if_expression(p):
 	'''
 	if_expression : IF expression_logic paso1IF THEN  if_expression_local if_expression_local2 paso2IF ELSE if_expression_local paso3IF END_IF
-				  | IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
+				        | IF expression_logic paso1IF THEN if_expression_local paso3IF END_IF
 	
 	'''
 
@@ -1073,6 +1373,7 @@ def p_StringOut(p):
 def p_idOut(p):
 	'''
 	idOut : ID
+				
 
 	'''
 	global PilaOperandos
@@ -1083,20 +1384,39 @@ def p_idOut(p):
 
 def p_variable_matrix_assign(p):
 	'''
-	variable_matrix_assign :  ID ASSIGN expression_arith
-	  						| ID LPAREN expression_arith RPAREN ASSIGN expression_arith 
-	  						| ID LPAREN expression_arith COMMA expression_arith RPAREN ASSIGN expression_arith
+	variable_matrix_assign :  otro1
+	  					          	| otro
 
 	'''
+
+def p_otro(p):
+	'''
+	otro : ID LARR expression_arith RARR ASSIGN expression_arith 
+			 | ID LARR expression_arith COMMA expression_arith RARR ASSIGN expression_arith
+
+	'''
+
+	global PilaOperandos
+	PilaOperandos.append(p[1])
+
+	if p[5] is '=' or p[7] is '=':
+		crearCuadruploAsignacionARREGLO()
+
+def p_otro1(p):
+	'''
+	otro1 : ID ASSIGN expression_arith
+
+	'''
+
 	global PilaOperandos
 	PilaOperandos.append(p[1])
 
 	if p[2] is '=':
 		crearCuadruploAsignacion()
-		
+	
 def p_expression_arith(p):
 	'''
-	expression_arith :                 expression_arith PLUS c 
+	expression_arith : expression_arith PLUS c 
 					 				 | expression_arith MINUS c
 									 | c 
 							
@@ -1127,8 +1447,8 @@ def p_te(p):
 	te : ID 
 	  | constante_entero
 	  | constante_flotante
-	  | ID LPAREN expression_arith RPAREN
-	  | ID LPAREN expression_arith COMMA expression_arith RPAREN
+	  | ID LARR expression_arith RARR
+	  | ID LARR expression_arith COMMA expression_arith RARR
 	  | LPAREN expression_arith RPAREN
 
 	'''
@@ -1136,8 +1456,8 @@ def p_te(p):
 	global PilaOperandos
 
 	if p[1] is not '(':
-		PilaOperandos.append(p[1]) 
-	
+		PilaOperandos.append(p[1])
+		
 def p_expression_logic(p):
 	'''
 	expression_logic : expression_logic OR g
@@ -1233,7 +1553,7 @@ def p_constante_entero(p):
 	global tablaVariables
 
 
-	tablaVariables[p[1]] = {'type': 'int', 'd1' : 0, 'd2' : 0, 'value': p[1]}
+	tablaVariables[p[1]] = {'type': 'int', 'd1' : None, 'd2' : None, 'value': p[1]}
 	p[0] = p[1]
 
 def p_constante_flotante(p):
@@ -1243,7 +1563,7 @@ def p_constante_flotante(p):
 	'''
 	global tablaVariables
 
-	tablaVariables[p[1]] = {'type': 'float', 'd1' : 0, 'd2' : 0, 'value': p[1]}
+	tablaVariables[p[1]] = {'type': 'float', 'd1' : None, 'd2' : None, 'value': p[1]}
 	p[0] = p[1]
 
 def p_paso1DO(p):
@@ -1324,7 +1644,7 @@ def p_empty(p):
 parser = yacc.yacc()
 
 print("Leyendo archivo..... " )
-fileName = "prueba_arreglo.txt"
+fileName = "pruebafor.1.txt"
 
 file = open(fileName, 'r')
 code = file.read()
@@ -1353,33 +1673,61 @@ def ejecutor():
 		cuad = Cuadruplos[i]
 		operacion = cuad[0]
 
+		#Ya incluye operacion de matriz
+
 		if operacion == '+':
+
 			OP1 = cuad[1]
 			OP2 = cuad[2]
 			OP3 = cuad[3]
+
+			OP1Value = None
+			OP2Value = None
+
+			if isinstance(OP1, list):
+				OP1, OP1Value = desempacarVariableDimensionada(OP1)
+			if isinstance(OP2, list):
+				OP2, OP2Value = desempacarVariableDimensionada(OP2)
 
 			OP1Info = tablaVariables.get(OP1)
 			OP2Info = tablaVariables.get(OP2)
 
 			if OP1Info is not None and OP2Info is not None:
-				temp = OP1Info['value'] + OP2Info['value']
+				temp = (OP1Value if OP1Value is not None else OP1Info['value']) + (OP2Value if OP2Value is not None else OP2Info['value'])
 				tablaVariables[OP3]['value'] = temp
 			else:
 				print('NO EXISTE LA VARIABLE')
+		
+		#Ya incluye operacion de matriz
 
 		elif operacion == '=':
 			OP1 = cuad[1]
 			OP2 = cuad[3]
 
+			OP1Value = None
+			OP2Destino = None
+
+			if isinstance(OP1, list):
+				OP1, OP1Value = desempacarVariableDimensionada(OP1)
+			if isinstance(OP2, list):
+				OP2, OP2Destino = desempacarVariableDimensionadaDestino(OP2)
+
 			OP1Info = tablaVariables.get(OP1)
 			OP2Info = tablaVariables.get(OP2)
 
 			if OP1Info is not None and OP2Info is not None:
-				temp = OP1Info['value']
-				tablaVariables[OP2]['value'] = temp
+				temp = (OP1Value if OP1Value is not None else OP1Info['value'])
+			
+				if (OP2Destino is not None):
+					tablaVariables[OP2]['value'][str(OP2Destino)] = temp
+				else:
+					tablaVariables[OP2]['value'] = temp
+
 			else:
 				print('NO EXISTE LA VARIABLE')
-		
+
+		#No incluye operacion de matriz
+
 		elif operacion == '*':
 			OP1 = cuad[1]
 			OP2 = cuad[2]
@@ -1394,6 +1742,12 @@ def ejecutor():
 			else:
 				print('NO EXISTE LA VARIABLE')
 		
+			#No incluye operacion de matriz
+
+			#No incluye operacion de matriz
+
+			#No incluye operacion de matriz
+
 		elif operacion == '/':
 			OP1 = cuad[1]
 			OP2 = cuad[2]
@@ -1596,7 +1950,7 @@ def ejecutor():
 		elif operacion == 'gotoP':
 			salto = cuad[1]
 			tablaDirecciones.append(i)
-			i = salto -1
+			i = salto - 1
 
 		i = i + 1
 

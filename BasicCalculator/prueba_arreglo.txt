@@ -1,12 +1,60 @@
 program prueba      					#este es un comentario
-      
-int::d[6]
+
+int::b,c,x,local,local2,local3
+int::a[3,3]
+int::f[3,3]
+int::r[3,3]
+
+subroutine teclearMatrices
+
+        for b = 0,2 do  
+                    for c = 0,2 do
+
+                        read x
+                        a[c,b] = x
+
+                    end_for
+
+            end_for
+
+                for b = 0,2 do  
+
+                    for c = 0,2 do
+
+                        read x
+                        f[c,b] = x
+
+                end_for
+
+            end_for
+
+end_subroutine
+
+subroutine mulMatrices
+
+    for b = 0,2 do  
+
+            for c = 0,2 do
+
+              local = a[c,b]
+              local2 = f[c,b]
+              local3 = local * local2
+              r[c,b] = local3
+
+         end_for
+
+        end_for
+
+end_subroutine
+
 
 begin
 
-print (Hola)
+        call teclearMatrices
+        call mulMatrices
 
-
+        print r
+ 
 end
 end program prueba
 
